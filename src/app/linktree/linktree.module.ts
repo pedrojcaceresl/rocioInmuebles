@@ -7,7 +7,7 @@ import { LinktreeRoutingModule } from './linktree-routing.module';
 
 @NgModule({
   declarations: [
-    LinktreePageComponent
+    LinktreePageComponent,
   ],
   imports: [
     CommonModule,

@@ -5,16 +5,7 @@ import { LinktreePageComponent } from './pages/linktree/linktree-page.component'
 const routes: Routes = [
   {
     path: '',
-    children: [
-      {
-        path: 'rocio',
-        component: LinktreePageComponent
-      },
-      {
-        path: '**',
-        redirectTo: 'rocio'
-      }
-    ]
+    component: LinktreePageComponent
   }
 ];
 

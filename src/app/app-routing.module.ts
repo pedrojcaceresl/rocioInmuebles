@@ -7,6 +7,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./linktree/linktree.module').then((m) => m.LinktreeModule),
   },
+  {
+    path: 'propiedades',
+    loadChildren: () =>
+      import('./propiedades/propiedades.module').then((m) => m.PropiedadesModule),
+  },
+  // {
+  //   path: '**',
+  //   redirectTo: ''
+  // }
 ];
 
 @NgModule({
