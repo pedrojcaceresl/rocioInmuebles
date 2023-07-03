@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "rocioinmuebles-page"
+  },
+  "targets": {
+    "rocioinmuebles-page": {
+      "hosting": {
+        "rocioinmuebles": [
+          "rocioinmuebles-page"
+        ]
+      }
+    }
+  }
+}
