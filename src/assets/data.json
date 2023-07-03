@@ -18,6 +18,11 @@
         "name": "Instagram",
         "icon": "/assets/svg/instagram.svg",
         "url": "https://www.instagram.com/rocioinmuebles/"
+      },
+        {
+        "name": "Instagram Personal",
+        "icon": "/assets/svg/instagram.svg",
+        "url": "https://www.instagram.com/rosgonzalezba/"
       }
     ]
   }
