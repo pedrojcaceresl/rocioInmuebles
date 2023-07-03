@@ -9,6 +9,10 @@ const routes: Routes = [
       {
         path: 'rocio',
         component: LinktreePageComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'rocio'
       }
     ]
   }

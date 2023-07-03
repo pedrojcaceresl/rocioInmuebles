@@ -4,6 +4,11 @@
     "desc": "Asesora Inmobiliaria",
     "iconurl": "/assets/images/picture.png",
     "links": [
+      // {
+      //   "name": "Website",
+      //   "icon": "/assets/svg/website.svg",
+      //   "url": "http://manthanank.web.app"
+      // },
       {
         "name": "Twitter",
         "icon": "/assets/svg/twitter.svg",
@@ -13,6 +18,11 @@
         "name": "LinkedIn",
         "icon": "/assets/svg/linkedin.svg",
         "url": "https://www.linkedin.com/in/manthanank"
+      },
+      {
+        "name": "GitHub",
+        "icon": "/assets/svg/github.svg",
+        "url": "https://github.com/manthanank"
       },
       {
         "name": "Facebook",

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LinktreePageComponent } from './pages/linktree/linktree-page.component';
+import { LinktreeRoutingModule } from './linktree-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { LinktreePageComponent } from './pages/linktree/linktree-page.component'
     LinktreePageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    LinktreeRoutingModule
   ]
 })
 export class LinktreeModule { }

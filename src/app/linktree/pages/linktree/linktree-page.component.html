@@ -16,7 +16,7 @@
     </div>
     <div class="text-container">
       <h1>@{{item.name}}</h1>
-      <h6>{{item.desc}}</h6>
+      <h3>{{item.desc}}</h3>
     </div>
 
     <div class="tile-container" *ngFor="let item of data[0].links">
@@ -38,6 +38,7 @@
 </main>
 <footer>
   <div class="footer-container" *ngFor="let item of data">
-    <p>&copy; 2023 Linktree Clone by {{item.name}}</p>
+    <!-- <p>&copy; 2023 {{item.name}}</p> -->
+    <p>&copy; 2023. Todos los derechos reservados by <a href="#">Creier</a></p>
   </div>
 </footer>

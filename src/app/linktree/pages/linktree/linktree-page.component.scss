@@ -16,14 +16,20 @@ main {
 .text-container {
     text-align: center;
 
-    h1 {
-        font-size: 20px;
+    .name {
+        p{
+            font-size: 20px;
+            font-weight: bolder;
+        }
     }
 
-    h6 {
-        margin-top: 0;
-        font-size: 18px;
-        margin-bottom: 30px;
+    .desc {
+        p{
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: bolder;
+        }
     }
 }
 
@@ -31,31 +37,26 @@ main {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    margin-bottom: 10px;
 
     .share-button {
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
         background-color: rgb(240, 240, 240);
     }
 
     .share-button svg {
-        margin-left: 12px;
-        margin-top: 10px;
+        margin-left: 15px;
         color: rgb(0, 0, 0);
     }
 }
 
 .image-container {
-    margin-top: 10px;
     height: 96px;
     width: 96px;
     border-radius: 48px;
     overflow: hidden;
-}
-
-.image-container img {
-    height: 100%;
 }
 
 .tile-container {
@@ -96,6 +97,7 @@ main {
         height: 40px;
         border-radius: 20px;
         background-color: rgb(52, 52, 52);
+        aspect-ratio: 1 / 1;
     }
 
     .tile-share-button svg {
