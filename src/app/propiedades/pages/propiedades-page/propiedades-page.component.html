@@ -10,11 +10,14 @@
 
     <div class="p-10 space-x-4 w-full gap-10 flex flex-wrap">
 
-      <app-propiedades-card class="animate__animated animate__fadeInUp" imgUrl="https://soyarquitectura.mx/wp-content/uploads/2021/09/casas-de-lujo-blogc8.jpg"/>
-      <app-propiedades-card class="animate__animated animate__fadeInUp" imgUrl="https://img.freepik.com/foto-gratis/villa-lujo-piscina-espectacular-diseno-contemporaneo-arte-digital-bienes-raices-hogar-casa-propiedad-ge_1258-150765.jpg"/>
-      <app-propiedades-card class="animate__animated animate__fadeInUp" imgUrl="https://villageverdesotogrande.com/wp-content/uploads/2021/06/apartamentos-de-lujo-en-venta-cerca-de-marbella-foto.jpg"/>
-      <app-propiedades-card class="animate__animated animate__fadeInUp" imgUrl="https://www.metrocuadrado.com/sites/noticias-m2/files/styles/crop_770x383/public/field/image/pool_with_a_view_final_4k.0.jpg"/>
-      <app-propiedades-card class="animate__animated animate__fadeInUp" imgUrl="https://ims.imgix.net/uploads/ims/project_image/image/22193/9.jpg"/>
+      <app-propiedades-card *ngFor="let propiedad of propiedades" class="animate__animated animate__fadeInUp"
+      [imgUrl]="propiedad.imgUrl"
+      [descripcion]="propiedad.descripcion"
+      [tags]="propiedad.etiquetas"
+      [titulo]="propiedad.titulo"
+      />
+
+
     </div>
 
 </div>
