@@ -8,6 +8,11 @@ const routes: Routes = [
       import('./linktree/linktree.module').then((m) => m.LinktreeModule),
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./layout/layout.module').then((m) => m.LayoutModule),
+  },
+  {
     path: 'propiedades',
     loadChildren: () =>
       import('./propiedades/propiedades.module').then(
@@ -15,11 +20,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'admin',
+    path: 'layout',
     loadChildren: () =>
-      import('./admin/admin.module').then(
-        (m) => m.AdminModule
-      ),
+      import('./admin/admin.module').then((m) => m.AdminModule),
   },
   // {
   //   path: '**',
