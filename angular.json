@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rocioInmuebles": {
+    "rocioinmuebles": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rocio-inmuebles",
+            "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rocioInmuebles:build:production"
+              "browserTarget": "rocioinmuebles:build:production"
             },
             "development": {
-              "browserTarget": "rocioInmuebles:build:development"
+              "browserTarget": "rocioinmuebles:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rocioInmuebles:build"
+            "browserTarget": "rocioinmuebles:build"
           }
         },
         "test": {
@@ -98,6 +98,13 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "rocioinmuebles:build:production"
           }
         }
       }

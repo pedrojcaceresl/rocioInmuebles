@@ -26,8 +26,8 @@ export class LinktreePageComponent {
   shareUrl() {
     if (navigator.share) {
       navigator.share({
-        title: 'My Angular App',
-        text: 'Check out this awesome Angular app',
+        title: 'Habla conmigo!',
+        text: 'Quieres saber mas?',
         url: window.location.href,
       });
     }
