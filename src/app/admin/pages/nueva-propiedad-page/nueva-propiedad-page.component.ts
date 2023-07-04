@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { collection, Firestore, addDoc, collectionData, doc, deleteDoc, setDoc} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import Propiedades from '../../interfaces/propiedades.interface';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
@@ -33,7 +36,10 @@ export class NuevaPropiedadPageComponent {
     disableDoubleClickZoom: true,
   };
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private firestore : Firestore
+    ) {}
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
@@ -53,4 +59,19 @@ export class NuevaPropiedadPageComponent {
         draggable: true
       });
   }
+
+    addPropiedades(propiedades: Propiedades | any){
+      const propiedadesRef = collection(this.firestore, 'propiedades');
+      return addDoc(propiedadesRef, propiedades)
+    }
+
+    getPropiedades(): Observable<Propiedades[]>{
+      const propiedadesRef = collection(this.firestore, 'propiedades');
+      return collectionData(propiedadesRef, {idField:'id'}) as Observable<Propiedades[]>;
+    }
+
+    deletePropiedades(propiedades: Propiedades){
+      const propiedadesDocRef = doc(this.firestore, `propiedades/${propiedades.id}`);
+      return deleteDoc(propiedadesDocRef)
+    }
 }
