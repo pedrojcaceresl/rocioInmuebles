@@ -10,7 +10,16 @@ const routes: Routes = [
   {
     path: 'propiedades',
     loadChildren: () =>
-      import('./propiedades/propiedades.module').then((m) => m.PropiedadesModule),
+      import('./propiedades/propiedades.module').then(
+        (m) => m.PropiedadesModule
+      ),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then(
+        (m) => m.AdminModule
+      ),
   },
   // {
   //   path: '**',
