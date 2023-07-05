@@ -5,25 +5,23 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./linktree/linktree.module').then((m) => m.LinktreeModule),
+      import('./modules/linktree/linktree.module').then(
+        (m) => m.LinktreeModule
+      ),
   },
   {
     path: 'admin',
     loadChildren: () =>
-      import('./layout/layout.module').then((m) => m.LayoutModule),
+      import('./modules/layout/layout.module').then((m) => m.LayoutModule),
   },
   {
     path: 'propiedades',
     loadChildren: () =>
-      import('./propiedades/propiedades.module').then(
+      import('./modules/propiedades/propiedades.module').then(
         (m) => m.PropiedadesModule
       ),
   },
-  {
-    path: 'layout',
-    loadChildren: () =>
-      import('./admin/admin.module').then((m) => m.AdminModule),
-  },
+
   // {
   //   path: '**',
   //   redirectTo: ''

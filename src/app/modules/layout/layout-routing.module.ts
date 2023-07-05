@@ -6,6 +6,13 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutPageComponent,
+    children: [
+      {
+        path: 'nueva-propiedad',
+        loadChildren: () =>
+          import('../admin/admin.module').then((m) => m.AdminModule),
+      },
+    ],
     // children: [
     //   {
     //     path: 'dashboard',
