@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import Propiedad from '../../interfaces/propiedades.interface';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
@@ -17,12 +18,16 @@ export class NuevaPropiedadPageComponent {
   });
 
   firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+    titulo: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    imgUrl: ['', Validators.required],
+    tipo: ['', Validators.required],
+    etiquetas: [['']]
   });
 
   secondFormGroup = this._formBuilder.group({
     latitude: [0],
-    longitude: [0]
+    longitude: [0],
   });
 
   isLinear = false;
@@ -65,7 +70,6 @@ export class NuevaPropiedadPageComponent {
       // label: 'Hello'
     });
 
-
     this.marker.setAnimation(google.maps.Animation.DROP);
     this.marker.addListener('dragend', () => {
       this.selectedPosition = this.marker.getPosition();
@@ -83,5 +87,28 @@ export class NuevaPropiedadPageComponent {
     });
 
     console.log(this.secondFormGroup.value);
+  }
+
+  onSubmit() {
+    const { titulo, descripcion, imgUrl, tipo, etiquetas } = this.firstFormGroup.value;
+    const { latitude, longitude } = this.secondFormGroup.value;
+    const propiedad: Propiedad = {
+      titulo,
+      descripcion,
+      imgUrl,
+      tipo,
+      etiquetas,
+      ubicacion: {
+        lat: latitude,
+        lng: longitude
+      }
+    };
+
+    console.log({propiedad})
+    // TODO llamar a metodo para guardar datos
+
+    // TODO mostrar mensaje de guardado con exito
+    alert(`Guardado con exito, ${JSON.stringify(propiedad)}`);
+    // TODO Redirigir al usuario a la lista de propiedades
   }
 }

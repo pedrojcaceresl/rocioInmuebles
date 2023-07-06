@@ -5,16 +5,17 @@ import { NuevaPropiedadPageComponent } from './pages/nueva-propiedad-page/nueva-
 const routes: Routes = [
   {
     path: '',
-    children: [
-      {
-        path: 'nueva-propiedad',
-        component: NuevaPropiedadPageComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'nueva-propiedad',
-      },
-    ],
+    component: NuevaPropiedadPageComponent
+    // children: [
+    //   {
+    //     path: '',
+    //     component: NuevaPropiedadPageComponent,
+    //   },
+    //   {
+    //     path: '**',
+    //     redirectTo: 'nueva-propiedad',
+    //   },
+    // ],
   },
 ];
 
