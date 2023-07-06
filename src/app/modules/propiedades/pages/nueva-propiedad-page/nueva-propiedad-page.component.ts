@@ -23,6 +23,7 @@ export class NuevaPropiedadPageComponent {
     descripcion: ['', Validators.required],
     imgUrl: ['', Validators.required],
     tipo: ['', Validators.required],
+    estado: ['', Validators.required],
     etiquetas: [['']]
   });
 
@@ -94,7 +95,7 @@ export class NuevaPropiedadPageComponent {
   }
 
   onSubmit() {
-    const { titulo, descripcion, imgUrl, tipo, etiquetas } = this.firstFormGroup.value;
+    const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } = this.firstFormGroup.value;
     const { latitude, longitude } = this.secondFormGroup.value;
     const propiedad: Propiedad = {
       titulo,
@@ -102,6 +103,7 @@ export class NuevaPropiedadPageComponent {
       imgUrl,
       tipo,
       etiquetas,
+      estado,
       ubicacion: {
         lat: latitude,
         lng: longitude

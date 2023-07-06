@@ -4,6 +4,7 @@ export default interface Propiedad {
   descripcion: string | null | undefined;
   imgUrl: string | null | undefined;
   tipo: string | null | undefined;
+  estado: string | null | undefined;
   ubicacion: Coords | null | undefined;
   etiquetas?: string[] | null | undefined;
 }
