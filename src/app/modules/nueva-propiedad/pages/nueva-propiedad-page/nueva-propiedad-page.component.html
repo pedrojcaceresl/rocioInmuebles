@@ -1,12 +1,11 @@
 
-<div class="h-screen lg:p-10">
-
+<div class="h-screen lg:p-2">
 
 
 <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button> -->
-<mat-stepper class="h-full" [linear]="isLinear" #stepper>
+<mat-stepper class="max-h-fit" [linear]="isLinear" #stepper>
 
 
 
@@ -16,12 +15,22 @@
 
       <mat-form-field>
         <mat-label>Titulo</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        <input matInput placeholder="Titulo" formControlName="titulo" required>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Descripcion</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        <input matInput placeholder="Descripcion" formControlName="descripcion" required>
+      </mat-form-field>
+
+            <mat-form-field>
+        <mat-label>Url Imagen</mat-label>
+        <input matInput placeholder="Imagenes Url" formControlName="imgUrl" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Etiquetas</mat-label>
+        <input matInput placeholder="Etiquetas" formControlName="etiquetas" required>
       </mat-form-field>
 
       <div>
@@ -34,34 +43,26 @@
 
   <mat-step [stepControl]="secondFormGroup" label="Selecciona la ubicacion">
     <form [formGroup]="secondFormGroup">
-
-      <div>
-        <google-map (mapInitialized)="onMapInitialized($event)" [center]="center" [zoom]="zoom" width="1024px" height="720px" />
+      <h1 class="text-slate-600">Selecciona la ubicación arrastrando el marcador</h1>
+      <div class="my-2">
+        <button mat-button color="secondary" matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
       </div>
 
-      <code class="text-stone-900">
-        {{ selectedPosition | json }}
-      </code>
-
-      <!-- <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field> -->
-
-
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <google-map (mapInitialized)="onMapInitialized($event)" [center]="center" [zoom]="zoom" width="1000px" height="450px" />
       </div>
+
+
     </form>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
+  <mat-step >
+    <ng-template matStepLabel>Guardar</ng-template>
+    <p class="text-slate-600">Si todos los datos están correctos, presione el botón de Guardar</p>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="onSubmit()">Guardar</button>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button mat-button (click)="stepper.reset()">Cancelar</button>
     </div>
   </mat-step>
 </mat-stepper>
