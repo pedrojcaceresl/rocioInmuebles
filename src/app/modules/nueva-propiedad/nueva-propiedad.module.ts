@@ -7,7 +7,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
-import { AdminRoutingModule } from './admin-routing.module';
+import { NuevaPropiedadRoutingModule } from './nueva-propiedad-routing.module';
 import { NuevaPropiedadPageComponent } from './pages/nueva-propiedad-page/nueva-propiedad-page.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 
@@ -16,7 +16,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
   declarations: [NuevaPropiedadPageComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule,
+    NuevaPropiedadRoutingModule,
     ReactiveFormsModule,
 
     GoogleMapsModule,
@@ -27,4 +27,4 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatInputModule,
   ],
 })
-export class AdminModule {}
+export class NuevaPropiedadModule {}
