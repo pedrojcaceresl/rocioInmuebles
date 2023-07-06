@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/linktree/linktree.module').then(
+      import('./modules/client/linktree/linktree.module').then(
         (m) => m.LinktreeModule
       ),
   },
@@ -17,8 +17,8 @@ const routes: Routes = [
   {
     path: 'propiedades',
     loadChildren: () =>
-      import('./modules/propiedades/propiedades.module').then(
-        (m) => m.PropiedadesModule
+      import('./modules/client/propiedades/propiedades.module').then(
+        (m) => m.PropiedadesClientModule
       ),
   },
 

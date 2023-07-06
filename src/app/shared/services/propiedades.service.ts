@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import Propiedades from 'src/app/admin/interfaces/propiedades.interface';
+import Propiedades from 'src/app/modules/propiedades/interfaces/propiedades.interface';
 
 @Injectable({
   providedIn: 'root'

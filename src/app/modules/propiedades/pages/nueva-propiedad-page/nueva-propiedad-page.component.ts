@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { PropiedadesService } from '../../../../shared/services/propiedades.service';
 import Propiedad from '../../interfaces/propiedades.interface';
 
 @Component({
@@ -51,7 +52,10 @@ export class NuevaPropiedadPageComponent {
     disableDoubleClickZoom: true,
   };
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private propiedadesService: PropiedadesService
+    ) {}
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
@@ -103,6 +107,7 @@ export class NuevaPropiedadPageComponent {
         lng: longitude
       }
     };
+    this.propiedadesService.addPropiedades(propiedad);
 
     console.log({propiedad})
     // TODO llamar a metodo para guardar datos

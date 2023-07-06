@@ -8,10 +8,14 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children: [
       {
-        path: 'nueva-propiedad',
+        path: 'propiedades',
         loadChildren: () =>
-          import('../nueva-propiedad/nueva-propiedad.module').then((m) => m.NuevaPropiedadModule),
+          import('../propiedades/propiedades.module').then((m) => m.PropiedadesModule),
       },
+      {
+        path: '**',
+        redirectTo: 'propiedades'
+      }
     ],
     // children: [
     //   {

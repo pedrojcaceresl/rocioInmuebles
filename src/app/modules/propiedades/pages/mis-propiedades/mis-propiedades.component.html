@@ -1,0 +1,10 @@
+<div class="p-10 space-x-2 w-full gap-5 flex flex-wrap">
+  <app-propiedades-card
+    *ngFor="let propiedad of propiedades"
+    class="animate__animated animate__fadeInUp"
+    [imgUrl]="propiedad.imgUrl"
+    [descripcion]="propiedad.descripcion"
+    [tags]="propiedad.etiquetas"
+    [titulo]="propiedad.titulo"
+  ></app-propiedades-card>
+</div>

@@ -5,6 +5,7 @@ import { SidebarComponent, SidebarItemComponent, SidebarItemGroupComponent } fro
 import { SanitizeHtmlPipe } from './pipes';
 import { RouterModule } from '@angular/router';
 import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 
 
@@ -16,6 +17,7 @@ import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
     SidebarItemGroupComponent,
     SanitizeHtmlPipe,
     DarkThemeToggleComponent,
+    SearchBoxComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -24,6 +26,7 @@ import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
     SidebarItemGroupComponent,
     NavbarComponent,
     DarkThemeToggleComponent,
+    SearchBoxComponent
   ],
 })
 export class SharedModule {}
