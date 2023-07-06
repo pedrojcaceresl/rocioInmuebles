@@ -1,3 +1,5 @@
+// Aqui se definen las rutas de admin
+
 export type ComponentCardItem = {
   className: string;
   images: { light: string; dark: string };
