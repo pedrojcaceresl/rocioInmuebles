@@ -10,7 +10,7 @@ const routes: Routes = [
       {
         path: 'nueva-propiedad',
         loadChildren: () =>
-          import('../admin/admin.module').then((m) => m.AdminModule),
+          import('../nueva-propiedad/nueva-propiedad.module').then((m) => m.NuevaPropiedadModule),
       },
     ],
     // children: [
