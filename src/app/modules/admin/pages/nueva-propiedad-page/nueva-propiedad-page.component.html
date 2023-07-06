@@ -36,7 +36,7 @@
     <form [formGroup]="secondFormGroup">
 
       <div>
-        <google-map (mapDblclick)="addMarker($event)" (mapInitialized)="onMapInitialized($event)" [center]="center" [zoom]="zoom" width="1024px" height="720px" />
+        <google-map (mapInitialized)="onMapInitialized($event)" [center]="center" [zoom]="zoom" width="1024px" height="720px" />
       </div>
 
       <code class="text-stone-900">
