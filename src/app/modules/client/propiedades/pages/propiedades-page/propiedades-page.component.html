@@ -1,0 +1,18 @@
+<div class="flex flex-wrap w-screen justify-center p-10 bg-slate-400">
+  <div class="sidenav flex justify-center flex-col items-center">
+    <h1 class="text-xl lg:text-5xl">Rocio Inmuebles</h1>
+    <h2 class="lg:text-3xl mt-5">Propiedades</h2>
+  </div>
+
+  <div class="p-10 space-x-4 w-full gap-10 flex flex-wrap bg-green-300">
+    <shared-search-box></shared-search-box>
+    <app-propiedades-card
+      *ngFor="let propiedad of propiedades"
+      class="animate__animated animate__fadeInUp"
+      [imgUrl]="propiedad.imgUrl"
+      [descripcion]="propiedad.descripcion"
+      [tags]="propiedad.etiquetas"
+      [titulo]="propiedad.titulo"
+    ></app-propiedades-card>
+  </div>
+</div>

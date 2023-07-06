@@ -1,12 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PropiedadesPageComponent } from './pages/propiedades-page/propiedades-page.component';
+import { NuevaPropiedadPageComponent } from './pages/nueva-propiedad-page/nueva-propiedad-page.component';
+import { MisPropiedadesComponent } from './pages/mis-propiedades/mis-propiedades.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PropiedadesPageComponent
-  }
+    children: [
+      {
+        path: 'mis-propiedades',
+        component: MisPropiedadesComponent
+      },
+      {
+        path: 'nueva-propiedad',
+        component: NuevaPropiedadPageComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'mis-propiedades'
+      }
+    ]
+  },
+
 ];
 
 @NgModule({
