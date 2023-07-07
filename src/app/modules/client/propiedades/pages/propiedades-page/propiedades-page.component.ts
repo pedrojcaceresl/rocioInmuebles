@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { PropiedadesService } from 'src/app/shared/services/propiedades.service';
 
 @Component({
   templateUrl: './propiedades-page.component.html',
@@ -10,10 +11,12 @@ export class PropiedadesPageComponent {
 
   http = inject(HttpClient);
 
+  propiedadesService = inject(PropiedadesService)
+
   ngOnInit() {
-    this.http.get('/assets/propiedades.json').subscribe((res: any) => {
-      console.log(res);
+    this.propiedadesService.getPropiedades().subscribe(res=>{
       this.propiedades = res;
-    });
+
+    })
   }
 }

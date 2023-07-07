@@ -12,6 +12,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { PropiedadesRoutingModule } from './propiedades-routing.module';
 import { MisPropiedadesComponent } from './pages/mis-propiedades/mis-propiedades.component';
 import { PropiedadesClientModule } from "../client/propiedades/propiedades.module";
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [NuevaPropiedadPageComponent, MisPropiedadesComponent],
@@ -24,7 +25,8 @@ import { PropiedadesClientModule } from "../client/propiedades/propiedades.modul
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    PropiedadesClientModule
+    PropiedadesClientModule,
+    SharedModule
   ],
 })
 export class PropiedadesModule {}
