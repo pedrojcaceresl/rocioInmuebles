@@ -1,7 +1,10 @@
-<input
-  type="text"
-  [placeholder]="placeholder"
-  class="form-control"
-  (keyup.enter)="emitValue(txtInput.value)"
-  #txtInput
-  class="input input-bordered input-accent w-full max-w-xs" />
+<div class="flex">
+  <label for="buscar"
+    ><input
+      (keyup.enter)="emitValue(txtInput.value)"
+      class="w-48 rounded-2xl text-slate-700 dark:text-gray-200 dark:bg-slate-700 focus:outline-none focus:ring-white"
+      type="text"
+      #txtInput
+      [placeholder]="placeholder"
+  /></label>
+</div>

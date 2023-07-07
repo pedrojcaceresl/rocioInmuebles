@@ -21,6 +21,7 @@ export class MisPropiedadesComponent {
     // })
 
     this.propiedadesService.getPropiedades().subscribe(res=>{
+      console.log({res});
       this.propiedades = res;
 
     })

@@ -14,6 +14,7 @@ export class SearchBoxComponent {
   @Output() onValue = new EventEmitter<string>();
 
   emitValue( value: string):void{
+    console.log(value);
     this.onValue.emit(value);
   }
 
