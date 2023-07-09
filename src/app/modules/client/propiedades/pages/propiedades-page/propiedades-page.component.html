@@ -1,22 +1,22 @@
+<div class="sidenav flex justify-center flex-col items-center pt-10">
+  <h1 class="text-2xl md:text-4xl lg:text-5xl">Rocio Inmuebles</h1>
+  <h2 class="text-xl md:text-3xl lg:text-3xl mt-5">Propiedades</h2>
+</div>
 <div class="flex flex-wrap w-screen justify-center p-10 ">
-  <div class="sidenav flex justify-center flex-col items-center">
-    <h1 class="text-xl lg:text-5xl">Rocio Inmuebles</h1>
-    <h2 class="lg:text-3xl mt-5">Propiedades</h2>
-  </div>
 
   <div class="p-5 flex">
     <div
       class="filter-container hidden md:inline-block lg:inline-block p-5 w-60 "
     >
-      <div class="py-8">
+      <div class="py-5">
         <shared-search-box
           placeholder="Buscar propiedad"
           class=""
         ></shared-search-box>
       </div>
-
-      <div class="mt-5">
-        <h1 class="text-xl dark:text-slate-200 text-slate-700">Filtro</h1>
+<hr class="bg-slate-900 dark:bg-slate-300 dark:h-1 dark:opacity-10 rounded-full ">
+      <div class="mt-4">
+        <h1 class="text-xl dark:text-slate-200 text-slate-700 mb-2">Filtro</h1>
         <div class="input-container flex flex-col flex-wrap">
           <label for="Lotes" class="inline-block dark:text-slate-200 text-slate-700">
             <input type="checkbox" name="Lotes" id="" /> Lotes
@@ -39,14 +39,23 @@
         <div
           class="grid grid-flow-row gap-4 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-5"
         >
+
+          <ng-template #dataSection>
+  <!-- Render your actual data here -->
           <app-propiedades-card
             *ngFor="let propiedad of propiedades"
-            class="animate__animated animate__fadeInUp"
             [imgUrl]="propiedad.imgUrl"
             [descripcion]="propiedad.descripcion"
             [tags]="propiedad.etiquetas"
             [titulo]="propiedad.titulo"
           ></app-propiedades-card>
+
+</ng-template>
+
+          <ng-container *ngIf="!isLoading; else dataSection">
+            <app-propiedades-card-skeleton/>
+            <app-propiedades-card-skeleton/>
+          </ng-container>
         </div>
       </div>
     </div>
