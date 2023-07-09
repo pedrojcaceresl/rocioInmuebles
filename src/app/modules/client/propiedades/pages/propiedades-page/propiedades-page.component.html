@@ -4,15 +4,50 @@
     <h2 class="lg:text-3xl mt-5">Propiedades</h2>
   </div>
 
-  <div class="p-10 space-x-4 w-full gap-10 flex flex-wrap ">
-    <!-- <shared-search-box></shared-search-box> -->
-    <app-propiedades-card
-      *ngFor="let propiedad of propiedades"
-      class="animate__animated animate__fadeInUp"
-      [imgUrl]="propiedad.imgUrl"
-      [descripcion]="propiedad.descripcion"
-      [tags]="propiedad.etiquetas"
-      [titulo]="propiedad.titulo"
-    ></app-propiedades-card>
+  <div class="p-5 flex">
+    <div
+      class="filter-container hidden md:inline-block lg:inline-block p-5 w-60 "
+    >
+      <div class="py-8">
+        <shared-search-box
+          placeholder="Buscar propiedad"
+          class=""
+        ></shared-search-box>
+      </div>
+
+      <div class="mt-5">
+        <h1 class="text-xl dark:text-slate-200 text-slate-700">Filtro</h1>
+        <div class="input-container flex flex-col flex-wrap">
+          <label for="Lotes" class="inline-block dark:text-slate-200 text-slate-700">
+            <input type="checkbox" name="Lotes" id="" /> Lotes
+          </label>
+          <label for="Lotes" class="inline-block dark:text-slate-200 text-slate-700">
+            <input type="checkbox" name="Lotes" id="" /> Casas
+          </label>
+          <label for="Lotes" class="inline-block dark:text-slate-200 text-slate-700">
+            <input type="checkbox" name="Lotes" id="" /> Condominio
+          </label>
+          <label for="Lotes" class="inline-block dark:text-slate-200 text-slate-700">
+            <input type="checkbox" name="Lotes" id="" /> Barrio Cerrado
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="props-container">
+      <div class="dark:bg-gray-900">
+        <div
+          class="grid grid-flow-row gap-4 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-5"
+        >
+          <app-propiedades-card
+            *ngFor="let propiedad of propiedades"
+            class="animate__animated animate__fadeInUp"
+            [imgUrl]="propiedad.imgUrl"
+            [descripcion]="propiedad.descripcion"
+            [tags]="propiedad.etiquetas"
+            [titulo]="propiedad.titulo"
+          ></app-propiedades-card>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
