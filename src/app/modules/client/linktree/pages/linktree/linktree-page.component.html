@@ -1,12 +1,12 @@
-<main>
+<main >
   <div class="container animate__animated animate__fadeInUp" *ngFor="let item of data">
 
 
     <div class="header-container">
 
 
-      <div class="flex items-center justify-center p-3 bg-slate-500 rounded-full">
-        <a (click)="shareUrl()">
+      <div class="flex items-center justify-center p-3 cursor-pointer shadow-md hover:bg-slate-200 dark:bg-slate-500 hover:dark:bg-slate-400 hover:scale-105 transition-all duration-500 rounded-full">
+        <a (click)="shareUrl()" title="Compartir">
           <svg width="20" height="20" viewBox="0 0 16 16" enable-background="new 0 0 24 24" class="sc-gKsewC iPWGYb">
             <path fill-rule="evenodd" clip-rule="evenodd"
               d="M10.6464 3.85347L11 4.20702L11.7071 3.49992L11.3536 3.14636L8.35355 0.146362H7.64645L4.64645 3.14636L4.29289 3.49992L5 4.20702L5.35355 3.85347L7.5 1.70702V9.49992V9.99992H8.5V9.49992V1.70702L10.6464 3.85347ZM1 5.49994L1.5 4.99994H4V5.99994H2V14.9999H14V5.99994H12V4.99994H14.5L15 5.49994V15.4999L14.5 15.9999H1.5L1 15.4999V5.49994Z"
@@ -20,16 +20,16 @@
     </div>
 
 
-    <div class="image-container">
-      <img src="assets\images\profile.jpg" width="125" height="125"  priority alt="" class="rounded-full">
+    <div class="image-container mb-5 shadow-md">
+      <img src="assets\images\profile.jpg" width="125" height="125"  priority alt="" class="rounded-full  ">
     </div>
-    <div class="text-container">
+    <div class="text-container mb-5">
       <h1>@{{item.name}}</h1>
       <h3>{{item.desc}}</h3>
     </div>
 
 
-    <div class="tile-container " *ngFor="let item of data[0].links">
+    <div class="tile-container bg-slate-200 dark:bg-gray-800 text-slate-800 shadow-md dark:text-slate-200" *ngFor="let item of data[0].links">
       <a class="tile flex items-center" href={{item.url}} target="_blank">
         <div class="icon">
           <img src={{item.icon}} alt="">
@@ -46,7 +46,7 @@
     </div>
 
 
-          <div class="tile-container animate__animated animate__pulse animate__infinite " >
+          <div class=" dark:bg-gray-800 text-slate-800 bg-slate-200 shadow-md dark:text-slate-200 tile-container animate__animated animate__pulse animate__infinite " >
         <a class="tile flex items-center" routerLink="/propiedades">
           <div class="icon">
             <img src={{item.icon}} alt="">
@@ -65,9 +65,9 @@
 
   </div>
 </main>
-<footer>
+<footer class="mt-10 animate__animated animate__fadeInUp animate__faster animate__delay-1s">
   <div class="footer-container" *ngFor="let item of data">
     <!-- <p>&copy; 2023 {{item.name}}</p> -->
-    <p>&copy; 2023. Todos los derechos reservados by <a href="#">Creier</a></p>
+    <small>&copy; 2023. Todos los derechos reservados by <a href="#">Creier</a></small>
   </div>
 </footer>
