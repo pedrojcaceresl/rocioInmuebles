@@ -7,7 +7,7 @@ main {
 .container {
     width: 91%;
     max-width: 680px;
-    margin-top: 2rem;
+    margin-top: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,20 +37,20 @@ main {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 
     .share-button {
         width: 50px;
         height: 50px;
         border-radius: 25px;
         background-color: #08e739;
-        cursor: pointer;
     }
 
     .share-button:hover {
         background-color: rgb(232, 232, 232);
         transition: cubic-bezier(.07, 1.41, .82, 1.41) 0.2s;
         transform: scale(1.02);
+        cursor: pointer;
     }
 
     .share-button svg {
@@ -63,13 +63,13 @@ main {
 .image-container {
     height: 120px;
     width: 120px;
-    border-radius: 48px;
+    border-radius: 100%;
     overflow: hidden;
 }
 
 .tile-container {
     width: 100%;
-    background-color: rgb(37, 37, 37);
+    // background-color: rgb(37, 37, 37);
     margin: 7px;
     border-radius: 17px;
     display: flex;
@@ -77,12 +77,12 @@ main {
 
     a {
         text-decoration: none;
-        color: rgb(240, 240, 240);
+        // color: rgb(240, 240, 240);
     }
 
     .tile {
         width: 100%;
-        background-color: rgb(37, 37, 37);
+        // background-color: rgb(37, 37, 37);
         border-radius: 17px;
         display: flex;
         justify-content: space-between;
@@ -104,7 +104,7 @@ main {
         width: 40px;
         height: 40px;
         border-radius: 20px;
-        background-color: rgb(52, 52, 52);
+        // background-color: rgb(52, 52, 52);
         aspect-ratio: 1 / 1;
     }
 
