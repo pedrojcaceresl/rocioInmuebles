@@ -1,10 +1,11 @@
-<div class="flex">
-  <label for="buscar"
-    ><input
-      (keyup.enter)="emitValue(txtInput.value)"
-      class="w-48 rounded-2xl text-slate-700 dark:text-gray-200 dark:bg-slate-700 focus:outline-none focus:ring-white"
-      type="text"
+
+     <div class=" max-w-md mx-auto text-gray-600 border-none shadow-sm">
+        <input
+            (keyup.enter)="emitValue(txtInput.value)"
       #txtInput
       [placeholder]="placeholder"
-  /></label>
-</div>
+        class="border-2 relative dark:text-slate-100 dark:placeholder:text-slate-100 dark:hover:bg-slate-700 dark:bg-slate-700 border-none w-full border-gray-300 bg-white h-10  rounded-lg text-sm focus:outline-none"
+          type="search" name="search" placeholder="Buscar...">
+
+      </div>
+
