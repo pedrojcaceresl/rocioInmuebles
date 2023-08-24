@@ -9,12 +9,11 @@ export class PropiedadesCardComponent {
   @Input() imgUrl!: string;
   @Input() titulo!: string;
   @Input() descripcion!: string;
-  @Input() tags!: string[];
+  @Input() tags!: any;
+
 
 
   search(term: string): void {
-    console.log('Desde Propiedades');
-    console.log({ term });
     // this.countriesService.searchCapital(term).subscribe((countries) => {
     //   this.countries = countries
     // });
