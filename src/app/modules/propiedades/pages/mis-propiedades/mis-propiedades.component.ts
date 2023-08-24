@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { NuevaPropiedadPageComponent } from '../nueva-propiedad-page/nueva-propiedad-page.component';
 import { BehaviorSubject } from 'rxjs';
+import Propiedad from '../../interfaces/propiedades.interface';
 
 
 @Component({
