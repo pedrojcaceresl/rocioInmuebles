@@ -1,75 +1,89 @@
 
-<div class="h-screen lg:p-2">
+    <mat-card class="">
+      <mat-card-content class="dark:bg-gray-700">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4  text-white">
+            <div>
+              <h2>Titulo</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Titulo"
+                required
+                formControlName="titulo"
+                type="text"
+              />
 
+              <h2>Descripcion</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Descripcion"
+                required
+                formControlName="descripcion"
+                type="text"
+              />
 
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button> -->
-<mat-stepper class="max-h-fit" [linear]="isLinear" #stepper>
+              <h2>URL Imagen</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+                formControlName="imgUrl"
+                type="text"
+              />
+            </div>
+            <div>
+              <h2>Etiquetas</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+                formControlName="etiquetas"
+                type="text"
+              />
 
+              <h2>Estado</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+                formControlName="estado"
+                type="text"
+              />
 
+              <h2>Tipos</h2>
+              <mat-select
+                formControlName="tipo"
+                required
+                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <mat-option
+                  *ngFor="let tipo of tipos"
+                  [value]="tipo"
+                >
+                  {{ tipo }}</mat-option>
+              </mat-select>
+            </div>
+          </div>
 
-  <mat-step class="h-full bg-slate-500" [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Datos de la propiedad</ng-template>
+          <div class="mt-4">
+            <h1 class="text-slate-600 dark:text-white">
+              Selecciona la ubicación arrastrando el marcador
+            </h1>
+            <div class="map-container">
+              <google-map
+                (mapInitialized)="onMapInitialized($event)"
+                [center]="center"
+                [zoom]="zoom"
+                width="100%"
+                height="100%"
+              />
+            </div>
+          </div>
 
-      <mat-form-field>
-        <mat-label>Titulo</mat-label>
-        <input matInput placeholder="Titulo" formControlName="titulo" required>
-      </mat-form-field>
+          <div class="flex justify-between mt-4">
+            <span></span>
 
-      <mat-form-field>
-        <mat-label>Descripcion</mat-label>
-        <input matInput placeholder="Descripcion" formControlName="descripcion" required>
-      </mat-form-field>
-
-            <mat-form-field>
-        <mat-label>Url Imagen</mat-label>
-        <input matInput placeholder="Imagenes Url" formControlName="imgUrl" required>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Etiquetas</mat-label>
-        <input matInput placeholder="Etiquetas" formControlName="etiquetas" required>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Estado</mat-label>
-        <input matInput placeholder="Estado" formControlName="estado" required>
-      </mat-form-field>
-
-      <div>
-        <button mat-button matStepperNext >Siguiente</button>
-      </div>
-    </form>
-  </mat-step>
-
-
-
-  <mat-step [stepControl]="secondFormGroup" label="Selecciona la ubicacion">
-    <form [formGroup]="secondFormGroup">
-      <h1 class="text-slate-600">Selecciona la ubicación arrastrando el marcador</h1>
-      <div class="my-2">
-        <button mat-button color="secondary" matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext>Siguiente</button>
-      </div>
-
-      <div>
-        <google-map (mapInitialized)="onMapInitialized($event)" [center]="center" [zoom]="zoom" width="1000px" height="450px" />
-      </div>
-
-
-    </form>
-  </mat-step>
-  <mat-step >
-    <ng-template matStepLabel>Guardar</ng-template>
-    <p class="text-slate-600">Si todos los datos están correctos, presione el botón de Guardar</p>
-    <div>
-      <button mat-button (click)="onSubmit()">Guardar</button>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button (click)="stepper.reset()">Cancelar</button>
-    </div>
-  </mat-step>
-</mat-stepper>
-
-</div>
+            <button (click)="onSubmit()" color="primary" class="bg-gray-600 text-white p-2 rounded-lg">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>

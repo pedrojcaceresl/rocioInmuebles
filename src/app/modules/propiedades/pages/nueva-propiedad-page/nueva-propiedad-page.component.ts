@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,12 +7,16 @@ import {
 } from '@angular/forms';
 import { PropiedadesService } from '../../../../shared/services/propiedades.service';
 import Propiedad from '../../interfaces/propiedades.interface';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
   styleUrls: ['./nueva-propiedad-page.component.scss'],
 })
-export class NuevaPropiedadPageComponent {
+export class NuevaPropiedadPageComponent  implements OnInit{
+  tipos: String[] = ['lote', 'duplex', 'casa', 'terreno']
+
+
   locationForm = new FormGroup({
     latitude: new FormControl(),
     longitude: new FormControl(),
@@ -23,8 +27,8 @@ export class NuevaPropiedadPageComponent {
     descripcion: ['', Validators.required],
     imgUrl: ['', Validators.required],
     tipo: ['', Validators.required],
+    etiquetas: [''],
     estado: ['', Validators.required],
-    etiquetas: [['']]
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -55,8 +59,22 @@ export class NuevaPropiedadPageComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private propiedadesService: PropiedadesService
-    ) {}
+    private propiedadesService: PropiedadesService,
+    // private dialog: MatDialog
+    public dialogRef: MatDialogRef<NuevaPropiedadPageComponent>,
+
+    @Inject (MAT_DIALOG_DATA) public data: any
+
+
+  ) {
+    this.propiedadesService.getPropiedadById('N6VFyICGyi7gxCzqJKXy').subscribe(res=>{
+      console.log('le datee',res);
+    })
+  }
+  ngOnInit(): void {
+      this.firstFormGroup.reset(this.data)
+
+  }
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
@@ -95,7 +113,8 @@ export class NuevaPropiedadPageComponent {
   }
 
   onSubmit() {
-    const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } = this.firstFormGroup.value;
+    const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } =
+      this.firstFormGroup.value;
     const { latitude, longitude } = this.secondFormGroup.value;
     const propiedad: Propiedad = {
       titulo,
@@ -106,12 +125,12 @@ export class NuevaPropiedadPageComponent {
       estado,
       ubicacion: {
         lat: latitude,
-        lng: longitude
-      }
+        lng: longitude,
+      },
     };
     this.propiedadesService.addPropiedades(propiedad);
 
-    console.log({propiedad})
+    console.log({ propiedad });
     // TODO llamar a metodo para guardar datos
 
     // TODO mostrar mensaje de guardado con exito
