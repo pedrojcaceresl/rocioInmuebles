@@ -1,11 +1,11 @@
 [
   {
-    "imgUrl": "https://soyarquitectura.mx/wp-content/uploads/2021/09/casas-de-lujo-blogc8.jpg",
+    "imgUrl": "https://clasicdn.paraguay.com/pictures/2017/08/28/778471/2911510L.webp",
     "descripcion": "Amplio dúplex de lujo disponible para estrenar. Cuenta con acabados de alta calidad y espacios modernos. Excelente ubicación cerca de servicios y transporte público.",
     "titulo": "En venta, duplex a estrenar",
     "tipo": "Departamento",
     "ubicacion": "-54, -27",
-    "etiquetas": ["venta", "duplex", "lujo", "estrenar"]
+    "etiquetas": ["barrio cerrado", "duplex", "lujo", "estrenar", "Barrio Cerrado"]
   },
   {
     "imgUrl": "https://img.freepik.com/foto-gratis/villa-lujo-piscina-espectacular-diseno-contemporaneo-arte-digital-bienes-raices-hogar-casa-propiedad-ge_1258-150765.jpg",
@@ -13,7 +13,7 @@
     "titulo": "Amplio lote en venta",
     "tipo": "Lote",
     "ubicacion": "Ubicación privilegiada",
-    "etiquetas": ["venta", "lote", "lujo", "piscina"]
+    "etiquetas": ["casas", "lote", "lujo", "piscina"]
   },
   {
     "imgUrl": "https://www.metrocuadrado.com/sites/noticias-m2/files/styles/crop_770x383/public/field/image/pool_with_a_view_final_4k.0.jpg",
@@ -21,7 +21,7 @@
     "titulo": "Departamento de lujo con vista a la piscina",
     "tipo": "Departamento",
     "ubicacion": "Ubicación privilegiada",
-    "etiquetas": ["venta", "departamento", "lujo", "vista a la piscina"]
+    "etiquetas": ["venta", "barrio cerrado", "lujo", "vista a la piscina"]
   },
   {
     "imgUrl": "https://ims.imgix.net/uploads/ims/project_image/image/22193/9.jpg",
@@ -29,6 +29,6 @@
     "titulo": "Amplia casa en venta",
     "tipo": "Casa",
     "ubicacion": "Ubicación privilegiada",
-    "etiquetas": ["venta", "casa", "amplia", "jardín"]
+    "etiquetas": ["venta", "casas", "amplia", "jardín"]
   }
 ]

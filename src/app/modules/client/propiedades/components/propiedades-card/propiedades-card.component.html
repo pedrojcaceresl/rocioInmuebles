@@ -7,14 +7,9 @@
     </small>
   </div>
   <div class="px-6 pt-4 pb-2">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"># {{ tags }}</span>
-
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" *ngFor="let tag of tags"># {{ tag }}</span>
   </div>
-
-
 </div>
-
-
 
 <div *ngIf="!imgUrl" role="status" class="max-w-sm rounded animate-pulse overflow-hidden shadow-lg cursor-pointer my-8 bg-white dark:bg-gray-800 dark:shadow-gray-900">
       <div class="flex items-center h-52 justify-center px-6 py-4 w-full  bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
