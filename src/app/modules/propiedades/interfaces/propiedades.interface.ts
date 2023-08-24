@@ -6,7 +6,7 @@ export default interface Propiedad {
   tipo: string | null | undefined;
   estado: string | null | undefined;
   ubicacion: Coords | null | undefined;
-  etiquetas?: string[] | null | undefined;
+  etiquetas: string | null | undefined;
 }
 
 interface Coords {
@@ -14,9 +14,9 @@ interface Coords {
   lng: number | null | undefined;
 }
 
-enum PropiedadTipo {
-  lote = 'lote',
-  duplex = 'duplex',
-  casa = 'casa',
-  terreno = 'terreno'
-}
+// enum PropiedadTipo {
+//   lote = 'lote',
+//   duplex = 'duplex',
+//   casa = 'casa',
+//   terreno = 'terreno'
+// }

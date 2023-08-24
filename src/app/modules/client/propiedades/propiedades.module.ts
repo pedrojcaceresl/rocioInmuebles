@@ -6,6 +6,7 @@ import { PropiedadesPageComponent } from './pages/propiedades-page/propiedades-p
 import { PropiedadesCardComponent } from './components/propiedades-card/propiedades-card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PropiedadesCardSkeletonComponent } from './components/propiedades-card-skeleton/propiedades-card-skeleton.component';
+import { MaterialModule } from '../../material/material.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PropiedadesCardSkeletonComponent } from './components/propiedades-card-
   imports: [
     CommonModule,
     PropiedadesRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ],
   exports:[
     PropiedadesCardComponent

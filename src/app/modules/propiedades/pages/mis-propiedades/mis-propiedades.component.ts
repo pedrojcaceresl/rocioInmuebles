@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PropiedadesService } from '../../../../shared/services/propiedades.service';
+import { MatDialog } from '@angular/material/dialog';
+
+import { NuevaPropiedadPageComponent } from '../nueva-propiedad-page/nueva-propiedad-page.component';
 import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   templateUrl: './mis-propiedades.component.html',
@@ -26,9 +30,16 @@ export class MisPropiedadesComponent {
 
   constructor(
     private http: HttpClient,
-    private propiedadesService: PropiedadesService
-  ) {
-    this.http.get('/assets/propiedades.json').subscribe((res) => {
+    private propiedadesService: PropiedadesService,
+    private dialog: MatDialog,
+
+  ){
+    // this.http.get('/assets/propiedades.json').subscribe(res=>{
+    //   this.propiedades = res;
+    // })
+
+    this.propiedadesService.getPropiedades().subscribe(res=>{
+      console.log({res});
       this.propiedades = res;
       this.filteredCards = [...this.propiedades];
     });
@@ -37,6 +48,13 @@ export class MisPropiedadesComponent {
     //   console.log({ res });
     //   this.propiedades = res;
     // });
+  }
+
+  editarPropiedad(propiedad: Propiedad){
+    console.log('data', {propiedad});
+    this.dialog.open(NuevaPropiedadPageComponent, {
+      data: propiedad
+    })
   }
 
   applyFilters(filter: string) {
