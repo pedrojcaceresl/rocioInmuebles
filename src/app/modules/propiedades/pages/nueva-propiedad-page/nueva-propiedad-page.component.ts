@@ -7,15 +7,18 @@ import {
 } from '@angular/forms';
 import { PropiedadesService } from '../../../../shared/services/propiedades.service';
 import Propiedad from '../../interfaces/propiedades.interface';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
   styleUrls: ['./nueva-propiedad-page.component.scss'],
 })
-export class NuevaPropiedadPageComponent  implements OnInit{
-  tipos: String[] = ['lote', 'duplex', 'casa', 'terreno']
-
+export class NuevaPropiedadPageComponent implements OnInit {
+  tipos: String[] = ['lote', 'duplex', 'casa', 'terreno'];
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -63,21 +66,23 @@ export class NuevaPropiedadPageComponent  implements OnInit{
     // private dialog: MatDialog
     public dialogRef: MatDialogRef<NuevaPropiedadPageComponent>,
 
-    @Inject (MAT_DIALOG_DATA) public data: any
-
-
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.propiedadesService.getPropiedadById('N6VFyICGyi7gxCzqJKXy').subscribe(res=>{
-      console.log('le datee',res);
-    })
   }
   ngOnInit(): void {
-      this.firstFormGroup.reset(this.data)
+    this.firstFormGroup.reset(this.data.propiedad);
+    console.log('datossss',this.data);
 
   }
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
+
+    this.center = {
+      lat: this.data.propiedad.ubicacion.lat,
+      lng: this.data.propiedad.ubicacion.lng,
+    };
+
     this.initMarker();
   }
 
@@ -87,18 +92,20 @@ export class NuevaPropiedadPageComponent  implements OnInit{
 
   initMarker() {
     this.marker = new google.maps.Marker({
-      position: { lat: this.lat, lng: this.lng },
+      position: {
+        lat: this.data.propiedad.ubicacion.lat ? this.data.propiedad.ubicacion.lat : this.lat,
+        lng: this.data.propiedad.ubicacion.lng ? this.data.propiedad.ubicacion.lng : this.lng},
       map: this.map,
       draggable: true,
-      // label: 'Hello'
     });
+
 
     this.marker.setAnimation(google.maps.Animation.DROP);
     this.marker.addListener('dragend', () => {
       this.selectedPosition = this.marker.getPosition();
       const position = this.marker.getPosition();
-      this.lat = position?.lat();
-      this.lng = position?.lng();
+        this.lat = position?.lat();
+        this.lng = position?.lng();
       this.updateFormValues();
     });
   }
@@ -113,10 +120,14 @@ export class NuevaPropiedadPageComponent  implements OnInit{
   }
 
   onSubmit() {
-    const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } =
-      this.firstFormGroup.value;
-    const { latitude, longitude } = this.secondFormGroup.value;
+
+    const { editMode } = this.data;
+    const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } = this.firstFormGroup.value;
+    // const { latitude, longitude } = this.secondFormGroup.value;
+
+
     const propiedad: Propiedad = {
+      id: this.data.propiedad.id,
       titulo,
       descripcion,
       imgUrl,
@@ -124,17 +135,22 @@ export class NuevaPropiedadPageComponent  implements OnInit{
       etiquetas,
       estado,
       ubicacion: {
-        lat: latitude,
-        lng: longitude,
+        lat: this.lat,
+        lng: this.lng,
       },
     };
-    this.propiedadesService.addPropiedades(propiedad);
+
+
+    if(editMode){
+      console.log("se editara");
+      this.propiedadesService.updatePropiedad(propiedad);
+    }else{
+      this.propiedadesService.addPropiedades(propiedad);
+    }
 
     console.log({ propiedad });
-    // TODO llamar a metodo para guardar datos
+    alert(`Guardado con exito`);
+    this.dialogRef.close();
 
-    // TODO mostrar mensaje de guardado con exito
-    alert(`Guardado con exito, ${JSON.stringify(propiedad)}`);
-    // TODO Redirigir al usuario a la lista de propiedades
   }
 }

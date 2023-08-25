@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { addDoc, setDoc, collection, collectionData, deleteDoc, doc, Firestore, getDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import Propiedades from 'src/app/modules/propiedades/interfaces/propiedades.interface';
 
@@ -24,9 +24,9 @@ export class PropiedadesService {
   }
 
   getPropiedadById(propiedadId: string): Observable<Propiedades | undefined> {
-    const propiedadDocRef = doc(this.firestore, 'propiedades', propiedadId);
+    const propiedadesDocRef = doc(this.firestore, 'propiedades', propiedadId);
     return new Observable<Propiedades | undefined>((observer) => {
-      getDoc(propiedadDocRef).then((docSnapshot) => {
+      getDoc(propiedadesDocRef).then((docSnapshot) => {
         if (docSnapshot.exists()) {
           const propiedadData = docSnapshot.data() as Propiedades;
           observer.next({ id: propiedadId, ...propiedadData });
@@ -38,6 +38,13 @@ export class PropiedadesService {
         observer.error(error);
       });
     });
+  }
+
+  updatePropiedad(propiedad: any): Promise<void> {
+    const propiedadesDocRef = doc(this.firestore, 'propiedades', propiedad.id);
+    const propiedadWithoutId = { ...propiedad };
+    delete propiedadWithoutId.id; // Eliminar el campo "id" del objeto a actualizar
+    return setDoc(propiedadesDocRef, propiedadWithoutId, { merge: true });
   }
 
   deletePropiedades(propiedades: Propiedades){
