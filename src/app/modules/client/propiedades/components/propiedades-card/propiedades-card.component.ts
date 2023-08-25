@@ -10,12 +10,13 @@ import { NuevaPropiedadPageComponent } from 'src/app/modules/propiedades/pages/n
 export class PropiedadesCardComponent {
 
 
-  @Output() onEdit = new EventEmitter
-
   @Input() imgUrl!: string;
   @Input() titulo!: string;
   @Input() descripcion!: string;
   @Input() tags!: string;
+
+  @Output() onEdit = new EventEmitter<any>();
+  @Output() onDelete = new EventEmitter<any>();
 
   constructor(
     private dialog: MatDialog,
@@ -30,6 +31,11 @@ export class PropiedadesCardComponent {
 
   editarPropiedad(){
     this.onEdit.emit()
+  }
+
+  eliminarPropiedad(){
+    console.log('se quiere eliminar');
+    this.onDelete.emit();
   }
 
 }

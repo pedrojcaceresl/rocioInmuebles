@@ -70,7 +70,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    this.firstFormGroup.reset(this.data.propiedad);
+    this.data && this.firstFormGroup.reset(this.data.propiedad);
     console.log('datossss',this.data);
 
   }
@@ -79,8 +79,8 @@ export class NuevaPropiedadPageComponent implements OnInit {
     this.mapInitialized = map;
 
     this.center = {
-      lat: this.data.propiedad.ubicacion.lat,
-      lng: this.data.propiedad.ubicacion.lng,
+      lat: this.data && this.data.propiedad.ubicacion.lat || this.lat,
+      lng: this.data && this.data.propiedad.ubicacion.lng || this.lng,
     };
 
     this.initMarker();
@@ -91,10 +91,14 @@ export class NuevaPropiedadPageComponent implements OnInit {
   }
 
   initMarker() {
+    let lat = -25.496983038652843;
+    let lng = -54.6637051698589;
+
     this.marker = new google.maps.Marker({
       position: {
-        lat: this.data.propiedad.ubicacion.lat ? this.data.propiedad.ubicacion.lat : this.lat,
-        lng: this.data.propiedad.ubicacion.lng ? this.data.propiedad.ubicacion.lng : this.lng},
+        lat: this.data?.propiedad.ubicacion.lat ? this.data?.propiedad.ubicacion.lat : lat,
+        lng: this.data?.propiedad.ubicacion.lng ? this.data?.propiedad.ubicacion.lng : lng
+      },
       map: this.map,
       draggable: true,
     });
@@ -121,13 +125,12 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
   onSubmit() {
 
-    const { editMode } = this.data;
+
     const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } = this.firstFormGroup.value;
     // const { latitude, longitude } = this.secondFormGroup.value;
 
-
     const propiedad: Propiedad = {
-      id: this.data.propiedad.id,
+      id: this.data && this.data.propiedad.id,
       titulo,
       descripcion,
       imgUrl,
@@ -140,8 +143,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
       },
     };
 
-
-    if(editMode){
+    if(this.data && this.data.editMode){
       console.log("se editara");
       this.propiedadesService.updatePropiedad(propiedad);
     }else{

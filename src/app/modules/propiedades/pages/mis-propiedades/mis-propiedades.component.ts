@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NuevaPropiedadPageComponent } from '../nueva-propiedad-page/nueva-propiedad-page.component';
 import { BehaviorSubject } from 'rxjs';
 import Propiedad from '../../interfaces/propiedades.interface';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -51,13 +52,31 @@ export class MisPropiedadesComponent implements OnInit {
     })
   }
 
-
+  nuevaPropiedad(){
+    const dialogRef =  this.dialog.open(NuevaPropiedadPageComponent, {
+    })
+  }
 
 
   editarPropiedad(propiedad: Propiedad){
-    // console.log('data', {propiedad});
     this.dialog.open(NuevaPropiedadPageComponent, {
       data: {propiedad, editMode: true}
+    })
+  }
+
+  eliminarPropiedad(propiedad: Propiedad){
+    console.log("pANZA", propiedad.id);
+
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data : propiedad.titulo
+    })
+
+    dialogRef.afterClosed().subscribe(res => {
+      res && this.propiedadesService.deletePropiedades(propiedad)
+      .then( (res) =>{
+        this.cd.markForCheck();
+      })
     })
   }
 
