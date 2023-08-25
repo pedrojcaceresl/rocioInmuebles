@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PropiedadesService } from '../../../../shared/services/propiedades.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,8 +11,9 @@ import Propiedad from '../../interfaces/propiedades.interface';
 @Component({
   templateUrl: './mis-propiedades.component.html',
   styleUrls: ['./mis-propiedades.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MisPropiedadesComponent {
+export class MisPropiedadesComponent implements OnInit {
   propiedades: any = [];
   filteredCards: any; // Inicialmente, muestra todas las tarjetas
 
@@ -33,28 +34,30 @@ export class MisPropiedadesComponent {
     private http: HttpClient,
     private propiedadesService: PropiedadesService,
     private dialog: MatDialog,
+    private cd: ChangeDetectorRef,
+    private zone: NgZone,
 
   ){
-    // this.http.get('/assets/propiedades.json').subscribe(res=>{
-    //   this.propiedades = res;
-    // })
 
-    this.propiedadesService.getPropiedades().subscribe(res=>{
-      console.log({res});
-      this.propiedades = res;
-      this.filteredCards = [...this.propiedades];
-    });
-
-    // this.propiedadesService.getPropiedades().subscribe((res) => {
-    //   console.log({ res });
-    //   this.propiedades = res;
-    // });
+  }
+  ngOnInit(): void {
+    this.zone.run(()=>{
+      this.propiedadesService.getPropiedades().subscribe(res=>{
+        console.log({res});
+        this.propiedades = res;
+        this.filteredCards = [...this.propiedades];
+        this.cd.markForCheck();
+      });
+    })
   }
 
+
+
+
   editarPropiedad(propiedad: Propiedad){
-    console.log('data', {propiedad});
+    // console.log('data', {propiedad});
     this.dialog.open(NuevaPropiedadPageComponent, {
-      data: propiedad
+      data: {propiedad, editMode: true}
     })
   }
 
