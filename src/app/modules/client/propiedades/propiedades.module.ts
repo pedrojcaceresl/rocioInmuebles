@@ -7,13 +7,17 @@ import { PropiedadesCardComponent } from './components/propiedades-card/propieda
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PropiedadesCardSkeletonComponent } from './components/propiedades-card-skeleton/propiedades-card-skeleton.component';
 import { MaterialModule } from '../../material/material.module';
+import { PropertyCardClientComponent } from './components/property-card-client/property-card-client.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
   declarations: [
     PropiedadesPageComponent,
     PropiedadesCardComponent,
-    PropiedadesCardSkeletonComponent
+    PropiedadesCardSkeletonComponent,
+    PropertyCardClientComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
