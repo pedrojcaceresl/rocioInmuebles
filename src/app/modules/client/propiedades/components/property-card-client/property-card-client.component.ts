@@ -12,6 +12,6 @@ export class PropertyCardClientComponent {
   @Input() descripcion!: string;
   @Input() tags!: string;
 
-  constructor(private dialog: MatDialog) {}
+  constructor() {}
 
 }
