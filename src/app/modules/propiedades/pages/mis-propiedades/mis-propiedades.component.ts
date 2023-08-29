@@ -66,8 +66,6 @@ export class MisPropiedadesComponent implements OnInit {
   }
 
   eliminarPropiedad(propiedad: Propiedad){
-    console.log("pANZA", propiedad.id);
-
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data : propiedad.titulo

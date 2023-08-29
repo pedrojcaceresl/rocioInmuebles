@@ -12,6 +12,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 
 import { MaterialModule } from '../material/material.module';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { FiltrosComponent } from './pages/filtros/filtros.component';
+import { NuevoFiltroComponent } from './pages/nuevo-filtro/nuevo-filtro.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
     MisPropiedadesComponent,
     ConfirmDialogComponent,
     SearchPageComponent,
+    FiltrosComponent,
+    NuevoFiltroComponent,
   ],
   imports: [
     CommonModule,

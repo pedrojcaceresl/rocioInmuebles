@@ -1,0 +1,65 @@
+<!-- <div class="p-5 flex"> -->
+  <div class="filter-container hidden md:inline-block lg:inline-block p-5 w-60">
+    <!-- <div class="py-8">
+      <shared-search-box
+        placeholder="Buscar propiedad"
+        class=""
+      ></shared-search-box>
+    </div> -->
+  </div>
+
+  <div class="props-container">
+    <button
+    (click)="nuevoFiltro()"
+      class="dark:bg-gray-500 dark:text-white m-5 p-3 rounded-xl"
+    >
+      Añadir Filtro
+    </button>
+    <!-- <div class="dark:bg-gray-900">
+      <div
+        class="grid grid-flow-row gap-4 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-5"
+      >
+
+
+    </div> -->
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+              <th scope="col" class="px-6 py-3">
+                  Id
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Nombre
+              </th>
+              <!-- <th scope="col" class="px-6 py-3">
+                  algo mas
+              </th> -->
+              <th scope="col" class="px-6 py-3">
+                  <span class="sr-only">Acciones</span>
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr
+          *ngFor="let filtro of filtros"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{filtro.id}}
+              </th>
+              <td class="px-6 py-4">
+                  {{filtro.nombre}}
+              </td>
+              <td class="px-6 py-4 text-right">
+                  <button (click)="editarFiltro(filtro)" class="border border-blue-600 rounded-lg p-3 font-medium text-blue-600 dark:text-blue-500 hover:underline mr-10">Editar</button>
+
+                  <button (click)="eliminarFiltro(filtro)" class="border border-red-600 rounded-lg p-3 font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+  </div>
+<!-- </div> -->
