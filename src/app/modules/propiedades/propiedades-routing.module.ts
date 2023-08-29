@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NuevaPropiedadPageComponent } from './pages/nueva-propiedad-page/nueva-propiedad-page.component';
 import { MisPropiedadesComponent } from './pages/mis-propiedades/mis-propiedades.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { FiltrosComponent } from './pages/filtros/filtros.component';
 
 const routes: Routes = [
   {
@@ -13,8 +14,8 @@ const routes: Routes = [
         component: MisPropiedadesComponent
       },
       {
-        path: 'nueva-propiedad',
-        component: NuevaPropiedadPageComponent
+        path: 'filtros',
+        component: FiltrosComponent
       },
       {
         path: 'search',
