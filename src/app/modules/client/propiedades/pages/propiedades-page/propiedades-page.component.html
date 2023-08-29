@@ -1,24 +1,61 @@
-<div class="sidenav flex justify-center flex-col items-center pt-10">
-  <h1 class="text-2xl md:text-4xl lg:text-5xl">Rocio Inmuebles</h1>
-  <h2 class="text-xl md:text-3xl lg:text-3xl mt-5">Propiedades</h2>
-</div>
+<flowbite-navbar extraClass="border-b" [fluid]="true">
+  <div class="flex items-center">
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 20 20"
+      class="mr-6 h-6 w-6 cursor-pointer text-gray-600 dark:text-gray-400"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+    <a
+      class="cursor-pointer text-xl font-semibold text-gray-600 dark:text-white"
+      routerLink=""
+      >Rocio Inmuebles</a
+    >
+  </div>
+  <div class="flex items-center gap-2">
+    <flowbite-dark-theme-toggle></flowbite-dark-theme-toggle>
+  </div>
+</flowbite-navbar>
 
-<div class="w-full flex flex-col justify-center items-center mb-10">
+<div class="w-full flex flex-col justify-center items-center my-10">
+  <div class="flex md:px-10 w-full justify-center">
+    <div class="">
+      <div class="w-full flex justify-center p-2 px-4 max-w-7xl">
+        <app-filter></app-filter>
+      </div>
 
-<app-filter></app-filter>
-<div class="flex md:p-10 w-screen">
-        <div class="w-full flex-wrap flex gap-10  dark:bg-gray-900 p-10 text-neutral-600 justify-center">
-              <!-- Render your actual data here -->
-            <div class="w-full max-w-7xl flex md:gap-10 flex-wrap justify-center">
-                <app-property-card-client
-                *ngFor="let propiedad of propiedades"
-                [imgUrl]="propiedad.imgUrl"
-                [descripcion]="propiedad.descripcion"
-                [tags]="propiedad.etiquetas"
-                [titulo]="propiedad.titulo"
-              ></app-property-card-client>
-            </div>
+      <div class="flex w-full max-w-7xl p-2 px-4 my-10">
+        <h1 class="text-2xl w-1/2">Venta de Inmuebles</h1>
+        <div class="w-1/2 flex justify-end mx-2">
+          <button
+            class="dark:bg-slate-700 dark:hover:bg-slate-600 p-2 rounded-md px-5 flex gap-2"
+          >
+            <i class="fa-solid fa-map-location-dot mt-0.5"></i>
+            <p>Ver mapa</p>
+          </button>
         </div>
-</div>
+      </div>
 
+      <!-- Render your actual data here -->
+      <div class="w-full max-w-7xl flex md:gap-x-10 flex-wrap justify-center">
+        <app-property-card-client
+          *ngFor="let propiedad of propiedades"
+          [imgUrl]="propiedad.imgUrl"
+          [descripcion]="propiedad.descripcion"
+          [tags]="propiedad.etiquetas"
+          [titulo]="propiedad.titulo"
+        ></app-property-card-client>
+      </div>
+    </div>
+  </div>
 </div>
