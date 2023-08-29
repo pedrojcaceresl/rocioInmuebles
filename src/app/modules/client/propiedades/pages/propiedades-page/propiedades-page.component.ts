@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { PropiedadesService } from 'src/app/shared/services/propiedades.service';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 @Component({
   templateUrl: './propiedades-page.component.html',
@@ -8,15 +8,15 @@ import { PropiedadesService } from 'src/app/shared/services/propiedades.service'
 })
 export class PropiedadesPageComponent {
   public propiedades: any[] = [];
-
+  path: string = 'propiedades'
   isLoading = false;
 
   http = inject(HttpClient);
 
-  propiedadesService = inject(PropiedadesService);
+  firebaseService = inject(FirebaseService);
 
   ngOnInit() {
-    this.propiedadesService.getPropiedades().subscribe((res) => {
+    this.firebaseService.getData(this.path).subscribe((res) => {
       this.isLoading = true;
       this.propiedades = res;
     });

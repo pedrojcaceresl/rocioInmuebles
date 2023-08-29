@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PropiedadesService } from '../../../../shared/services/propiedades.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { NuevaPropiedadPageComponent } from '../nueva-propiedad-page/nueva-propiedad-page.component';
 import { BehaviorSubject } from 'rxjs';
 import Propiedad from '../../interfaces/propiedades.interface';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { FirebaseService } from '../../../../shared/services/firebase.service';
 
 
 @Component({
@@ -30,10 +30,11 @@ export class MisPropiedadesComponent implements OnInit {
     []
   );
   etiquetas: string[] = ['casas', 'lote', 'lujo', 'piscina'];
+  path: string = 'propiedades'
 
   constructor(
     private http: HttpClient,
-    private propiedadesService: PropiedadesService,
+    private firebaseService: FirebaseService,
     private dialog: MatDialog,
     private cd: ChangeDetectorRef,
     private zone: NgZone,
@@ -43,7 +44,7 @@ export class MisPropiedadesComponent implements OnInit {
   }
   ngOnInit(): void {
     this.zone.run(()=>{
-      this.propiedadesService.getPropiedades().subscribe(res=>{
+      this.firebaseService.getData(this.path).subscribe(res=>{
         console.log({res});
         this.propiedades = res;
         this.filteredCards = [...this.propiedades];
@@ -73,7 +74,7 @@ export class MisPropiedadesComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(res => {
-      res && this.propiedadesService.deletePropiedades(propiedad)
+      res && this.firebaseService.deleteData(propiedad, this.path)
       .then( (res) =>{
         this.cd.markForCheck();
       })

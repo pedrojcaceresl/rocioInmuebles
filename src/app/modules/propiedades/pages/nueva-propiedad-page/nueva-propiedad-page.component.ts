@@ -1,12 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { PropiedadesService } from '../../../../shared/services/propiedades.service';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import Propiedad from '../../interfaces/propiedades.interface';
+import { FirebaseService } from '../../../../shared/services/firebase.service';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -19,6 +14,7 @@ import {
 })
 export class NuevaPropiedadPageComponent implements OnInit {
   tipos: String[] = ['lote', 'duplex', 'casa', 'terreno'];
+  path: string = 'propiedades'
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -62,7 +58,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private propiedadesService: PropiedadesService,
+    private firebaseService: FirebaseService,
     // private dialog: MatDialog
     public dialogRef: MatDialogRef<NuevaPropiedadPageComponent>,
 
@@ -145,9 +141,9 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
     if(this.data && this.data.editMode){
       console.log("se editara");
-      this.propiedadesService.updatePropiedad(propiedad);
+      this.firebaseService.updateData(propiedad, this.path);
     }else{
-      this.propiedadesService.addPropiedades(propiedad);
+      this.firebaseService.addData(propiedad, this.path);
     }
 
     console.log({ propiedad });
