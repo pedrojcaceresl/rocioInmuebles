@@ -9,6 +9,8 @@ import { PropiedadesCardSkeletonComponent } from './components/propiedades-card-
 import { MaterialModule } from '../../material/material.module';
 import { PropertyCardClientComponent } from './components/property-card-client/property-card-client.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { PropiedadesDetallesPageComponent } from './pages/propiedades-detalles-page/propiedades-detalles-page.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { FilterComponent } from './components/filter/filter.component';
     PropiedadesCardComponent,
     PropiedadesCardSkeletonComponent,
     PropertyCardClientComponent,
-    FilterComponent
+    FilterComponent,
+    PropiedadesDetallesPageComponent,
+    GalleryComponent
   ],
   imports: [
     CommonModule,

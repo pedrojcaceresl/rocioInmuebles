@@ -1,0 +1,16 @@
+<div id="app" class="p-4">
+  <h1 class="mb-2 md:mb-4 font-semibold text-xl">Alquilo</h1>
+  <div class="mb-4 w-screen max-w-3xl ">
+    <div id="productCarousel" class="f-carousel">
+      <div
+        *ngFor="let image of images"
+        class="f-carousel__slide"
+        [attr.data-thumb-src]="image['data-thumb-src']"
+        data-fancybox="gallery"
+        [attr.data-src]="image['data-src']"
+      >
+        <img alt="" [attr.data-lazy-src]="image['data-src']" />
+      </div>
+    </div>
+  </div>
+</div>
