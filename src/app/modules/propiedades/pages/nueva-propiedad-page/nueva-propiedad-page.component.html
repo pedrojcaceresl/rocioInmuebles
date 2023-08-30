@@ -23,12 +23,13 @@
               />
 
               <h2>URL Imagen</h2>
-              <input
+              <!-- <input
                 class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
                 formControlName="imgUrl"
                 type="text"
-              />
+              /> -->
+              <shared-image-uploader (onResponse)="onImageUpload($event)" folder="rocio-inmuebles" [multiple]="true">Subir imagen</shared-image-uploader>
             </div>
             <div>
               <h2>Etiquetas</h2>
@@ -40,12 +41,23 @@
               />
 
               <h2>Estado</h2>
-              <input
+              <!-- <input
                 class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
                 formControlName="estado"
                 type="text"
-              />
+              /> -->
+              <mat-select
+              formControlName="estado"
+              required
+              class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <mat-option
+                *ngFor="let estado of estados"
+                [value]="estado.nombre"
+              >
+                {{ estado.nombre }}</mat-option>
+            </mat-select>
 
               <h2>Tipos</h2>
               <mat-select

@@ -2,11 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import Propiedad from '../../interfaces/propiedades.interface';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
+import { filter, map } from "rxjs";
 import {
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
+import Filtro from '../../interfaces/filtros.interface';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
@@ -15,6 +17,8 @@ import {
 export class NuevaPropiedadPageComponent implements OnInit {
   tipos: String[] = ['lote', 'duplex', 'casa', 'terreno'];
   path: string = 'propiedades'
+  imgUrls: string[] = [];
+  imgUrl: string = '';
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -56,6 +60,8 @@ export class NuevaPropiedadPageComponent implements OnInit {
     disableDoubleClickZoom: true,
   };
 
+  estados: Filtro[] = [];
+
   constructor(
     private _formBuilder: FormBuilder,
     private firebaseService: FirebaseService,
@@ -64,7 +70,13 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.firebaseService.getData('filtros')
+    .subscribe(res =>{
+      this.estados = res.filter((estado:any) => estado.categoria === 'Estado')
+      console.log(this.estados);
+    })
   }
+
   ngOnInit(): void {
     this.data && this.firstFormGroup.reset(this.data.propiedad);
     console.log('datossss',this.data);
@@ -129,7 +141,8 @@ export class NuevaPropiedadPageComponent implements OnInit {
       id: this.data && this.data.propiedad.id,
       titulo,
       descripcion,
-      imgUrl,
+      imgUrl: this.imgUrl,
+      imgUrls: this.imgUrls,
       tipo,
       etiquetas,
       estado,
@@ -149,6 +162,23 @@ export class NuevaPropiedadPageComponent implements OnInit {
     console.log({ propiedad });
     alert(`Guardado con exito`);
     this.dialogRef.close();
+
+  }
+
+  onImageUpload(event: any){
+    // console.log("La fiesta",event);
+
+    if(event.event === 'success'){
+      console.log("Lo que se viene",event.info.url);
+      this.imgUrl = event.info.url;
+      this.imgUrls.push(this.imgUrl);
+      // this.currentImageId = event.info.public_id;
+
+      // this.formulario.controls['src'].patchValue(this.imgUrl)
+      // this.formulario.controls['imageId'].patchValue(currentImageId)
+
+      // this.wasSelected = true
+    }
 
   }
 }

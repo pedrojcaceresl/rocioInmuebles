@@ -33,9 +33,9 @@
               <th scope="col" class="px-6 py-3">
                   Nombre
               </th>
-              <!-- <th scope="col" class="px-6 py-3">
-                  algo mas
-              </th> -->
+              <th scope="col" class="px-6 py-3">
+                  Categoria
+              </th>
               <th scope="col" class="px-6 py-3">
                   <span class="sr-only">Acciones</span>
               </th>
@@ -51,6 +51,9 @@
               <td class="px-6 py-4">
                   {{filtro.nombre}}
               </td>
+              <td class="px-6 py-4">
+                {{filtro.categoria}}
+            </td>
               <td class="px-6 py-4 text-right">
                   <button (click)="editarFiltro(filtro)" class="border border-blue-600 rounded-lg p-3 font-medium text-blue-600 dark:text-blue-500 hover:underline mr-10">Editar</button>
 

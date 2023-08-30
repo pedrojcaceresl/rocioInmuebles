@@ -6,6 +6,7 @@ import { SanitizeHtmlPipe } from './pipes';
 import { RouterModule } from '@angular/router';
 import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 
 
 
@@ -18,6 +19,7 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
     SanitizeHtmlPipe,
     DarkThemeToggleComponent,
     SearchBoxComponent,
+    ImageUploaderComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -26,7 +28,8 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
     SidebarItemGroupComponent,
     NavbarComponent,
     DarkThemeToggleComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    ImageUploaderComponent
   ],
 })
 export class SharedModule {}
