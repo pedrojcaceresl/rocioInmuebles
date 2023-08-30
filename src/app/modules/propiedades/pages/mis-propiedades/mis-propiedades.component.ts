@@ -17,6 +17,7 @@ import { FirebaseService } from '../../../../shared/services/firebase.service';
 export class MisPropiedadesComponent implements OnInit {
   propiedades: any = [];
   filteredCards: any; // Inicialmente, muestra todas las tarjetas
+  filtros: any;
 
   filters = [
     { name: 'Lotes', checked: false },
@@ -40,8 +41,8 @@ export class MisPropiedadesComponent implements OnInit {
     private zone: NgZone,
 
   ){
-
   }
+
   ngOnInit(): void {
     this.zone.run(()=>{
       this.firebaseService.getData(this.path).subscribe(res=>{
