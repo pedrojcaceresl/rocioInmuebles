@@ -1,27 +1,3 @@
-// @import '@fancyapps/ui/dist/fancybox/fancybox.css';
-// @import '@fancyapps/ui/dist/carousel/carousel.thumbs.css';
-
-
-/* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-body {
-    margin: 0;
-    padding: 0;
-    // background-color: rgb(10, 10, 10);
-    // color: rgb(240, 240, 240);
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-:root {
-  --f-brand-color: #2563eb;
-}
 
 #productCarousel,
 .f-thumbs.is-classic,
@@ -46,11 +22,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --f-button-svg-disabled-opacity: 0.2;
 }
 
-// .f-carousel__slide {
-//   display: flex;
-//   align-items: center;
-//   justify-items: center;
-// }
+.f-carousel__slide {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
 
 .f-thumbs.is-classic {
   --f-thumb-width: 120px;
@@ -87,7 +63,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .fancybox__container {
-  // --fancybox-bg: #fff;
+  --fancybox-bg: #fff;
   --fancybox-color: #6a6969;
 
   --f-spinner-color-1: rgba(0, 0, 0, 0.1);

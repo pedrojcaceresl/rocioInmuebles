@@ -50,6 +50,7 @@
       <div class="w-full max-w-7xl flex md:gap-x-10 flex-wrap justify-center">
         <app-property-card-client
           *ngFor="let propiedad of propiedades"
+          [routerLink]="['detalle',  propiedad.id]" routerLinkActive="router-link-active"
           [imgUrl]="propiedad.imgUrl"
           [descripcion]="propiedad.descripcion"
           [tags]="propiedad.etiquetas"
