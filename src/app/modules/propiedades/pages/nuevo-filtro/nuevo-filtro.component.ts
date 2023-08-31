@@ -14,6 +14,7 @@ export class NuevoFiltroComponent {
 
   form = this._formBuilder.group({
     nombre: ['', Validators.required],
+    categoria: ['', Validators.required],
   });
 
   constructor(
@@ -34,11 +35,12 @@ export class NuevoFiltroComponent {
 
   onSubmit() {
 
-    const { nombre } = this.form.value;
+    const { nombre, categoria } = this.form.value;
 
     const filtro: Filtro = {
       id: this.data && this.data.filtro.id,
       nombre,
+      categoria,
       };
 
     if(this.data && this.data.editMode){
