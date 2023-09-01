@@ -12,68 +12,65 @@ import Inmueble from '../../interfaces/categorias.interface';
 @Component({
   selector: 'app-filtros',
   templateUrl: './filtros.component.html',
-  styleUrls: ['./filtros.component.scss']
+  styleUrls: ['./filtros.component.scss'],
 })
-export class FiltrosComponent implements OnInit{
-  pathFiltros: string = 'filtros'
-  pathCategorias: string = 'categorias'
-  pathInmuebles: string = 'inmuebles'
+export class FiltrosComponent implements OnInit {
+  pathFiltros: string = 'filtros';
+  pathCategorias: string = 'categorias';
+  pathInmuebles: string = 'inmuebles';
 
-   filtros: Filtro[] = [];
-   categorias: Categoria[] = [];
-   inmuebles: Inmueble[] = [];
+  filtros: Filtro[] = [];
+  categorias: Categoria[] = [];
+  inmuebles: Inmueble[] = [];
 
   constructor(
     private firebaseService: FirebaseService,
-    private dialog: MatDialog,
-
-  ){
-
-  }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.firebaseService.getData(this.pathFiltros).subscribe(res =>{
+    this.firebaseService.getData(this.pathFiltros).subscribe((res) => {
       this.filtros = res;
-      console.log("valor de this.filtros", this.filtros)
+      console.log('valor de this.filtros', this.filtros);
     });
-    this.firebaseService.getData(this.pathCategorias).subscribe(res =>{
+    this.firebaseService.getData(this.pathCategorias).subscribe((res) => {
       this.categorias = res;
-      console.log("valor de this.categorias", this.categorias)
+      console.log('valor de this.categorias', this.categorias);
     });
-    this.firebaseService.getData(this.pathInmuebles).subscribe(res =>{
+    this.firebaseService.getData(this.pathInmuebles).subscribe((res) => {
       this.inmuebles = res;
-      console.log("valor de this.inmuebles", this.inmuebles)
+      console.log('valor de this.inmuebles', this.inmuebles);
     });
-
   }
 
-  nuevoFiltro(){ const dialogRef =  this.dialog.open(NuevoFiltroComponent, {})}
+  nuevoFiltro() {
+    const dialogRef = this.dialog.open(NuevoFiltroComponent, {});
+  }
 
-  editarFiltro(filtro: Filtro){
+  editarFiltro(filtro: Filtro) {
     this.dialog.open(NuevoFiltroComponent, {
-      data: {filtro, editMode: true}
-    })
+      data: { filtro, editMode: true },
+    });
   }
 
-  eliminarFiltro(filtro: Filtro){
-    this.firebaseService.deleteData(filtro, this.pathFiltros).then()
+  eliminarFiltro(filtro: Filtro) {
+    this.firebaseService.deleteData(filtro, this.pathFiltros).then();
   }
 
   //Acciones del card de Categorias
-  nuevaCategoria(path: any){ const dialogRef =  this.dialog.open(NuevaCategoriaComponent, {
-    data: {path}
-  })}
+  nuevaCategoria(path: any) {
+    const dialogRef = this.dialog.open(NuevaCategoriaComponent, {
+      data: { path },
+    });
+  }
 
-  editarCategoria(categoria: Categoria, path: any){
-
+  editarCategoria(categoria: Categoria, path: any) {
     this.dialog.open(NuevaCategoriaComponent, {
-      data: {categoria, path, editMode: true}
-    })
+      data: { categoria, path, editMode: true },
+    });
   }
 
-  eliminarCategoria(categoria: Categoria, path: any){
-    this.firebaseService.deleteData(categoria, path).then()
+  eliminarCategoria(categoria: Categoria, path: any) {
+    this.firebaseService.deleteData(categoria, path).then();
   }
-
-
 }
