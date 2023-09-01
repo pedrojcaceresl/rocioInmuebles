@@ -20,7 +20,6 @@ export class NuevoFiltroComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private firebaseService: FirebaseService,
-    // private dialog: MatDialog
     public dialogRef: MatDialogRef<NuevoFiltroComponent>,
 
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -29,29 +28,19 @@ export class NuevoFiltroComponent {
 
   ngOnInit(): void {
     this.data && this.form.reset(this.data.filtro);
-    // console.log('datossss',this.data);
-
   }
 
   onSubmit() {
-
     const { nombre, categoria } = this.form.value;
-
-    const filtro: Filtro = {
-      id: this.data && this.data.filtro.id,
-      nombre,
-      categoria,
-      };
+    const filtro: Filtro = { id: this.data && this.data.filtro.id, nombre, categoria }
 
     if(this.data && this.data.editMode){
-      // console.log("se editara");
       this.firebaseService.updateData(filtro, this.path);
     }else{
       this.firebaseService.addData(filtro, this.path);
     }
 
-    console.log({ filtro });
-    alert(`Guardado con exito`);
+    // alert(`Guardado con exito`);
     this.dialogRef.close();
   };
 

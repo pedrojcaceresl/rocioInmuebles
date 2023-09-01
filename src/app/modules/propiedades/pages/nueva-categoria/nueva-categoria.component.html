@@ -1,31 +1,21 @@
-
-<mat-card class="">
-   <mat-card-content class="dark:bg-gray-700">
+<mat-card>
+  <mat-card-content class="dark:bg-gray-700">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4  text-white">
 
         <h2>Nombre</h2>
         <input
         class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Nombre del filtro"
+        placeholder="Nombre de la Categoria"
         required
         formControlName="nombre"
-        type="text"
-        />
-
-        <h2>Categoria</h2>
-        <input
-        class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Categoria del filtro"
-        required
-        formControlName="categoria"
         type="text"
         />
       </div>
 
       <div class="flex justify-between mt-4">
         <span></span>
-        <button type="submit" color="primary" class="bg-gray-600 text-white p-2 rounded-lg">
+        <button type="submit" class="bg-gray-600 text-white p-2 rounded-lg">
           Guardar
         </button>
       </div>
