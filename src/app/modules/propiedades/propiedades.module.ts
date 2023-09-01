@@ -14,6 +14,8 @@ import { MaterialModule } from '../material/material.module';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { FiltrosComponent } from './pages/filtros/filtros.component';
 import { NuevoFiltroComponent } from './pages/nuevo-filtro/nuevo-filtro.component';
+import { NuevaCategoriaComponent } from './pages/nueva-categoria/nueva-categoria.component';
+import { FiltroCardComponent } from './pages/filtro-card/filtro-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { NuevoFiltroComponent } from './pages/nuevo-filtro/nuevo-filtro.componen
     SearchPageComponent,
     FiltrosComponent,
     NuevoFiltroComponent,
+    NuevaCategoriaComponent,
+    FiltroCardComponent,
   ],
   imports: [
     CommonModule,
