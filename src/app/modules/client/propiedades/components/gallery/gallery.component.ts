@@ -66,7 +66,7 @@ export class GalleryComponent {
     new Carousel(
       document.getElementById('productCarousel'),
       {
-        infinite: false,
+        infinite: true,
         Dots: false,
         Thumbs: {
           type: 'classic',
