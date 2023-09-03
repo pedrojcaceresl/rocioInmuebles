@@ -1,4 +1,5 @@
 <div class="flex flex-wrap justify-normal">
+
     <!-- Contenido del primer div -->
     <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
@@ -23,37 +24,15 @@
         >Añadir</button>
   </div>
 
-  <div class="w-full max-w-sm p-4 ml-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 mb-4">
-    <!-- Contenido del segundo div -->
-    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-        Inmuebles
-    </h5>
-    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Estos son los tipos de inmuebles, puedes añadir más si lo necesitas!</p>
-    <ul class="my-4 space-y-3">
-      <li *ngFor="let inmueble of inmuebles">
-            <div class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 group  dark:bg-gray-600 dark:text-white">
-                <span class="flex-1 ml-3 whitespace-nowrap">{{inmueble.nombre}}</span>
+  <app-filtro-card
+    class=""
+    *ngFor="let categoria of categorias"
+    [titulo]="categoria.nombre"
+    [path]="categoria.nombre?.toLowerCase()"
+  ></app-filtro-card>
 
-                <button (click)="editarCategoria(inmueble, 'inmuebles')" class="border border-blue-600 rounded-lg p-1 font-medium text-blue-600 dark:text-blue-500 hover:underline mr-2">Editar</button>
-
-                <button (click)="eliminarCategoria(inmueble, 'inmuebles')" class="border border-red-600 rounded-lg p-1 font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</button>
-            </div>
-        </li>
-    </ul>
-    <button
-      (click)="nuevaCategoria('inmuebles')"
-      type="button"
-      class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-      >Añadir</button>
-  </div>
 </div>
 
-
-<div class="props-container">
-  <button
-    (click)="nuevoFiltro()"
-    class="dark:bg-gray-500 dark:text-white m-5 p-3 rounded-xl"
-  >Añadir Filtro</button>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -96,5 +75,5 @@
   </table>
 </div>
 
-  </div>
+  <!-- </div> -->
 <!-- </div> -->
