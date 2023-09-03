@@ -8,6 +8,7 @@ export default interface Propiedad {
   estado: string | null | undefined;
   ubicacion: Coords | null | undefined;
   etiquetas: string | null | undefined;
+  // precio: string | null | undefined;
 }
 
 interface Coords {
