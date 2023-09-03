@@ -11,6 +11,10 @@ import { PropertyCardClientComponent } from './components/property-card-client/p
 import { FilterComponent } from './components/filter/filter.component';
 import { PropiedadesDetallesPageComponent } from './pages/propiedades-detalles-page/propiedades-detalles-page.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { PropiedadesDescripcionComponent } from './components/propiedades-descripcion/propiedades-descripcion.component';
+import { PropiedadesUbicacionComponent } from './components/propiedades-ubicacion/propiedades-ubicacion.component';
+import { ConsultarCardDesktopComponent } from './components/consultar-card-desktop/consultar-card-desktop.component';
+import { ConsultarCardMobileComponent } from './components/consultar-card-mobile/consultar-card-mobile.component';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     PropertyCardClientComponent,
     FilterComponent,
     PropiedadesDetallesPageComponent,
-    GalleryComponent
+    GalleryComponent,
+    PropiedadesDescripcionComponent,
+    PropiedadesUbicacionComponent,
+    ConsultarCardDesktopComponent,
+    ConsultarCardMobileComponent
   ],
   imports: [
     CommonModule,

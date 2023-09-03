@@ -1,26 +1,13 @@
 <flowbite-navbar extraClass="border-b" [fluid]="true">
   <div class="flex items-center">
-    <svg
-      stroke="currentColor"
-      fill="currentColor"
-      stroke-width="0"
-      viewBox="0 0 20 20"
-      class="mr-6 h-6 w-6 cursor-pointer text-gray-600 dark:text-gray-400"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
+      class="mr-6 h-6 w-6 cursor-pointer text-gray-600 dark:text-gray-400" height="1em" width="1em"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
         d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-        clip-rule="evenodd"
-      ></path>
+        clip-rule="evenodd"></path>
     </svg>
-    <a
-      class="cursor-pointer text-xl font-semibold text-gray-600 dark:text-white"
-      routerLink=""
-      >Rocio Inmuebles</a
-    >
+    <a class="cursor-pointer text-xl font-semibold text-gray-600 dark:text-white" routerLink="">Rocio Inmuebles</a>
   </div>
   <div class="flex items-center gap-2">
     <flowbite-dark-theme-toggle></flowbite-dark-theme-toggle>
@@ -28,113 +15,39 @@
 </flowbite-navbar>
 
 
+<div *ngIf="!propiedad">Cargando...</div>
 
 
-
-<div class="bg-gray-100 dark:bg-gray-900">
+<div class="bg-gray-100 dark:bg-gray-900" *ngIf="propiedad">
   <div class="flex justify-center flex-col w-full items-center ">
 
-  <div
-    class="w-full flex flex-col justify-center max-w-7xl px-3 md:p-0"
-  >
-    <div class="flex w-full justify-center xl:justify-start ">
+    <div class="w-full flex flex-col justify-center max-w-7xl px-3 md:p-0">
+      <div class="flex w-full justify-center xl:justify-start ">
 
-      <div class="overflow-hidden p-5 ">
-        <app-gallery></app-gallery>
+        <div class="overflow-hidden p-5 ">
+
+          <app-gallery *ngIf="propiedad" [image]="propiedad"></app-gallery>
           <div class="flex justify-between w-full ">
-      <p class="font-extrabold text-xl lg:text-3xl my-5">ALQUILO - Condominio Ecovilla</p>
-      <div class="my-5">
-        <p class="font-extrabold text-xl lg:text-3xl ">U$S 2.100</p>
-        <p align="end" class="text-xs md:text-base">Precio Alquiler</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="my-4" >
-        <div class="w-3/12 fixed z-50 hidden xl:flex">
-          <div class="dark:bg-gray-800  shadow-lg   bg-white w-80 mx-3 rounded-lg p-5 ">
-       <form >
-        <p class="font-extrabold w-full text-2xl dark:text-gray-300 text-gray-600">Consultar</p>
-
-        <div class="flex gap-2 mt-3 ">
-          <div>
-            <input type="text" formControlName="megasBajada" placeholder="Nombre"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
+            <p class="font-extrabold text-xl lg:text-3xl my-5">ALQUILO - {{propiedad.titulo}} </p>
+            <div class="my-5">
+              <p class="font-extrabold text-xl lg:text-3xl ">U$S 2.100</p>
+              <p align="end" class="text-xs md:text-base">Precio Alquiler</p>
+            </div>
           </div>
 
-          <div>
-            <input type="text" formControlName="megasBajada" placeholder="Teléfono"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
-          </div>
-        </div>
-        <div class=" my-4">
-          <input type="email" formControlName="megasBajada" placeholder="Email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
-        </div>
-        <div class=" my-4">
-          <textarea type="text" rows="3" formControlName="Escribe tu consulta" placeholder="Teléfono"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white"></textarea>
         </div>
 
-        <div>
-          <button type="button"
-            class="bg-blue-500 w-full hover:bg-blue-600 text-white font-bold py-2   px-4 rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700">
-            Enviar consulta
-          </button>
-        </div>
-       </form>
+        <app-consultar-card-desktop></app-consultar-card-desktop>
 
-
-          </div>
-      </div>
-  </div>
       </div>
     </div>
     <div class="w-full flex flex-col justify-center max-w-7xl my-0 mx-10 px-3">
 
+      <app-consultar-card-mobile></app-consultar-card-mobile>
 
-      <!-- consultar card -->
-      <div class="max-w-4xl block lg:hidden bg-white dark:bg-gray-800 rounded-lg p-5">
-        <p class="font-extrabold w-full text-2xl">Consultar</p>
-        detalles Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores,
-        cumque natus. Perferendis asperiores maiores tempore quae quia, nisi nulla
-        amet, dolorum recusandae quam eum? Debitis sit tenetur in nostrum
-        repellendus.
+      <app-propiedades-ubicacion [propiedad]="propiedad"></app-propiedades-ubicacion>
 
-      </div>
-
-
-        <div class="max-w-4xl flex-col   my-5 dark:bg-gray-800 rounded-lg p-5">
-          <div class="w-full">
-            <div class="">
-              <h1 class="font-extrabold text-2xl mb-2">Ubicación</h1>
-              <p class="mb-3">Ciudad del Este</p>
-            </div>
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, vel rem.
-                Ad ut dolorem officiis cupiditate dolor quis at voluptatibus officia,
-                placeat est nihil odit ducimus natus commodi quia sapiente.
-              </div>
-          </div>
-        </div>
-
-        <div class="max-w-4xl flex-col  dark:bg-gray-800 rounded-lg p-5">
-          <div class="w-full">
-            <div class="">
-              <h1 class="font-extrabold text-2xl mb-2">Descripción</h1>
-              <p class="mb-3">Ciudad del Este</p>
-              UBICACIONNNN
-              <br />
-            </div>
-            <div>
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, vel rem.
-                Ad ut dolorem officiis cupiditate dolor quis at voluptatibus officia,
-                placeat est nihil odit ducimus natus commodi quia sapiente.
-              </div>
-            </div>
-          </div>
-        </div>
+      <app-propiedades-descripcion [propiedad]="propiedad"></app-propiedades-descripcion>
 
     </div>
   </div>
@@ -142,7 +55,7 @@
 </div>
 
 <footer class="my-10 p-10 w-full flex justify-center ">
-  <div class="footer-container" >
+  <div class="footer-container">
     <!-- <p>&copy; 2023 {{item.name}}</p> -->
     <small>&copy; 2023. Todos los derechos reservados by <a href="#">Creier</a></small>
   </div>

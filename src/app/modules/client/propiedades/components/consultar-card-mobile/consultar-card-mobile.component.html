@@ -1,0 +1,34 @@
+<!-- consultar card -->
+<div class="max-w-4xl block lg:hidden bg-white dark:bg-gray-800 rounded-lg p-5">
+  <!-- <p class="font-extrabold w-full text-2xl">Consultar</p> -->
+      <form>
+        <p class="font-extrabold w-full text-2xl dark:text-gray-300 text-gray-600">Consultar</p>
+
+        <div class="flex gap-2 mt-3 w-full">
+          <div class="w-full">
+            <input type="text" formControlName="megasBajada" placeholder="Nombre"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
+          </div>
+
+          <div class="w-full">
+            <input type="text" formControlName="megasBajada" placeholder="Teléfono"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
+          </div>
+        </div>
+        <div class=" my-4">
+          <input type="email" formControlName="megasBajada" placeholder="Email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
+        </div>
+        <div class=" my-4">
+          <textarea type="text" rows="3" formControlName="Escribe tu consulta" placeholder="Teléfono"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white"></textarea>
+        </div>
+
+        <div>
+          <button type="button"
+            class="bg-blue-500 w-full hover:bg-blue-600 text-white font-bold py-2   px-4 rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700">
+            Enviar consulta
+          </button>
+        </div>
+      </form>
+</div>

@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Fancybox } from '@fancyapps/ui';
 
 import { Carousel } from '@fancyapps/ui';
@@ -9,11 +15,16 @@ import { Thumbs } from '@fancyapps/ui/dist/carousel/carousel.thumbs.esm.js';
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GalleryComponent {
-  constructor() {}
+export class GalleryComponent implements OnInit {
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  images = [
+  @Input() image: any;
+
+  @Input() images = [
     {
       'data-thumb-src':
         'https://www.ecovillas.com.py/br/assets/images/implantacao.fw-1-3806x2141.png',
@@ -62,25 +73,31 @@ export class GalleryComponent {
     },
   ];
 
+  ngOnInit(): void {
+    console.log(this.image.imgUrl);
+  }
+
   ngAfterViewInit(): void {
-    new Carousel(
-      document.getElementById('productCarousel'),
-      {
-        infinite: true,
-        Dots: false,
-        Thumbs: {
-          type: 'classic',
-          Carousel: {
-            slidesPerPage: 1,
-            Navigation: true,
-            center: true,
-            fill: true,
-            dragFree: true,
-          },
-        },
-      },
-      { Thumbs }
-    );
+    setTimeout(() => {
+       new Carousel(
+         document.getElementById('productCarousel'),
+         {
+           infinite: true,
+           Dots: false,
+           Thumbs: {
+             type: 'classic',
+             Carousel: {
+               slidesPerPage: 1,
+               Navigation: true,
+               center: true,
+               fill: true,
+               dragFree: true,
+             },
+           },
+         },
+         { Thumbs }
+       );
+    }, 100);
 
     Fancybox.bind('[data-fancybox="gallery"]', {
       idle: false,

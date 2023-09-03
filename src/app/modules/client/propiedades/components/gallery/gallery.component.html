@@ -1,5 +1,5 @@
-<div id="app" class="">
-  <!-- <h1 class="mb-2 md:mb-4 font-semibold text-xl">Alquilo</h1> -->
+<!-- <h1 class="mb-2 md:mb-4 font-semibold text-xl">Alquilo</h1> -->
+<!-- <div id="app" class="">
   <div class="mb-4 max-w-4xl">
     <div id="productCarousel" class="f-carousel">
       <div
@@ -10,6 +10,19 @@
         [attr.data-src]="image['data-src']"
       >
         <img alt="" [attr.data-lazy-src]="image['data-src']" />
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div id="app" class="">
+  <div class="mb-4 max-w-4xl">
+    <div id="productCarousel" class="f-carousel">
+      <div
+        class="f-carousel__slide max-h-[400px]  md:max-h-[600px] overflow-hidden"
+        [attr.data-thumb-src]="image.imgUrl"
+        data-fancybox="gallery" [attr.data-src]="image.imgUrl">
+        <img alt="" [attr.data-lazy-src]="image.imgUrl" />
       </div>
     </div>
   </div>
