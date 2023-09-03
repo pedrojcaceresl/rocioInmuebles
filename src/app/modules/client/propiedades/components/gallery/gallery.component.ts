@@ -15,40 +15,50 @@ export class GalleryComponent {
 
   images = [
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_1_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_1_b.jpg',
+      'data-thumb-src':
+        'https://www.ecovillas.com.py/br/assets/images/implantacao.fw-1-3806x2141.png',
+      'data-src':
+        'https://www.ecovillas.com.py/br/assets/images/implantacao.fw-1-3806x2141.png',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_2_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_2_b.jpg',
+      'data-thumb-src':
+        'https://www.ecovillas.com.py/br/assets/images/piscina-academia-003-2000x1125.jpg',
+      'data-src':
+        'https://www.ecovillas.com.py/br/assets/images/piscina-academia-003-2000x1125.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_3_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_3_b.jpg',
+      'data-thumb-src':
+        'https://www.ecovillas.com.py/br/assets/images/portaria-02-2000x1125.jpg',
+      'data-src':
+        'https://www.ecovillas.com.py/br/assets/images/portaria-02-2000x1125.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_4_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_4_b.jpg',
+      'data-thumb-src':
+        'https://www.ecovillas.com.py/br/assets/images/blocos-residenciais-01-2000x1125.jpg',
+      'data-src':
+        'https://www.ecovillas.com.py/br/assets/images/blocos-residenciais-01-2000x1125.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_5_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_5_b.jpg',
+      'data-thumb-src':
+        'https://www.ecovillas.com.py/br/assets/images/playground-2000x1125.jpg',
+      'data-src':
+        'https://www.ecovillas.com.py/br/assets/images/playground-2000x1125.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_6_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_6_b.jpg',
+      'data-thumb-src': 'https://www.ecovillas.com.py/br/assets/images/blocos-residenciais-02-2000x1125.jpg',
+      'data-src': 'https://www.ecovillas.com.py/br/assets/images/blocos-residenciais-02-2000x1125.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_7_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_7_b.jpg',
+      'data-thumb-src': 'https://www.ecovillas.com.py/br/assets/images/02-2000x1125-800x450.jpg',
+      'data-src': 'https://www.ecovillas.com.py/br/assets/images/02-2000x1125-800x450.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_8_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_8_b.jpg',
+      'data-thumb-src': 'https://www.ecovillas.com.py/br/assets/images/piscina-academia-002-2000x1125.jpg',
+      'data-src': 'https://www.ecovillas.com.py/br/assets/images/piscina-academia-002-2000x1125.jpg',
     },
     {
-      'data-thumb-src': 'https://fancyapps.com/img/car_9_s.jpg',
-      'data-src': 'https://fancyapps.com/img/car_9_b.jpg',
+      'data-thumb-src': 'https://www.ecovillas.com.py/br/assets/images/implantao-001-2000x1125.jpg',
+      'data-src': 'https://www.ecovillas.com.py/br/assets/images/implantao-001-2000x1125.jpg',
     },
   ];
 
@@ -56,7 +66,7 @@ export class GalleryComponent {
     new Carousel(
       document.getElementById('productCarousel'),
       {
-        infinite: false,
+        infinite: true,
         Dots: false,
         Thumbs: {
           type: 'classic',
