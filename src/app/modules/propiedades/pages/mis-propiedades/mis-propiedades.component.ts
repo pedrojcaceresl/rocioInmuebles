@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   NgZone,
   OnInit,
+  Output,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,7 +23,6 @@ import { FirebaseService } from '../../../../shared/services/firebase.service';
 })
 export class MisPropiedadesComponent implements OnInit {
   propiedades: any = [];
-  // filteredCards: any; // Inicialmente, muestra todas las tarjetas
   filtros: any;
 
   currentPage: number = 1; // Página actual
@@ -57,6 +58,9 @@ export class MisPropiedadesComponent implements OnInit {
         console.log({ res });
         this.propiedades = res;
         this.filteredCards = [...this.propiedades];
+        this.totalPages = Math.ceil(
+          this.filteredCards.length / this.itemsPerPage
+        );
         this.cd.markForCheck();
       });
     });
@@ -99,42 +103,20 @@ export class MisPropiedadesComponent implements OnInit {
       );
     });
   }
-  // Función para cambiar de página
-  onPageChange(newPage: number): void {
-    console.log({newPage});
-    this.currentPage = newPage;
-    // Aquí deberías actualizar los datos que se muestran en filteredCards
-    // Puedes utilizar esta.currentPage y this.itemsPerPage para realizar la paginación adecuadamente.
-  }
 
-  // Función para generar un arreglo de números para la paginación
-  getPaginationArray(): number[] {
-    this.totalPages = Math.ceil(this.filteredCards.length / this.itemsPerPage);
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  onPageChange(newPage: number){
+    this.currentPage = newPage;
   }
 
   previusPage() {
-    if( this.currentPage > 1){
+    if (this.currentPage > 1) {
       this.currentPage -= 1;
     }
   }
 
   nextPage() {
-    if( this.currentPage < this.totalPages){
+    if (this.currentPage < this.totalPages) {
       this.currentPage += 1;
     }
   }
-
- obtenerClases(page: number): { [key: string]: boolean } {
-    return {
-      [
-        this.currentPage == page
-        ? 'flex items-center justify-center cursor-pointer px-4 h-10 leading-tight text-white bg-blue-500 border border-gray-300  hover:text-gray-700 dark:bg-blue-500 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white'
-        : 'flex items-center justify-center cursor-pointer px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300  hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-      ]: true
-      // 'clase-condicional': this.aplicarClaseCondicional,
-      // Puedes agregar más clases y condiciones aquí según tus necesidades.
-    }
-  }
-
 }

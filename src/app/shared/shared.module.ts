@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { PaginadorComponent } from './components/paginador/paginador.component';
 
 
 
@@ -20,6 +21,7 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
     DarkThemeToggleComponent,
     SearchBoxComponent,
     ImageUploaderComponent,
+    PaginadorComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -29,7 +31,8 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
     NavbarComponent,
     DarkThemeToggleComponent,
     SearchBoxComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    PaginadorComponent,
   ],
 })
 export class SharedModule {}
