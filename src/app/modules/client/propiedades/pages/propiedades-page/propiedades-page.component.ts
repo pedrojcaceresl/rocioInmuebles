@@ -15,10 +15,35 @@ export class PropiedadesPageComponent {
 
   firebaseService = inject(FirebaseService);
 
+  currentPage: number = 1; // Página actual
+  itemsPerPage: number = 6; // Cantidad de elementos por página
+  filteredCards: any[] = []; // Aquí deberías cargar los datos filtrados
+  totalPages: any;
+
   ngOnInit() {
     this.firebaseService.getData(this.path).subscribe((res) => {
       this.isLoading = true;
       this.propiedades = res;
+      this.filteredCards = this.propiedades;
+      this.totalPages = Math.ceil(
+        this.filteredCards.length / this.itemsPerPage
+      );
     });
+  }
+
+  onPageChange(newPage: number){
+    this.currentPage = newPage;
+  }
+
+  previusPage() {
+    if (this.currentPage > 1) {
+      this.currentPage -= 1;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage += 1;
+    }
   }
 }
