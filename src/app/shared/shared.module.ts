@@ -8,6 +8,7 @@ import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { PaginadorComponent } from './components/paginador/paginador.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
@@ -22,6 +23,7 @@ import { PaginadorComponent } from './components/paginador/paginador.component';
     SearchBoxComponent,
     ImageUploaderComponent,
     PaginadorComponent,
+    HeaderComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -33,6 +35,7 @@ import { PaginadorComponent } from './components/paginador/paginador.component';
     SearchBoxComponent,
     ImageUploaderComponent,
     PaginadorComponent,
+    HeaderComponent
   ],
 })
 export class SharedModule {}
