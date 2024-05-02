@@ -1,0 +1,9 @@
+.gradient-bg-hover {
+  background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+  transition: background-color 0.3s ease;
+}
+
+.gradient-bg-hover:hover {
+  background-image: none; /* Remueve el gradiente al hacer hover */
+  background-color: #ff7e5f; /* Cambia el color de fondo al hacer hover */
+}
