@@ -17,8 +17,8 @@ const routes: Routes = [
   {
     path: 'propiedades',
     loadChildren: () =>
-      import('./modules/client/propiedades/propiedades.module').then(
-        (m) => m.PropiedadesClientModule
+      import('./modules/client/propertiesPage/propertiesPage.module').then(
+        (m) => m.PropertiesPageModule
       ),
   },
   {
