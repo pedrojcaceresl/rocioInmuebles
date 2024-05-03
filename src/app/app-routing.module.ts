@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MapaModule } from './modules/client/mapa/mapa.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/client/propiedades/propiedades.module').then(
         (m) => m.PropiedadesClientModule
+      ),
+  },
+  {
+    path: 'mapa',
+    loadChildren: () =>
+      import('./modules/client/mapa/mapa.module').then(
+        (m) => m.MapaModule
       ),
   },
   {
