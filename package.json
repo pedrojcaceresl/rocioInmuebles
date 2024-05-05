@@ -32,7 +32,7 @@
     "@angular/router": "^16.1.0-next.0",
     "@fancyapps/fancybox": "^3.5.7",
     "@fancyapps/ui": "^5.0.22",
-    "angular-svg-icon": "^16.0.0",
+    "angular-svg-icon": "^16.1.0",
     "daisyui": "^2.51.3",
     "firebase": "^9.23.0",
     "flowbite": "^1.8.1",
