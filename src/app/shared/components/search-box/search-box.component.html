@@ -1,11 +1,11 @@
-
-     <div class=" max-w-md mx-auto text-gray-600 border-none shadow-sm">
-        <input
-            (keyup.enter)="emitValue(txtInput.value)"
-      #txtInput
-      [placeholder]="placeholder"
-        class="border-2 relative dark:text-slate-100 dark:placeholder:text-slate-100 dark:hover:bg-slate-700 dark:bg-slate-700 border-none w-full border-gray-300 bg-white h-10  rounded-lg text-sm focus:outline-none"
-          type="search" name="search" placeholder="Buscar...">
-
-      </div>
-
+<div class="w-full text-gray-600 border-none shadow-sm">
+  <input
+    (keyup.enter)="emitValue(txtInput.value)"
+    #txtInput
+    [placeholder]="placeholder"
+    class="w-full border-2 relative dark:text-slate-100 dark:placeholder:text-slate-100 dark:hover:bg-slate-700 dark:bg-slate-700 border-none border-gray-300 bg-white h-10 rounded-lg text-sm focus:outline-none"
+    type="search"
+    name="search"
+    placeholder="Buscar..."
+  />
+</div>

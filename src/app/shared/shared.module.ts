@@ -9,6 +9,7 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { PaginadorComponent } from './components/paginador/paginador.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AngularSvgIconModule, SvgHttpLoader, SvgIconRegistryService } from 'angular-svg-icon';
 
 
 
@@ -25,7 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
     PaginadorComponent,
     HeaderComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,AngularSvgIconModule],
   exports: [
     SidebarComponent,
     SidebarItemComponent,
@@ -37,5 +38,9 @@ import { HeaderComponent } from './components/header/header.component';
     PaginadorComponent,
     HeaderComponent
   ],
+  providers:[
+    SvgIconRegistryService,
+    SvgHttpLoader
+  ]
 })
 export class SharedModule {}
