@@ -37,7 +37,23 @@ export class PropertiesPageComponent {
       locationCoords: '',
     },
     {
-      imgUrl: 'https://example.com/image2.jpg',
+      imgUrl:
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/464841037.jpg?k=f70c1524982939e7f7e175e375563708aae0a7976f32858afb6779b12793288c&o=&hp=1',
+      oferta: true,
+      categoria: 'alquiler',
+      tipo: 'departamento',
+      priceMonth: 2500,
+      priceSale: 0,
+      title: 'Departamento',
+      beds: 4,
+      baths: 2,
+      dimension: 400,
+      ubicacion: 'Ciudad del Este',
+      locationCoords: '',
+    },
+    {
+      imgUrl:
+        'https://img.jamesedition.com/listing_images/2023/10/24/15/50/34/503a8f37-d76f-4979-b045-7cbd7fe4e2b7/je/1100xxs.jpg',
       oferta: false,
       categoria: 'venta',
       tipo: 'casa',
@@ -51,7 +67,8 @@ export class PropertiesPageComponent {
       locationCoords: '',
     },
     {
-      imgUrl: 'https://example.com/image3.jpg',
+      imgUrl:
+        'https://cdn2.infocasas.com.uy/repo/img/511ccba88a59c40caf971656e5351dc4c8387836.jpg',
       oferta: true,
       categoria: 'alquiler',
       tipo: 'departamento',
