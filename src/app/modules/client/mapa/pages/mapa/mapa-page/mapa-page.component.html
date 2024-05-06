@@ -1,10 +1,41 @@
-<!-- <google-map [center]="center" [options]="options" [zoom]="zoom" width="1000px"></google-map> -->
-
 <google-map
   height="400px"
   width="750px"
   [center]="center"
   [zoom]="zoom"
-  (mapClick)="addMarker($event)">
-      <map-marker *ngFor="let position of markerPositions" [position]="position" [options]="markerOptions" />
+  (mapClick)="addMarker($event)"
+>
+  <map-marker
+    #marker="mapMarker"
+    *ngFor="let position of markers; let i = index"
+    [position]="position.position"
+    [options]="markerOptions"
+    (mapClick)="openInfoWindow(marker, i)"
+  />
+  <map-info-window>
+    <div class="p-2 bg-white rounded-lg min-w-72" *ngIf="markerInfo">
+      <div class="space-x-4">
+        <button
+          class="uppercase bg-[#C0A700] text-sm text-white font-bold px-6 py-2 rounded-lg"
+        >
+          Oferta
+        </button>
+        <button
+          class="uppercase bg-[#0D1C39] text-sm text-white font-bold px-6 py-2 rounded-lg"
+        >
+          En venta
+        </button>
+      </div>
+
+      <div>
+        <div class="my-4">
+          <h1 class="text-xl font-bold text-[#181A20]" >{{ markerInfo.title}}</h1>
+          <h4 class="font-normal text-[#717171]">{{ markerInfo.description}}</h4>
+        </div>
+        <h1 class="text-xl font-bold text-[#181A20]">$180.000</h1>
+      </div>
+    </div>
+  </map-info-window>
 </google-map>
+
+

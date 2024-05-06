@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MapaComponent } from './pages/mapa/mapa.component';
+import { PropertiesPageComponent } from './propertiesPage.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapaComponent,
+    component: PropertiesPageComponent
   },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+
+  
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class MapaRoutingModule {}
+export class PropertiesRoutingModule { }
