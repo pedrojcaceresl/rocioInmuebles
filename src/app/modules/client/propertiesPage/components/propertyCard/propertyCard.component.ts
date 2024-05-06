@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { ButtonBadgeComponent } from '../buttonBadge/buttonBadge.component';
 
 export const property = {
@@ -13,7 +13,7 @@ export const property = {
     beds: 4,
     baths: 2,
     dimension: 400,
-    location: "Ciudad del Este",
+    ubicacion: "Ciudad del Este",
     locationCoords: ''
 }
 
@@ -46,9 +46,9 @@ export const property = {
           <img
             class="h-[17px]"
             src="/assets/icons/location.png"
-            alt="location"
+            alt="ubicacion"
           />
-          <h1>{{ property.location }}</h1>
+          <h1>{{ property.ubicacion }}</h1>
         </div>
       </div>
 
@@ -73,5 +73,12 @@ export const property = {
   styleUrls: ['./propertyCard.component.css'],
 })
 export class PropertyCardComponent {
-  property = property;
+  @Input() property: any;
+
+  ngOnChanges() {
+  }
+
+  ngOnInit() {
+    this.property = property;
+  }
 }
