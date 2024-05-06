@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } from '@angular/core';
 import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
 
 @Component({
@@ -9,7 +9,9 @@ import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
   template: `
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-3">
-        <app-property-card *ngFor="let item of list" />
+        <div *ngFor="let item of properties">
+          <app-property-card property="item" />
+        </div>
       </div>
     </div>
   `,
@@ -17,5 +19,15 @@ import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertyListComponent {
-  list = [1, 2, 3, 4, 5, 6];
+  cd = inject(ChangeDetectorRef);
+
+  @Input() properties: any = [];
+
+  ngOnChanges() {
+    this.cd.detectChanges();
+  }
+
+  ngOnInit() {
+    this.cd.markForCheck();
+  }
 }
