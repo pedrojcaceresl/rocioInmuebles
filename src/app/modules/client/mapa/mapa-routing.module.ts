@@ -7,14 +7,11 @@ const routes: Routes = [
     path: '',
     component: MapaComponent,
   },
-  // {
-  //   path: 'detalle/:id',
-  //   component: PropiedadesDetallesPageComponent,
-  // },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MapaRoutingModule { }
+export class MapaRoutingModule {}
