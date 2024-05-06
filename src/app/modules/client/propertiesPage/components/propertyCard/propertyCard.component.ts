@@ -2,27 +2,14 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { ButtonBadgeComponent } from '../buttonBadge/buttonBadge.component';
 
-export const property = {
-    imgUrl: 'https://img-v2.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fsir.azureedge.net%2F1103i215%2Fqf55hfmz1g194vekc5j4v6ema5i215&option=N&h=472&permitphotoenlargement=false',
-    oferta: true,
-    categoria: "alquiler",
-    tipo: "departamento",
-    priceMonth: 2500,
-    priceSale: 0,
-    title: "Eco Villa Penthouse",
-    beds: 4,
-    baths: 2,
-    dimension: 400,
-    ubicacion: "Ciudad del Este",
-    locationCoords: ''
-}
+
 
 @Component({
   selector: 'app-property-card',
   standalone: true,
   imports: [CommonModule, ButtonBadgeComponent],
   template: `
-    <div class="m-10 rounded-2xl p-3 max-w-[328px] shadow-md">
+    <div class="m-10 rounded-2xl p-3 max-w-[328px] shadow-md" *ngIf="property">
       <!-- image -->
       <div class="relative rounded-2xl max-w-[306px]">
         <div class="absolute top-5 left-3">
@@ -33,7 +20,7 @@ export const property = {
 
       <!-- price -->
       <div class="mt-2">
-        <h1 class="text-red-500 font-bold text-xl">
+        <h1 class="text-green-500 font-bold text-xl">
           \${{ property.priceMonth
           }}<span class="text-xs font-normal">/mes</span>
         </h1>
@@ -75,10 +62,4 @@ export const property = {
 export class PropertyCardComponent {
   @Input() property: any;
 
-  ngOnChanges() {
-  }
-
-  ngOnInit() {
-    this.property = property;
-  }
 }

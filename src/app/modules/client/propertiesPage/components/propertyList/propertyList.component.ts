@@ -10,7 +10,7 @@ import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-3">
         <div *ngFor="let item of properties">
-          <app-property-card property="item" />
+          <app-property-card [property]="item" />
         </div>
       </div>
     </div>
@@ -23,11 +23,4 @@ export class PropertyListComponent {
 
   @Input() properties: any = [];
 
-  ngOnChanges() {
-    this.cd.detectChanges();
-  }
-
-  ngOnInit() {
-    this.cd.markForCheck();
-  }
 }
