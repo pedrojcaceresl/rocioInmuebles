@@ -1,14 +1,22 @@
 export default interface Propiedad {
-  id?: string;
-  titulo: string | null | undefined;
-  descripcion: string | null | undefined;
+  id?: string | null | undefined;
+  baths?: number | null | undefined;
+  beds?: number | null | undefined;
+  transactionType: string | null | undefined;
+  dimension?: number | null | undefined;
+  description?: string | null | undefined;
   imgUrl: string | null | undefined;
-  imgUrls: string[] | null | undefined;
-  tipo: string | null | undefined;
-  estado: string | null | undefined;
-  ubicacion: Coords | null | undefined;
-  etiquetas: string | null | undefined;
-  // precio: string | null | undefined;
+  isActive: string | null | undefined;
+  locationCoords: Coords | null | undefined;
+  isOffer?: boolean | null | undefined;
+  isSold?: boolean | null | undefined;
+  priceMonth?: number | null | undefined;
+  priceSale?: number | null | undefined;
+  type: string | null | undefined;
+  title: string | null | undefined;
+  viewTitle: string | null | undefined;
+  city: string | null | undefined;
+  state: string | null | undefined;
 }
 
 interface Coords {
@@ -16,9 +24,3 @@ interface Coords {
   lng: number | null | undefined;
 }
 
-// enum PropiedadTipo {
-//   lote = 'lote',
-//   duplex = 'duplex',
-//   casa = 'casa',
-//   terreno = 'terreno'
-// }

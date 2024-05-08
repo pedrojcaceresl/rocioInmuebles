@@ -78,7 +78,7 @@ export class MisPropiedadesComponent implements OnInit {
 
   eliminarPropiedad(propiedad: Propiedad) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: propiedad.titulo,
+      data: propiedad.title,
     });
 
     dialogRef.afterClosed().subscribe((res) => {

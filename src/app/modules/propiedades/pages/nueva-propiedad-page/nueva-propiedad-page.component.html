@@ -1,101 +1,192 @@
+<mat-card class="">
+  <mat-card-content class="dark:bg-gray-700">
+    <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-white">
+        <div>
+          <h2 class="text-black">Alquiler/Venta</h2>
+          <mat-select
+            placeholder="Como se ofrece"
+            formControlName="transactionType"
+            required
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <mat-option value="Venta">En venta</mat-option>
+            <mat-option value="Alquiler">En alquiler</mat-option>
+          </mat-select>
 
-    <mat-card class="">
-      <mat-card-content class="dark:bg-gray-700">
-        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4  text-white">
-            <div>
-              <h2>Titulo</h2>
-              <input
-                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Titulo"
-                required
-                formControlName="titulo"
-                type="text"
-              />
+          <h2 class="text-black">Titulo Largo</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Titulo largo"
+            required
+            formControlName="title"
+            type="text"
+          />
 
-              <h2>Descripcion</h2>
-              <input
-                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Descripcion"
-                required
-                formControlName="descripcion"
-                type="text"
-              />
+          <h2 class="text-black">Titulo Corto</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Titulo corto"
+            required
+            formControlName="viewTitle"
+            type="text"
+          />
 
-              <h2>URL Imagen</h2>
-              <!-- <input
-                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required
-                formControlName="imgUrl"
-                type="text"
-              /> -->
-              <shared-image-uploader (onResponse)="onImageUpload($event)" folder="rocio-inmuebles" [multiple]="true">Subir imagen</shared-image-uploader>
-            </div>
-            <div>
-              <h2>Etiquetas</h2>
-              <input
-                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required
-                formControlName="etiquetas"
-                type="text"
-              />
+          <h2 class="text-black">Descripcion</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Descripcion"
+            formControlName="description"
+            type="text"
+          />
 
-              <h2>Estado</h2>
-              <!-- <input
-                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required
-                formControlName="estado"
-                type="text"
-              /> -->
-              <mat-select
-              formControlName="estado"
-              required
-              class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          <h2 class="text-black">URL Imagen</h2>
+          <shared-image-uploader
+            (onResponse)="onImageUpload($event)"
+            folder="rocio-inmuebles"
+            [multiple]="true"
+            >Subir imagen</shared-image-uploader
+          >
+        </div>
+        <div>
+          <h2 class="text-black">Precio mensual</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Mensualidad"
+            formControlName="priceMonth"
+            type="number"
+          />
+
+          <h2 class="text-black">Precio venta</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Precio de venta"
+            formControlName="priceSale"
+            type="number"
+          />
+
+          <h2 class="text-black">Vendido</h2>
+          <mat-select
+            placeholder="Esta vendido?"
+            formControlName="isSold"
+            required
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <mat-option value="true">Si</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+
+          <h2 class="text-black">Oferta</h2>
+          <mat-select
+            placeholder="Esta en oferta?"
+            formControlName="isOffer"
+            required
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <mat-option value="true">Si</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+        </div>
+        <div>
+          <h2 class="text-black">Baños</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Cantidad de baños"
+            formControlName="baths"
+            type="number"
+          />
+
+          <h2 class="text-black">Dormitorios</h2>
+          <mat-select
+            formControlName="beds"
+            required
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <mat-option
+              *ngFor="let dormitorio of dormitorios"
+              [value]="dormitorio"
             >
-              <mat-option
-                *ngFor="let estado of estados"
-                [value]="estado.nombre"
-              >
-                {{ estado.nombre }}</mat-option>
-            </mat-select>
+              {{ dormitorio.nombre }}</mat-option
+            >
+          </mat-select>
 
-              <h2>Tipos</h2>
-              <mat-select
-                formControlName="tipo"
-                required
-                class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <mat-option
-                  *ngFor="let tipo of tipos"
-                  [value]="tipo"
-                >
-                  {{ tipo }}</mat-option>
-              </mat-select>
-            </div>
-          </div>
+          <h2 class="text-black">Ciudad</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Ciudad"
+            required
+            formControlName="city"
+            type="text"
+          />
 
-          <div class="mt-4">
-            <h1 class="text-slate-600 dark:text-white">
-              Selecciona la ubicación arrastrando el marcador
-            </h1>
-            <div class="map-container">
-              <google-map
-                (mapInitialized)="onMapInitialized($event)"
-                [center]="center"
-                [zoom]="zoom"
-                width="100%"
-                height="100%"
-              />
-            </div>
-          </div>
+          <h2 class="text-black">Departamento</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Departamento"
+            required
+            formControlName="state"
+            type="text"
+          />
+        </div>
+        <div>
+          <h2 class="text-black">Dimensiones</h2>
+          <input
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Dimensiones en m2"
+            formControlName="dimension"
+            type="text"
+          />
 
-          <div class="flex justify-between mt-4">
-            <span></span>
+          <h2 class="text-black">Estado</h2>
+          <mat-select
+            placeholder="Estado"
+            formControlName="isActive"
+            required
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <mat-option value="trueW">Activo</mat-option>
+            <mat-option value="false">Inactivo</mat-option>
+          </mat-select>
 
-            <button type="submit" color="primary" class="bg-gray-600 text-white p-2 rounded-lg">
-              Guardar
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
+          <h2 class="text-black">Tipos</h2>
+          <mat-select
+            formControlName="type"
+            required
+            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+              {{ tipo }}</mat-option
+            >
+          </mat-select>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h1 class="text-slate-600 dark:text-white">
+          Selecciona la ubicación arrastrando el marcador
+        </h1>
+        <div class="map-container">
+          <google-map
+            (mapInitialized)="onMapInitialized($event)"
+            [center]="center"
+            [zoom]="zoom"
+            width="100%"
+            height="100%"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-4">
+        <span></span>
+
+        <button
+          type="submit"
+          color="primary"
+          class="bg-gray-600 text-white p-2 rounded-lg"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

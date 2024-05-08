@@ -1,8 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import Propiedad from '../../interfaces/propiedades.interface';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
-import { filter, map } from "rxjs";
+import { filter, map } from 'rxjs';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -16,7 +21,7 @@ import Filtro from '../../interfaces/filtros.interface';
 })
 export class NuevaPropiedadPageComponent implements OnInit {
   tipos: String[] = ['lote', 'duplex', 'casa', 'terreno'];
-  path: string = 'propiedades'
+  path: string = 'propiedades';
   imgUrls: string[] = [];
   imgUrl: string = '';
 
@@ -26,12 +31,23 @@ export class NuevaPropiedadPageComponent implements OnInit {
   });
 
   firstFormGroup = this._formBuilder.group({
-    titulo: ['', Validators.required],
-    descripcion: ['', Validators.required],
+    baths: [null],
+    beds: [null],
+    transactionType: ['', Validators.required],
+    dimension: [null],
+    description: [''],
     imgUrl: ['', Validators.required],
-    tipo: ['', Validators.required],
-    etiquetas: [''],
-    estado: ['', Validators.required],
+    isActive: ['', Validators.required],
+    locationCoords: ['', Validators.required],
+    isOffer: [false],
+    isSold: [false],
+    priceMonth: [0],
+    priceSale: [0],
+    type: ['', Validators.required],
+    title: ['', Validators.required],
+    viewTitle: ['', Validators.required],
+    city: ['', Validators.required],
+    state: ['', Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -61,6 +77,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   };
 
   estados: Filtro[] = [];
+  dormitorios:any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -70,25 +87,27 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.firebaseService.getData('filtros')
-    .subscribe(res =>{
-      this.estados = res.filter((estado:any) => estado.categoria === 'Estado')
-      console.log(this.estados);
+    this.firebaseService.getData('dormitorios').subscribe((res) => {
+      this.dormitorios = res
     })
+
+    this.firebaseService.getData('filtros').subscribe((res) => {
+      this.estados = res.filter((estado: any) => estado.categoria === 'Estado');
+      console.log(this.estados);
+    });
   }
 
   ngOnInit(): void {
     this.data && this.firstFormGroup.reset(this.data.propiedad);
-    console.log('datossss',this.data);
-
+    console.log('datossss', this.data);
   }
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
 
     this.center = {
-      lat: this.data && this.data.propiedad.ubicacion.lat || this.lat,
-      lng: this.data && this.data.propiedad.ubicacion.lng || this.lng,
+      lat: (this.data && this.data.propiedad.locationCoords.lat) || this.lat,
+      lng: (this.data && this.data.propiedad.locationCoords.lng) || this.lng,
     };
 
     this.initMarker();
@@ -104,20 +123,23 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
     this.marker = new google.maps.Marker({
       position: {
-        lat: this.data?.propiedad.ubicacion.lat ? this.data?.propiedad.ubicacion.lat : lat,
-        lng: this.data?.propiedad.ubicacion.lng ? this.data?.propiedad.ubicacion.lng : lng
+        lat: this.data?.propiedad.locationCoords.lat
+          ? this.data?.propiedad.locationCoords.lat
+          : lat,
+        lng: this.data?.propiedad.locationCoords.lng
+          ? this.data?.propiedad.locationCoords.lng
+          : lng,
       },
       map: this.map,
       draggable: true,
     });
 
-
     this.marker.setAnimation(google.maps.Animation.DROP);
     this.marker.addListener('dragend', () => {
       this.selectedPosition = this.marker.getPosition();
       const position = this.marker.getPosition();
-        this.lat = position?.lat();
-        this.lng = position?.lng();
+      this.lat = position?.lat();
+      this.lng = position?.lng();
       this.updateFormValues();
     });
   }
@@ -132,44 +154,68 @@ export class NuevaPropiedadPageComponent implements OnInit {
   }
 
   onSubmit() {
-
-
-    const { titulo, descripcion, imgUrl, tipo, etiquetas, estado } = this.firstFormGroup.value;
+    const {
+      baths,
+      beds,
+      transactionType,
+      dimension,
+      description,
+      imgUrl,
+      isActive,
+      locationCoords,
+      isOffer,
+      isSold,
+      priceMonth,
+      priceSale,
+      type,
+      title,
+      viewTitle,
+      city,
+      state,
+    } = this.firstFormGroup.value;
     // const { latitude, longitude } = this.secondFormGroup.value;
 
     const propiedad: Propiedad = {
       id: this.data && this.data.propiedad.id,
-      titulo,
-      descripcion,
+      baths,
+      beds,
+      transactionType,
+      dimension,
+      description,
+      isSold,
       imgUrl: this.imgUrl,
-      imgUrls: this.imgUrls,
-      tipo,
-      etiquetas,
-      estado,
-      ubicacion: {
+      isActive,
+      locationCoords: {
         lat: this.lat,
         lng: this.lng,
       },
+      isOffer,
+      priceMonth,
+      priceSale,
+      type,
+      title,
+      viewTitle,
+      city,
+      state,
     };
 
-    if(this.data && this.data.editMode){
-      console.log("se editara");
+    if (this.data && this.data.editMode) {
+      console.log('se editara');
       this.firebaseService.updateData(propiedad, this.path);
-    }else{
+    } else {
       this.firebaseService.addData(propiedad, this.path);
     }
 
     console.log({ propiedad });
     alert(`Guardado con exito`);
     this.dialogRef.close();
-
   }
 
-  onImageUpload(event: any){
+  onImageUpload(event: any) {
     // console.log("La fiesta",event);
 
-    if(event.event === 'success'){
-      console.log("Lo que se viene",event.info.url);
+    if (event.event === 'success') {
+      console.log('Lo que se viene', event.info.url);
       this.imgUrl = event.info.url;
       this.imgUrls.push(this.imgUrl);
       // this.currentImageId = event.info.public_id;
@@ -179,6 +225,5 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
       // this.wasSelected = true
     }
-
   }
 }
