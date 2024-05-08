@@ -15,6 +15,9 @@ import { PropiedadesDescripcionComponent } from './components/propiedades-descri
 import { PropiedadesUbicacionComponent } from './components/propiedades-ubicacion/propiedades-ubicacion.component';
 import { ConsultarCardDesktopComponent } from './components/consultar-card-desktop/consultar-card-desktop.component';
 import { ConsultarCardMobileComponent } from './components/consultar-card-mobile/consultar-card-mobile.component';
+import { PropertiesPageModule } from '../propertiesPage/propertiesPage.module';
+import { PropertyFiltersComponent } from '../propertiesPage/components/propertyFilters/propertyFilters.component';
+import { PropertyListComponent } from '../propertiesPage/components/propertyList/propertyList.component';
 
 
 @NgModule({
@@ -29,13 +32,16 @@ import { ConsultarCardMobileComponent } from './components/consultar-card-mobile
     PropiedadesDescripcionComponent,
     PropiedadesUbicacionComponent,
     ConsultarCardDesktopComponent,
-    ConsultarCardMobileComponent
+    ConsultarCardMobileComponent,
   ],
   imports: [
     CommonModule,
     PropiedadesRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    PropertiesPageModule,
+    PropertyFiltersComponent,
+    PropertyListComponent,
   ],
   exports:[
     PropiedadesCardComponent

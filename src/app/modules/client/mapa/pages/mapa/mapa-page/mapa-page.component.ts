@@ -16,6 +16,9 @@ export class MapaPageComponent {
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     animation: google.maps.Animation.DROP,
+    icon: {
+      url: 'assets/images/pin-map.png',
+    }
   };
   markers = [
     {
