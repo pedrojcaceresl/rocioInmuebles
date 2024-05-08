@@ -1,39 +1,12 @@
-<!-- <flowbite-navbar extraClass="border-b" [fluid]="true">
-  <div class="flex items-center">
-    <svg
-      stroke="currentColor"
-      fill="currentColor"
-      stroke-width="0"
-      viewBox="0 0 20 20"
-      class="mr-6 h-6 w-6 cursor-pointer text-gray-600 dark:text-gray-400"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-        clip-rule="evenodd"
-      ></path>
-    </svg>
-    <a
-      class="cursor-pointer text-xl font-semibold text-gray-600 dark:text-white"
-      routerLink=""
-      >Rocio Inmuebles</a
-    >
-  </div>
-  <div class="flex items-center gap-2">
-    <flowbite-dark-theme-toggle></flowbite-dark-theme-toggle>
-  </div>
-</flowbite-navbar> -->
-
 <shared-header></shared-header>
 
 <div class="w-full flex flex-col justify-center items-center my-10">
   <div class="flex md:px-10 w-full justify-center">
     <div class="">
       <div class="w-full flex justify-center p-2 px-4 max-w-7xl">
-        <app-filter></app-filter>
+        <!-- <app-filter></app-filter> -->
+        <app-property-filters></app-property-filters>
+        <app-property-list [properties]="propiedades"></app-property-list>
       </div>
 
       <div class="flex w-full max-w-7xl p-2 px-4 my-10">

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MapaModule } from './modules/client/mapa/mapa.module';
 
 const routes: Routes = [
   {
@@ -18,8 +17,8 @@ const routes: Routes = [
   {
     path: 'propiedades',
     loadChildren: () =>
-      import('./modules/client/propertiesPage/propertiesPage.module').then(
-        (m) => m.PropertiesPageModule
+      import('./modules/client/propiedades/propiedades.module').then(
+        (m) => m.PropiedadesClientModule
       ),
   },
   {
