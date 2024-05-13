@@ -1,54 +1,16 @@
+
 <shared-header></shared-header>
-
-<div class="w-full flex flex-col justify-center items-center my-10">
-  <div class="flex md:px-10 w-full justify-center">
+<div class="flex flex-col items-center justify-center w-full my-10">
+  <div class="flex justify-center w-full md:px-10">
     <div class="">
-      <div class="w-full flex justify-center p-2 px-4 max-w-7xl">
-        <!-- <app-filter></app-filter> -->
-        <app-property-filters></app-property-filters>
-        <app-property-list [properties]="propiedades"></app-property-list>
-      </div>
-
-      <div class="flex w-full max-w-7xl p-2 px-4 my-10">
-        <h1 class="text-2xl w-1/2">Venta de Inmuebles</h1>
-        <div class="w-1/2 flex justify-end mx-2">
-          <button
-            class="dark:bg-slate-700 dark:hover:bg-slate-600 p-2 rounded-md px-5 flex gap-2"
-          >
-            <i class="fa-solid fa-map-location-dot mt-0.5"></i>
-            <p>Ver mapa</p>
-          </button>
-        </div>
-      </div>
-
-      <!-- Render your actual data here -->
-      <div class="w-full max-w-7xl flex md:gap-x-10 flex-wrap justify-center">
-        <app-property-card-client
-        *ngFor="
-        let propiedad of filteredCards.slice(
-          (currentPage - 1) * itemsPerPage,
-          currentPage * itemsPerPage
-        )
-      "
-          [routerLink]="['detalle',  propiedad.id]" routerLinkActive="router-link-active"
-          [imgUrl]="propiedad.imgUrl"
-          [descripcion]="propiedad.descripcion"
-          [tags]="propiedad.etiquetas"
-          [titulo]="propiedad.titulo"
-        ></app-property-card-client>
+      <div class="flex flex-wrap justify-center w-full max-w-7xl md:gap-x-10">
+        
+        <router-outlet></router-outlet>
+     
       </div>
     </div>
   </div>
 </div>
 
-<app-paginador
-  [itemsPerPage]="itemsPerPage"
-  [arrayLength]="filteredCards.length"
-  (onNext)="nextPage()"
-  (onPrevius)="previusPage()"
-  [currentPage]="currentPage"
-  [totalPages]="totalPages"
-  (onChange)="onPageChange($event)"
-></app-paginador>
-
 <shared-footer class="mt-5"></shared-footer>
+</div>

@@ -9,13 +9,13 @@ import { ButtonBadgeComponent } from '../buttonBadge/buttonBadge.component';
   standalone: true,
   imports: [CommonModule, ButtonBadgeComponent],
   template: `
-    <div class="m-10 rounded-2xl p-3 max-w-[328px] shadow-md" *ngIf="property">
+    <div class="my-10 rounded-2xl p-3 w-[306px] shadow-md h-[383px]" *ngIf="property">
       <!-- image -->
-      <div class="relative rounded-2xl max-w-[306px]">
+      <div class="relative rounded-2xl max-w-[284px]">
         <div class="absolute top-5 left-3">
           <app-button-badge />
         </div>
-        <img class="rounded-2xl " [src]="property.imgUrl" alt="" />
+        <img class="rounded-2xl w-full h-52 object-cover" [src]="property.imgUrl" alt="" />
       </div>
 
       <!-- price -->
