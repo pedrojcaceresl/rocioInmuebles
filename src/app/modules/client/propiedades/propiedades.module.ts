@@ -18,6 +18,7 @@ import { ConsultarCardMobileComponent } from './components/consultar-card-mobile
 import { PropertiesPageModule } from '../propertiesPage/propertiesPage.module';
 import { PropertyFiltersComponent } from '../propertiesPage/components/propertyFilters/propertyFilters.component';
 import { PropertyListComponent } from '../propertiesPage/components/propertyList/propertyList.component';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { PropertyListComponent } from '../propertiesPage/components/propertyList
     PropertiesPageModule,
     PropertyFiltersComponent,
     PropertyListComponent,
+    FooterComponent
   ],
   exports:[
     PropiedadesCardComponent

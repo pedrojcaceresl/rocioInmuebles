@@ -10,6 +10,7 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 import { PaginadorComponent } from './components/paginador/paginador.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -27,6 +28,7 @@ import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
     HeaderComponent,
   ],
   imports: [CommonModule, RouterModule,
+    FooterComponent,
     SvgIconComponent,
   ],
   exports: [
@@ -38,7 +40,7 @@ import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
     SearchBoxComponent,
     ImageUploaderComponent,
     PaginadorComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   providers:[ provideAngularSvgIcon() ],
 })
