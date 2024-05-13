@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   standalone: true,
   imports: [CommonModule, PropertyCardComponent, SharedModule],
   template: `
-    <div class="max-w-6xl mx-auto flex flex-col justify-between h-screen">
+    <div class="max-w-6xl mx-auto flex flex-col justify-between">
       <div class="lg:grid grid-cols-3 gap-10 mx-10">
         <div
           *ngFor="
@@ -27,7 +27,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
           <app-property-card [property]="item" />
         </div>
       </div>
-      <div class="flex justify-center lg:mx-10 w-full">
+      <div class="flex justify-center lg:mx-10 w-full mb-10">
         <app-paginador
           [itemsPerPage]="ITEMS_PER_PAGE"
           [arrayLength]="properties.length"
