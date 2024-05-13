@@ -14,6 +14,7 @@ export class NuevaCategoriaComponent{
 
   form = this._formBuilder.group({
     nombre: ['', Validators.required],
+    valor: [''],
   });
 
   constructor(
@@ -31,15 +32,15 @@ export class NuevaCategoriaComponent{
   }
 
   onSubmit() {
-    const { nombre } = this.form.value;
+    const { nombre, valor } = this.form.value;
     const { path } = this.data
     let categoria!: Categoria;
 
     if (this.data && this.data.editMode){
-      categoria = { id: this.data && this.data.categoria.id, nombre }
+      categoria = { id: this.data && this.data.categoria.id, nombre, valor}
       this.firebaseService.updateData(categoria, this.data.path);
     }else {
-      categoria = { nombre }
+      categoria = { nombre, valor}
       this.firebaseService.addData(categoria, path);
     }
 

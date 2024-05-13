@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content class="dark:bg-gray-700">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4  text-white">
+      <div class="grid grid-cols-2 sm:grid-cols-2 gap-4  text-white">
 
         <h2>Nombre</h2>
         <input
@@ -9,6 +9,15 @@
         placeholder="Nombre de la Categoria"
         required
         formControlName="nombre"
+        type="text"
+        />
+
+        <h2>Valor</h2>
+        <input
+        class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Valor adicional"
+        required
+        formControlName="valor"
         type="text"
         />
       </div>
