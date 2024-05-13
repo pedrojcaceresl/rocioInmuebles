@@ -37,6 +37,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     dimension: [null],
     description: [''],
     imgUrl: ['', Validators.required],
+    imgUrls: [[]],
     isActive: ['', Validators.required],
     locationCoords: ['', Validators.required],
     isOffer: [false],
@@ -184,6 +185,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
       description,
       isSold,
       imgUrl: this.imgUrl,
+      imgUrls: this.imgUrls,
       isActive,
       locationCoords: {
         lat: this.lat,
@@ -211,19 +213,19 @@ export class NuevaPropiedadPageComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  images: any;
+
   onImageUpload(event: any) {
     // console.log("La fiesta",event);
 
     if (event.event === 'success') {
       console.log('Lo que se viene', event.info.url);
       this.imgUrl = event.info.url;
-      this.imgUrls.push(this.imgUrl);
-      // this.currentImageId = event.info.public_id;
-
-      // this.formulario.controls['src'].patchValue(this.imgUrl)
-      // this.formulario.controls['imageId'].patchValue(currentImageId)
-
-      // this.wasSelected = true
+      this.imgUrls.push(event.info.url);
+      this.images = [...this.images, event.info.url]
+      console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.images:", this.images)
+      // this.imgUrls = this.images
     }
+      console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
   }
 }
