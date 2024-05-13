@@ -62,9 +62,4 @@ import { ButtonBadgeComponent } from '../buttonBadge/buttonBadge.component';
 export class PropertyCardComponent {
   @Input() property: any;
 
-  ngOnInit() {
-    console.log(this.property);
-  }
-  
-
 }
