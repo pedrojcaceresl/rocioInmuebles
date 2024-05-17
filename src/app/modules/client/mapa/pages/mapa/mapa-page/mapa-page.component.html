@@ -7,8 +7,8 @@
 >
   <map-marker
     #marker="mapMarker"
-    *ngFor="let position of markers; let i = index"
-    [position]="position.position"
+    *ngFor="let position of propiedades; let i = index"
+    [position]="position.locationCoords"
     [options]="markerOptions"
     (mapClick)="openInfoWindow(marker, i)"
   />
@@ -32,7 +32,12 @@
           <h1 class="text-xl font-bold text-[#181A20]" >{{ markerInfo.title}}</h1>
           <h4 class="font-normal text-[#717171]">{{ markerInfo.description}}</h4>
         </div>
-        <h1 class="text-xl font-bold text-[#181A20]">$180.000</h1>
+        <div>
+          <h1 class="text-xl font-bold text-[#181A20]">$180.000</h1>
+          <button class="uppercase bg-[#3880c9] text-sm text-white font-bold px-6 py-2 rounded-lg" (click)="goTo(markerInfo)">
+            <mat-icon fontIcon="info_outlined" ></mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </map-info-window>

@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { FirebaseService } from '../../../../../../shared/services/firebase.service';
+import { filter } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mapa-page',
@@ -10,9 +13,13 @@ export class MapaPageComponent {
   @ViewChild('marker') mapMarker!: MapMarker;
 
   cd = inject(ChangeDetectorRef);
+  markerPositions: any[] = [];
+  propiedades:any;
 
   markerInfo: any;
   zoom = 12;
+
+
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     animation: google.maps.Animation.DROP,
@@ -83,13 +90,29 @@ export class MapaPageComponent {
     lng: -54.66668507228658,
   };
 
-  markerPositions: any[] = [];
+  constructor(
+    private firebaseService:FirebaseService,
+    private router:Router
+  ){}
+
 
   ngOnInit() {
-    this.markers.map((marker) => {
-      const oMarker = this.createMarker(marker);
-      this.markerPositions.push(oMarker);
-    });
+    this.firebaseService.getData('propiedades').subscribe(res=>{
+      this.propiedades = res
+      this.loadMarkers();
+    })
+  }
+
+
+  loadMarkers() {
+    this.propiedades.filter((marker: any)=> marker.isActive);
+    if (this.propiedades && this.propiedades.length) {
+      this.propiedades.forEach((marker: any) => {
+        const oMarker = this.createMarker(marker);
+        this.markerPositions.push(oMarker);
+      });
+      this.cd.detectChanges();
+    }
   }
 
   createMarker(marker: any): google.maps.Marker {
@@ -100,10 +123,16 @@ export class MapaPageComponent {
       describe: {
         description: marker.description,
         position: marker.position,
+        id: marker.id,
       },
     });
     return oMarker;
   }
+
+  goTo(marker:any){
+    this.router.navigate([`/propiedades/detalle/${marker.describe.id}`])
+  }
+
 
   addMarker(event: google.maps.MapMouseEvent) {
     this.markers = [

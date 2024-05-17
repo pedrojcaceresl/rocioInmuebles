@@ -42,7 +42,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     description: [''],
     imgUrl: ['', Validators.required],
     imgUrls: [[]],
-    isActive: ['', Validators.required],
+    isActive: [false, Validators.required],
     locationCoords: ['', Validators.required],
     isOffer: [false],
     isSold: [false],
