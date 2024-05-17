@@ -14,6 +14,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import Filtro from '../../interfaces/filtros.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
@@ -24,6 +25,9 @@ export class NuevaPropiedadPageComponent implements OnInit {
   path: string = 'propiedades';
   imgUrls: string[] = [];
   imgUrl: string = '';
+  departamentos: any[] = [];
+  ciudades: string[] = [];
+
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -81,6 +85,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   dormitorios:any;
 
   constructor(
+    private http: HttpClient,
     private _formBuilder: FormBuilder,
     private firebaseService: FirebaseService,
     // private dialog: MatDialog
@@ -101,7 +106,17 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ngOnInit(): void {
     this.data && this.firstFormGroup.reset(this.data.propiedad);
     console.log('datossss', this.data);
+    this.http.get<any>('assets/geo-paraguay.json').subscribe(data => {
+      this.departamentos = data.departamentos;
+    });
   }
+
+  onSelectDepartamento(nombreDepartamento: any): void {
+    nombreDepartamento = nombreDepartamento.value
+    const departamento = this.departamentos.find(dep => dep.nombre === nombreDepartamento);
+    this.ciudades = departamento ? departamento.ciudades : [];
+  }
+
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
