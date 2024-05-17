@@ -72,8 +72,8 @@
             required
             class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <mat-option value="true">Si</mat-option>
-            <mat-option value="false">No</mat-option>
+            <mat-option [value]="true">Si</mat-option>
+            <mat-option [value]="false">No</mat-option>
           </mat-select>
 
           <h2 class="text-black">Oferta</h2>
@@ -83,8 +83,8 @@
             required
             class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <mat-option value="true">Si</mat-option>
-            <mat-option value="false">No</mat-option>
+            <mat-option [value]="true">Si</mat-option>
+            <mat-option [value]="false">No</mat-option>
           </mat-select>
         </div>
         <div>
@@ -110,7 +110,7 @@
             >
           </mat-select>
 
-          <h2 class="text-black">Ciudad</h2>
+          <!-- <h2 class="text-black">Ciudad</h2>
           <input
             class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Ciudad"
@@ -126,7 +126,47 @@
             required
             formControlName="state"
             type="text"
-          />
+          /> -->
+
+          <div class="col-span-1">
+            <label
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Departamento</label
+            >
+            <select
+              (change)="onSelectDepartamento($event.target)"
+              formControlName="state"
+              id="departamento"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="">Selecciona un departamento</option>
+              <option
+                *ngFor="let departamento of departamentos"
+                [value]="departamento.nombre"
+              >
+                {{ departamento.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-span-1">
+            <label
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Ciudad</label
+            >
+            <select
+              id="ciudad"
+              formControlName="city"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="">Selecciona una ciudad</option>
+              <option *ngFor="let ciudad of ciudades" value="{{ciudad}}">
+                {{ ciudad }}
+              </option>
+            </select>
+          </div>
+
+
         </div>
         <div>
           <h2 class="text-black">Dimensiones</h2>
@@ -144,8 +184,8 @@
             required
             class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <mat-option value="trueW">Activo</mat-option>
-            <mat-option value="false">Inactivo</mat-option>
+            <mat-option [value]="true">Activo</mat-option>
+            <mat-option [value]="false">Inactivo</mat-option>
           </mat-select>
 
           <h2 class="text-black">Tipos</h2>

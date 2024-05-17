@@ -7,7 +7,7 @@ export default interface Propiedad {
   description?: string | null | undefined;
   imgUrl: string | null | undefined;
   imgUrls: string[] | null | undefined;
-  isActive: string | null | undefined;
+  isActive: boolean | null | undefined;
   locationCoords: Coords | null | undefined;
   isOffer?: boolean | null | undefined;
   isSold?: boolean | null | undefined;

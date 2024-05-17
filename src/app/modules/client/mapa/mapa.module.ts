@@ -5,6 +5,7 @@ import { MapaRoutingModule } from './mapa-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapaPageComponent } from './pages/mapa/mapa-page/mapa-page.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -17,7 +18,8 @@ import { MapaPageComponent } from './pages/mapa/mapa-page/mapa-page.component';
     CommonModule,
     MapaRoutingModule,
     SharedModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    MatIconModule
   ]
 })
 export class MapaModule { }
