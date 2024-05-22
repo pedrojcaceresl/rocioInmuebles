@@ -6,6 +6,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapaPageComponent } from './pages/mapa/mapa-page/mapa-page.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
 
 
@@ -19,7 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
     MapaRoutingModule,
     SharedModule,
     GoogleMapsModule,
-    MatIconModule
+    MatIconModule,
+    FooterComponent
   ]
 })
 export class MapaModule { }
