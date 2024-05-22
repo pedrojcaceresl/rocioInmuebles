@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'shared-footer',
   standalone: true,
   imports: [CommonModule],
-  template: `<footer class="p-4 bg-black sm:p-6 dark:bg-gray-800">
+  template: `<footer class="p-4 mt-auto bg-black sm:p-6 dark:bg-gray-800">
     <div class="mx-auto max-w-screen-xl">
       <div class="md:flex md:justify-between">
         <div class="mb-6 md:mb-0">
