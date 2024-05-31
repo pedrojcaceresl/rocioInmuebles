@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PropiedadesPageComponent } from './pages/propiedades-page/propiedades-page.component';
-import { PropiedadesDetallesPageComponent } from './pages/propiedades-detalles-page/propiedades-detalles-page.component';
 import { PropertiesPageComponent } from '../propertiesPage/propertiesPage.component';
+import { DetailsPageComponent } from '../detailsPage/detailsPage.component';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'detalle/:id',
-        component: PropiedadesDetallesPageComponent,
+        component: DetailsPageComponent,
       },
     ],
   },
