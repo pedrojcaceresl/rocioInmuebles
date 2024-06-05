@@ -26,23 +26,23 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           <h4 class="font-normal text-[#717171]">178 Broadway, Brooklyn</h4>
         </div>
 
-        <div class="feat-class flex">
-          <div>
-            <img src="/assets/icons/cama.png" alt="bed" />
-            <h1 class="text-xl font-bold text-[#181A20]">Camas</h1>
+        <div class="feat-class flex space-x-8 mt-6">
+          <div class="flex space-x-2 items-center">
+            <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
+            <h1 class="text-lg font-bold text-[#181A20]">Camas</h1>
           </div>
-          <div>
-            <img src="/assets/icons/cama.png" alt="bed" />
-            <h1 class="text-xl font-bold text-[#181A20]">Camas</h1>
+          <div class="flex space-x-2 items-center">
+            <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
+            <h1 class="text-lg font-bold text-[#181A20]">Camas</h1>
           </div>
-          <div>
-            <img src="/assets/icons/cama.png" alt="bed" />
-            <h1 class="text-xl font-bold text-[#181A20]">Camas</h1>
+          <div class="flex space-x-2 items-center">
+            <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
+            <h1 class="text-lg font-bold text-[#181A20]">Camas</h1>
           </div>
         </div>
 
-        <div>
-          <h2>Descripción</h2>
+        <div class="mt-6">
+          <h2 class="text-lg">Descripción</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
             venenatis a eros quis pulvinar. Aenean ac urna eu orci commodo
@@ -50,7 +50,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           </p>
         </div>
 
-        <div>
+        <div class="flex mt-6 ">
           <div>
             <h2>Contáctame</h2>
             <h3>+595 985 123 456</h3>
@@ -65,7 +65,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           <h1 class="text-xl font-bold text-[#181A20]">$180.000</h1>
         </div>
 
-        <button class="bg-[#C0A700] w-[202px] flex px-10 justify-center py-1 rounded-sm items-center">
+        <button
+          class="bg-[#C0A700] w-[202px] flex px-10 justify-center py-1 rounded-sm items-center"
+        >
           <img src="/assets/icons/cama.png" alt="bed" />
 
           <h1 class="text-2xl font-bold text-white">Cotizar</h1>
