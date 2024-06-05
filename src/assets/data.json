@@ -6,7 +6,7 @@
     "links": [
       {
         "name": "WhatsApp",
-        "icon": "/assets/svg/whatsapp.svg",
+        "icon": "/assets/icons/whatsapp.svg",
         "url": "https://wa.me/+595973205207?text=Hola%20Rocio!"
       },
       {
@@ -16,12 +16,12 @@
       },
       {
         "name": "Instagram",
-        "icon": "/assets/svg/instagram.svg",
+        "icon": "/assets/icons/instagram.svg",
         "url": "https://www.instagram.com/rocioinmuebles/"
       },
         {
         "name": "Instagram Personal",
-        "icon": "/assets/svg/instagram.svg",
+        "icon": "/assets/icons/instagram.svg",
         "url": "https://www.instagram.com/rosgonzalezba/"
       }
     ]
