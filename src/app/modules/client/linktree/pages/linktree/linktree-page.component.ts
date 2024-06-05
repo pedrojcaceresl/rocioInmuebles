@@ -1,25 +1,22 @@
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
+  selector: 'app-linktree-page',
   templateUrl: './linktree-page.component.html',
-  styleUrls: ['./linktree-page.component.scss'],
+  styleUrls: ['./linktree-page.component.scss']
 })
-export class LinktreePageComponent {
+export class LinktreePageComponent implements OnInit {
   title = 'linktree-clone-angular';
-
-  data: any;
-  name: any;
-  href: any;
+  data: any = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.http.get('/assets/data.json').subscribe((data) => {
       this.data = data;
-      this.name = data;
-      console.log(this.data);
+      // console.log(this.data);
     });
   }
 

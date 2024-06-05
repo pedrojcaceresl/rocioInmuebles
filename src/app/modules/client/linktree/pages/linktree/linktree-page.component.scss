@@ -6,12 +6,13 @@ main {
 
 .container {
     width: 91%;
-    max-width: 680px;
+    max-width: 1200px;
     margin-top: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .text-container {
     text-align: center;
@@ -68,7 +69,7 @@ main {
 }
 
 .tile-container {
-    width: 100%;
+    // width: 500px;
     // background-color: rgb(37, 37, 37);
     margin: 7px;
     border-radius: 17px;
