@@ -23,13 +23,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'mapa',
-    loadChildren: () =>
-      import('./modules/client/mapa/mapa.module').then(
-        (m) => m.MapaModule
-      ),
-  },
-  {
     path: 'about',
     loadChildren: () =>
       import('./modules/client/about/about.module').then(
