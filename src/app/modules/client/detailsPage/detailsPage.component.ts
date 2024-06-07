@@ -12,11 +12,11 @@ import { DetailsComponent } from './components/details/details.component';
     DetailsComponent
   ],
   template: `
-    <div class="w-full bg-pink-100 px-20 flex my-20">
+    <div class="w-full px-20 flex my-20 h-full items-center">
       <div class="w-[873px]">
         <app-sliders />
       </div>
-      <div class="w-1/3 h-full">
+      <div class="w-1/3 lg:ml-10">
         <app-details />
       </div>
     </div>

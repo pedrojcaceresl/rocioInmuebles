@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="bg-yellow-400">
+    <div>
       <div class="space-x-5">
         <button
           class="uppercase bg-[#C0A700] text-sm text-white font-bold px-6 py-2 rounded-lg"
@@ -21,9 +21,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       </div>
 
       <div>
-        <div class="my-4">
-          <h1 class="text-xl font-bold text-[#181A20]">Eco Villa Penthouse</h1>
-          <h4 class="font-normal text-[#717171]">178 Broadway, Brooklyn</h4>
+        <div class="mt-6">
+          <h1 class="text-xl font-bold text-[#181A20]">{{ title }}</h1>
+          <h4 class="font-normal text-[#717171]">{{ address }}</h4>
         </div>
 
         <div class="feat-class flex space-x-8 mt-6">
@@ -33,40 +33,38 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           </div>
           <div class="flex space-x-2 items-center">
             <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">Camas</h1>
+            <h1 class="text-lg font-bold text-[#181A20]">Dimension</h1>
           </div>
           <div class="flex space-x-2 items-center">
             <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">Camas</h1>
+            <h1 class="text-lg font-bold text-[#181A20]">Cuartos</h1>
           </div>
         </div>
 
         <div class="mt-6">
           <h2 class="text-lg">Descripción</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis a eros quis pulvinar. Aenean ac urna eu orci commodo
-            sollicitudin. Vestibulum vitae aliquet augue
+            {{ description }}
           </p>
         </div>
 
-        <div class="flex mt-6 ">
+        <div class="flex mt-6 space-x-6">
           <div>
             <h2>Contáctame</h2>
-            <h3>+595 985 123 456</h3>
+            <h3>{{ contactNumber }}</h3>
           </div>
           <div>
             <h2>Email</h2>
-            <h3>agent@apus.com</h3>
+            <h3>{{ email }}</h3>
           </div>
         </div>
 
-        <div>
-          <h1 class="text-xl font-bold text-[#181A20]">$180.000</h1>
+        <div class="mt-6">
+          <h1 class="text-xl font-bold text-[#181A20]">$ {{ price }}</h1>
         </div>
 
         <button
-          class="bg-[#C0A700] w-[202px] flex px-10 justify-center py-1 rounded-sm items-center"
+          class="bg-[#C0A700] mt-6 w-[202px] flex px-10 justify-center py-1 rounded-sm items-center"
         >
           <img src="/assets/icons/cama.png" alt="bed" />
 
@@ -79,11 +77,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailsComponent {
+  @Input() title: string = 'Eco Villa Penthouse';
+  @Input() address: string = '178 Broadway, Brooklyn';
   @Input() beds: number = 0;
   @Input() baths: number = 0;
   @Input() area: number = 0;
-  @Input() description: string = '';
-  @Input() contactNumber: string = '';
-  @Input() email: string = '';
-  @Input() price: number = 0;
+  @Input() description: string =
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.';
+  @Input() contactNumber: string = '+595 985 123 456';
+  @Input() email: string = 'example@mail.com';
+  @Input() price: number = 180000;
 }
