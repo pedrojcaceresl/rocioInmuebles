@@ -1,35 +1,81 @@
 <div class="w-full">
-  <!-- <shared-search-box
-      placeholder="Buscar propiedad"
-      class=""
-      ></shared-search-box> -->
   <button
     (click)="nuevaPropiedad()"
-    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-full sm:w-auto"
   >
     Añadir propiedad
   </button>
 </div>
 
+<div class="hidden sm:block justify-center w-full">
+  <div class="w-full overflow-x-auto border-x-2 rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-2 py-3 text-center">Producto</th>
+          <th scope="col" class="px-2 py-3 text-center">Tipo</th>
+          <th scope="col" class="px-2 py-3 text-center">Categoría</th>
+          <th scope="col" class="px-2 py-3 text-center">Ciudad</th>
+          <th scope="col" class="px-2 py-3 text-center">Dimensiones</th>
+          <th scope="col" class="px-2 py-3 text-center">Oferta</th>
+          <th scope="col" class="px-2 py-3 text-center">Estado</th>
+          <th scope="col" class="px-2 py-3 text-center bg-gray-100">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let propiedad of filteredCards.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-6 py-4">
+            <img [src]="propiedad.imgUrl" alt="Property Image" class="w-10 h-10 rounded">
+            {{ propiedad.title }}
+          </td>
+          <td class="px-6 py-4">{{propiedad.transactionType}}</td>
+          <td class="px-6 py-4">{{ propiedad.type | titlecase}}</td>
+          <td class="px-6 py-4">{{ propiedad.city }}</td>
+          <td class="px-6 py-4">{{propiedad.dimension}}</td>
+          <td class="px-6 py-4">
+            <span class="text-white bg-green-500 rounded px-2 py-1" *ngIf="propiedad.isOffer">Si</span>
+            <span class="text-white bg-red-500 rounded px-2 py-1" *ngIf="!propiedad.isOffer">No</span>
+          </td>
+          <td class="px-6 py-4">
+            <span class="text-white bg-green-500 rounded px-2 py-1" *ngIf="propiedad.isActive">Activo</span>
+            <span class="text-white bg-red-500 rounded px-2 py-1" *ngIf="!propiedad.isActive">Inactivo</span>
+          </td>
+          <td class="px-6 py-4 bg-gray-50">
+            <button (click)="editarPropiedad(propiedad)" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-2.5 py-2.5 text-center mx-1 mb-2">Editar</button>
+            <button (click)="eliminarPropiedad(propiedad)" class="text-white bg-gradient-to-br from-orange-400 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-2.5 py-2.5 text-center mx-1 mb-2">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<div class=" justify-center flex w-full">
-  <div
-    class="grid grid-flow-row gap-6 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 p-3"
-  >
-    <app-propiedades-card
-      *ngFor="
-        let propiedad of filteredCards.slice(
-          (currentPage - 1) * itemsPerPage,
-          currentPage * itemsPerPage
-        )
-      "
-      [imgUrl]="propiedad.imgUrl"
-      [descripcion]="propiedad.descripcion"
-      [tags]="propiedad.etiquetas"
-      [titulo]="propiedad.titulo"
-      (onEdit)="editarPropiedad(propiedad)"
-      (onDelete)="eliminarPropiedad(propiedad)"
-    ></app-propiedades-card>
+<div class="block sm:hidden w-full">
+  <div *ngFor="let propiedad of filteredCards.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" class="bg-white border rounded-lg mb-4 p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center mb-4">
+      <img [src]="propiedad.imgUrl" alt="Property Image" class="w-16 h-16 rounded mr-4">
+      <div>
+        <h2 class="text-lg font-bold text-gray-900 dark:text-white">{{ propiedad.title }}</h2>
+      </div>
+    </div>
+    <div class="mb-4">
+      <p><span class="font-semibold text-gray-900 dark:text-white">Tipo:</span> {{ propiedad.transactionType | titlecase}}</p>
+      <p><span class="font-semibold text-gray-900 dark:text-white">Categoría:</span> {{ propiedad.type | titlecase}}</p>
+      <p><span class="font-semibold text-gray-900 dark:text-white">Ciudad:</span> {{ propiedad.city }}</p>
+      <p><span class="font-semibold text-gray-900 dark:text-white">Dimensiones:</span> {{ propiedad.dimension }} m²</p>
+      <p><span class="font-semibold text-gray-900 dark:text-white">Oferta:</span>
+        <span *ngIf="propiedad.isOffer" class="text-green-500">Si</span>
+        <span *ngIf="!propiedad.isOffer" class="text-red-500">No</span>
+      </p>
+      <p><span class="font-semibold text-gray-900 dark:text-white">Estado:</span>
+        <span *ngIf="propiedad.isActive" class="text-green-500">Activo</span>
+        <span *ngIf="!propiedad.isActive" class="text-red-500">Inactivo</span>
+      </p>
+    </div>
+    <div class="flex justify-between">
+      <button (click)="editarPropiedad(propiedad)" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-4 py-2">Editar</button>
+      <button (click)="eliminarPropiedad(propiedad)" class="text-white bg-gradient-to-br from-orange-400 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-4 py-2">Eliminar</button>
+    </div>
   </div>
 </div>
 
