@@ -29,15 +29,15 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         <div class="feat-class flex space-x-8 mt-6">
           <div class="flex space-x-2 items-center">
             <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">Camas</h1>
+            <h1 class="text-lg font-bold text-[#181A20]">4 Dormitorios</h1>
           </div>
           <div class="flex space-x-2 items-center">
-            <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">Dimension</h1>
+            <img src="/assets/icons/banho.png" alt="bed" class="h-[13px]" />
+            <h1 class="text-lg font-bold text-[#181A20]">2 Baños</h1>
           </div>
           <div class="flex space-x-2 items-center">
-            <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">Cuartos</h1>
+            <img src="/assets/icons/meters.png" alt="bed" class="h-[13px]" />
+            <h1 class="text-lg font-bold text-[#181A20]">200 m2</h1>
           </div>
         </div>
 
@@ -64,9 +64,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         </div>
 
         <button
-          class="bg-[#C0A700] mt-6 w-[202px] flex px-10 justify-center py-1 rounded-sm items-center"
+          class="bg-[#C0A700] mt-6 w-[202px] rounded-lg flex px-10 justify-center py-1 items-center space-x-2"
         >
-          <img src="/assets/icons/cama.png" alt="bed" />
+          <img src="/assets/svg/whatsapp.svg" alt="whatsapp" class="h-6" />
 
           <h1 class="text-2xl font-bold text-white">Cotizar</h1>
         </button>

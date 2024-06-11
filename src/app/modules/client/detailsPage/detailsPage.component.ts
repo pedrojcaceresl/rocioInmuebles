@@ -6,17 +6,16 @@ import { DetailsComponent } from './components/details/details.component';
 @Component({
   selector: 'app-details-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    SlidersComponent,
-    DetailsComponent
-  ],
+  imports: [CommonModule, SlidersComponent, DetailsComponent],
   template: `
-    <div class="w-full px-20 flex my-20 h-full items-center">
-      <div class="w-[873px]">
+    <div class="w-full px-4 my-5 md:px-20 lg:flex lg:my-20 h-full justify-center ">
+      <div class="lg:w-[873px]">
         <app-sliders />
+        <div class="lg:hidden my-10">
+          <app-details />
+        </div>
       </div>
-      <div class="w-1/3 lg:ml-10">
+      <div class="w-1/3 lg:ml-10 hidden lg:flex  mt-10">
         <app-details />
       </div>
     </div>
@@ -24,4 +23,4 @@ import { DetailsComponent } from './components/details/details.component';
   styleUrls: ['./detailsPage.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailsPageComponent { }
+export class DetailsPageComponent {}
