@@ -23,28 +23,33 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       <div>
         <div class="mt-6">
           <h1 class="text-xl font-bold text-[#181A20]">{{ title }}</h1>
-          <h4 class="font-normal text-[#717171]">{{ address }}</h4>
+          <h4 class="font-normal text-[#717171]">{{ city }}</h4>
         </div>
 
         <div class="feat-class flex space-x-8 mt-6">
-          <div class="flex space-x-2 items-center">
+          <div *ngIf="baths" class="flex space-x-2 items-center">
             <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
             <h1 class="text-lg font-bold text-[#181A20]">4 Dormitorios</h1>
           </div>
-          <div class="flex space-x-2 items-center">
+          <div *ngIf="baths" class="flex space-x-2 items-center">
             <img src="/assets/icons/banho.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">2 Baños</h1>
+            <h1 class="text-lg font-bold text-[#181A20]">{{ baths }} Baños</h1>
           </div>
-          <div class="flex space-x-2 items-center">
+          <div *ngIf="dimension" class="flex space-x-2 items-center">
             <img src="/assets/icons/meters.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">200 m2</h1>
+            <h1 class="text-lg font-bold text-[#181A20]">{{ dimension }} m2</h1>
           </div>
         </div>
 
         <div class="mt-6">
           <h2 class="text-lg">Descripción</h2>
           <p>
-            {{ description }}
+            {{ showMore ? description.slice(0, 140) + '...' : description }}
+            <span
+              (click)="toggleShow()"
+              class="font-bold cursor-pointer text-slate-700"
+              >{{ showMore ? 'Ver más' : 'Ver menos' }}</span
+            >
           </p>
         </div>
 
@@ -60,7 +65,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         </div>
 
         <div class="mt-6">
-          <h1 class="text-xl font-bold text-[#181A20]">$ {{ price }}</h1>
+          <h1 class="text-xl font-bold text-[#181A20]">
+            {{ priceSale | currency: 'USD' }}
+          </h1>
         </div>
 
         <button
@@ -78,13 +85,19 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class DetailsComponent {
   @Input() title: string = 'Eco Villa Penthouse';
-  @Input() address: string = '178 Broadway, Brooklyn';
+  @Input() city: string = '178 Broadway, Brooklyn';
   @Input() beds: number = 0;
   @Input() baths: number = 0;
-  @Input() area: number = 0;
+  @Input() dimension: number = 0;
   @Input() description: string =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.';
   @Input() contactNumber: string = '+595 985 123 456';
   @Input() email: string = 'example@mail.com';
-  @Input() price: number = 180000;
+  @Input() priceSale: number = 180000;
+
+  showMore: Boolean = true;
+
+  toggleShow() {
+    this.showMore = !this.showMore;
+  }
 }
