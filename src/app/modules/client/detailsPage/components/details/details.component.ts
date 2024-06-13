@@ -29,20 +29,22 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         <div class="feat-class flex space-x-8 mt-6">
           <div *ngIf="baths" class="flex space-x-2 items-center">
             <img src="/assets/icons/cama.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">4 Dormitorios</h1>
+            <h1 class="text-md font-bold text-[#181A20]">
+              {{ beds }} Dormitorios
+            </h1>
           </div>
           <div *ngIf="baths" class="flex space-x-2 items-center">
             <img src="/assets/icons/banho.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">{{ baths }} Baños</h1>
+            <h1 class="text-md font-bold text-[#181A20]">{{ baths }} Baños</h1>
           </div>
           <div *ngIf="dimension" class="flex space-x-2 items-center">
             <img src="/assets/icons/meters.png" alt="bed" class="h-[13px]" />
-            <h1 class="text-lg font-bold text-[#181A20]">{{ dimension }} m2</h1>
+            <h1 class="text-md font-bold text-[#181A20]">{{ dimension }} m2</h1>
           </div>
         </div>
 
         <div class="mt-6">
-          <h2 class="text-lg">Descripción</h2>
+          <h2 class="text-lg font-bold">Descripción</h2>
           <p>
             {{ showMore ? description.slice(0, 140) + '...' : description }}
             <span
@@ -55,18 +57,18 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
         <div class="flex mt-6 space-x-6">
           <div>
-            <h2>Contáctame</h2>
+            <h2 class="font-bold">Contáctame</h2>
             <h3>{{ contactNumber }}</h3>
           </div>
           <div>
-            <h2>Email</h2>
+            <h2 class="font-bold">Email</h2>
             <h3>{{ email }}</h3>
           </div>
         </div>
 
         <div class="mt-6">
           <h1 class="text-xl font-bold text-[#181A20]">
-            {{ priceSale | currency: 'USD' }}
+            {{ priceSale | currency : 'USD' }}
           </h1>
         </div>
 
@@ -75,7 +77,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         >
           <img src="/assets/svg/whatsapp.svg" alt="whatsapp" class="h-6" />
 
-          <h1 class="text-2xl font-bold text-white">Cotizar</h1>
+          <a [href]="getWhatsAppLink(title)" target="_blank">
+            <h1 class="text-2xl font-bold text-white">Cotizar</h1>
+          </a>
         </button>
       </div>
     </div>
@@ -84,6 +88,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailsComponent {
+  @Input() id: string = '';
   @Input() title: string = 'Eco Villa Penthouse';
   @Input() city: string = '178 Broadway, Brooklyn';
   @Input() beds: number = 0;
@@ -91,13 +96,21 @@ export class DetailsComponent {
   @Input() dimension: number = 0;
   @Input() description: string =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.';
-  @Input() contactNumber: string = '+595 985 123 456';
-  @Input() email: string = 'example@mail.com';
+  @Input() contactNumber: string = '+595 994 329 377';
+  @Input() email: string = 'contacto.rocioinmuebles@gmail.com';
   @Input() priceSale: number = 180000;
 
   showMore: Boolean = true;
 
   toggleShow() {
     this.showMore = !this.showMore;
+  }
+
+  getWhatsAppLink(title: string): string {
+    const phoneNumber = '595994329377';
+    const url = `https://www.rocioinmuebles.com/propiedades/detalle/${this.id}`;
+    const message = `Estoy interesado en la propiedad: ${title}. La url aquí: ${url}`;
+
+    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   }
 }

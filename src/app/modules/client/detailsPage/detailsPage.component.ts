@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { SlidersComponent } from './components/sliders/sliders.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +26,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
         />
         <div class="lg:hidden my-10">
           <app-details
+            [id]="id"
             [description]="propiedad.description"
             [title]="propiedad.title"
             [city]="propiedad.city"
@@ -32,7 +38,16 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
         </div>
       </div>
       <div class="w-1/3 lg:ml-10 hidden lg:flex  mt-10">
-        <app-details [description]="propiedad.description" />
+        <app-details
+          [id]="id"
+          [description]="propiedad.description"
+          [title]="propiedad.title"
+          [city]="propiedad.city"
+          [baths]="propiedad.baths"
+          [beds]="propiedad.beds"
+          [dimension]="propiedad.dimension"
+          [priceSale]="propiedad.priceSale"
+        />
       </div>
     </div>
   `,
