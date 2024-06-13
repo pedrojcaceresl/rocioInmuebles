@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./nueva-propiedad-page.component.scss'],
 })
 export class NuevaPropiedadPageComponent implements OnInit {
-  tipos: String[] = ['lote', 'duplex', 'casa', 'terreno'];
+  tipos: string[] = ['lote', 'duplex', 'casa', 'terreno'];
   path: string = 'propiedades';
   imgUrls: string[] = [];
   imgUrl: string = '';
@@ -36,8 +36,8 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({
     baths: [null],
-    beds: [null],
-    transactionType: ['', Validators.required],
+    beds: [0],
+    transactionType: ['Venta', Validators.required],
     dimension: [null],
     description: [''],
     imgUrl: ['', Validators.required],
