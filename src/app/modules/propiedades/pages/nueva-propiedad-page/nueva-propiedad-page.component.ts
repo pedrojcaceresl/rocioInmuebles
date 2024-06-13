@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./nueva-propiedad-page.component.scss'],
 })
 export class NuevaPropiedadPageComponent implements OnInit {
-  tipos: String[] = ['lote', 'duplex', 'casa', 'terreno'];
+  tipos: string[] = ['lote', 'duplex', 'casa', 'terreno'];
   path: string = 'propiedades';
   imgUrls: string[] = [];
   imgUrl: string = '';
