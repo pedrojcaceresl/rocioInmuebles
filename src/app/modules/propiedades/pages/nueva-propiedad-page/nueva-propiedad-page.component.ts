@@ -243,4 +243,12 @@ export class NuevaPropiedadPageComponent implements OnInit {
     }
       console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
   }
+
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.onSubmit();
+    }
+  }
 }
