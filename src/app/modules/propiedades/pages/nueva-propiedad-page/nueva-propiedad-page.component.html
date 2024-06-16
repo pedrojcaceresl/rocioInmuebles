@@ -100,18 +100,12 @@
 
             <div class="mb-4">
               <h2 class="text-black">Dormitorios</h2>
-              <select
-                formControlName="beds"
-                required
+              <input
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option
-                  *ngFor="let dormitorio of dormitorios"
-                  [value]="dormitorio.valor"
-                >
-                  {{ dormitorio.nombre }}
-                </option>
-              </select>
+                placeholder="Cantidad de dormitorios"
+                formControlName="beds"
+                type="number"
+              />
             </div>
 
             <div class="mb-4">
