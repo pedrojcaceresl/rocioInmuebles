@@ -63,6 +63,7 @@ export class PropertiesPageComponent {
     this.firebaseService.getData(this.path).subscribe((res) => {
       this.filteredItems = res;
       this.properties = res;
+      console.log("🚀 ~ PropertiesPageComponent ~ this.firebaseService.getData ~ this.properties:", this.properties)
 
       this.cd.markForCheck();
     });
