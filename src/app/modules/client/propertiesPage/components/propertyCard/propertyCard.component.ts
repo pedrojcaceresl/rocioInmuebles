@@ -9,7 +9,7 @@ import { ButtonBadgeComponent } from '../buttonBadge/buttonBadge.component';
   standalone: true,
   imports: [CommonModule, ButtonBadgeComponent],
   template: `
-    <div class="my-10 rounded-2xl p-3 w-[306px] shadow-md h-[383px]" *ngIf="property">
+    <div class="my-10 rounded-2xl p-3 w-[306px] shadow-md h-[383px]" *ngIf="property && property.isActive == true">
       <!-- image -->
       <div class="relative rounded-2xl max-w-[284px]">
         <div class="absolute top-5 left-3">

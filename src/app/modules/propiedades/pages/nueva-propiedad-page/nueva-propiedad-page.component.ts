@@ -42,8 +42,8 @@ export class NuevaPropiedadPageComponent implements OnInit {
     description: [''],
     imgUrl: ['', Validators.required],
     imgUrls: [[]],
-    isActive: [false, Validators.required],
     locationCoords: ['', Validators.required],
+    isActive: [true, Validators.required],
     isOffer: [false],
     isSold: [false],
     priceMonth: [0],
@@ -189,15 +189,15 @@ export class NuevaPropiedadPageComponent implements OnInit {
       transactionType,
       dimension,
       description,
-      isSold,
+      isSold: !!isSold,
       imgUrl: this.imgUrl,
       imgUrls: this.imgUrls,
-      isActive,
+      isActive:!!isActive,
       locationCoords: {
         lat: this.lat,
         lng: this.lng,
       },
-      isOffer,
+      isOffer:!!isOffer,
       priceMonth,
       priceSale,
       type,
@@ -211,6 +211,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
       console.log('se editara');
       this.firebaseService.updateData(propiedad, this.path);
     } else {
+      console.log('LA PROPIEDAAAAADD',propiedad);
       this.firebaseService.addData(propiedad, this.path);
     }
 
