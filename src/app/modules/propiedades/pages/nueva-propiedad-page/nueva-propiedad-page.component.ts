@@ -35,15 +35,15 @@ export class NuevaPropiedadPageComponent implements OnInit {
   });
 
   firstFormGroup = this._formBuilder.group({
-    baths: [null],
+    baths: [0],
     beds: [0],
     transactionType: ['Venta', Validators.required],
     dimension: [null],
     description: [''],
     imgUrl: ['', Validators.required],
     imgUrls: [[]],
-    isActive: [false, Validators.required],
     locationCoords: ['', Validators.required],
+    isActive: [true, Validators.required],
     isOffer: [false],
     isSold: [false],
     priceMonth: [0],
@@ -92,16 +92,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     public dialogRef: MatDialogRef<NuevaPropiedadPageComponent>,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.firebaseService.getData('dormitorios').subscribe((res) => {
-      this.dormitorios = res
-    })
-
-    this.firebaseService.getData('filtros').subscribe((res) => {
-      this.estados = res.filter((estado: any) => estado.categoria === 'Estado');
-      console.log(this.estados);
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.data && this.firstFormGroup.reset(this.data.propiedad);
@@ -198,15 +189,15 @@ export class NuevaPropiedadPageComponent implements OnInit {
       transactionType,
       dimension,
       description,
-      isSold,
+      isSold: !!isSold,
       imgUrl: this.imgUrl,
       imgUrls: this.imgUrls,
-      isActive,
+      isActive:!!isActive,
       locationCoords: {
         lat: this.lat,
         lng: this.lng,
       },
-      isOffer,
+      isOffer:!!isOffer,
       priceMonth,
       priceSale,
       type,
@@ -220,6 +211,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
       console.log('se editara');
       this.firebaseService.updateData(propiedad, this.path);
     } else {
+      console.log('LA PROPIEDAAAAADD',propiedad);
       this.firebaseService.addData(propiedad, this.path);
     }
 
@@ -238,9 +230,17 @@ export class NuevaPropiedadPageComponent implements OnInit {
       this.imgUrl = event.info.url;
       this.imgUrls.push(event.info.url);
       this.images = [...this.images, event.info.url]
-      console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.images:", this.images)
+      // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.images:", this.images)
       // this.imgUrls = this.images
     }
-      console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
+      // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
+  }
+
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.onSubmit();
+    }
   }
 }
