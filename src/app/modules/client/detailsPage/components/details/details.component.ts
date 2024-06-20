@@ -107,8 +107,8 @@ export class DetailsComponent {
   }
 
   getWhatsAppLink(title: string): string {
-    const phoneNumber = '595994329377';
-    const url = `https://www.rocioinmuebles.com/propiedades/detalle/${this.id}`;
+    const phoneNumber = '595973205207';
+    const url = `https://rocioinmuebles.com/propiedades/detalle/${this.id}`;
     const message = `Estoy interesado en la propiedad: ${title}. La url aquí: ${url}`;
 
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
