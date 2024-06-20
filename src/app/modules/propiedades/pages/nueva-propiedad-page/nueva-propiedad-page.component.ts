@@ -21,13 +21,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./nueva-propiedad-page.component.scss'],
 })
 export class NuevaPropiedadPageComponent implements OnInit {
-  tipos: string[] = ['lote', 'duplex', 'casa', 'terreno'];
+  tipos: string[] = [
+    'casa quinta',
+    'casa',
+    'duplex',
+    'granja',
+    'terreno',
+    'departamento en pozo',
+    'lote en condominio',
+  ];
   path: string = 'propiedades';
   imgUrls: string[] = [];
   imgUrl: string = '';
   departamentos: any[] = [];
   ciudades: string[] = [];
-
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -82,7 +89,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   };
 
   estados: Filtro[] = [];
-  dormitorios:any;
+  dormitorios: any;
 
   constructor(
     private http: HttpClient,
@@ -97,17 +104,18 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ngOnInit(): void {
     this.data && this.firstFormGroup.reset(this.data.propiedad);
     console.log('datossss', this.data);
-    this.http.get<any>('assets/geo-paraguay.json').subscribe(data => {
+    this.http.get<any>('assets/geo-paraguay.json').subscribe((data) => {
       this.departamentos = data.departamentos;
-    });
+    });
   }
 
   onSelectDepartamento(nombreDepartamento: any): void {
-    nombreDepartamento = nombreDepartamento.value
-    const departamento = this.departamentos.find(dep => dep.nombre === nombreDepartamento);
+    nombreDepartamento = nombreDepartamento.value;
+    const departamento = this.departamentos.find(
+      (dep) => dep.nombre === nombreDepartamento
+    );
     this.ciudades = departamento ? departamento.ciudades : [];
   }
-
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
@@ -192,12 +200,12 @@ export class NuevaPropiedadPageComponent implements OnInit {
       isSold: !!isSold,
       imgUrl: this.imgUrl,
       imgUrls: this.imgUrls,
-      isActive:!!isActive,
+      isActive: !!isActive,
       locationCoords: {
         lat: this.lat,
         lng: this.lng,
       },
-      isOffer:!!isOffer,
+      isOffer: !!isOffer,
       priceMonth,
       priceSale,
       type,
@@ -211,7 +219,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
       console.log('se editara');
       this.firebaseService.updateData(propiedad, this.path);
     } else {
-      console.log('LA PROPIEDAAAAADD',propiedad);
+      console.log('LA PROPIEDAAAAADD', propiedad);
       this.firebaseService.addData(propiedad, this.path);
     }
 
@@ -229,13 +237,12 @@ export class NuevaPropiedadPageComponent implements OnInit {
       console.log('Lo que se viene', event.info.url);
       this.imgUrl = event.info.url;
       this.imgUrls.push(event.info.url);
-      this.images = [...this.images, event.info.url]
+      this.images = [...this.images, event.info.url];
       // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.images:", this.images)
       // this.imgUrls = this.images
     }
-      // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
+    // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
   }
-
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
