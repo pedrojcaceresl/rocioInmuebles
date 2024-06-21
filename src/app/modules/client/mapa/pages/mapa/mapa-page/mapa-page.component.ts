@@ -1,9 +1,8 @@
 import { ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { FirebaseService } from '../../../../../../shared/services/firebase.service';
-import { filter } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { formatCurrency } from '../../../../../../core/helpers/index';
 @Component({
   selector: 'app-mapa-page',
   templateUrl: './mapa-page.component.html',
@@ -14,18 +13,19 @@ export class MapaPageComponent {
 
   cd = inject(ChangeDetectorRef);
   markerPositions: any[] = [];
-  propiedades:any;
+  propiedades: any;
 
   markerInfo: any;
   zoom = 12;
 
+  formatCurrency = formatCurrency;
 
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     animation: google.maps.Animation.DROP,
     icon: {
       url: 'assets/images/pin-map.png',
-    }
+    },
   };
   markers = [
     {
@@ -91,21 +91,19 @@ export class MapaPageComponent {
   };
 
   constructor(
-    private firebaseService:FirebaseService,
-    private router:Router
-  ){}
-
+    private firebaseService: FirebaseService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.firebaseService.getData('propiedades').subscribe(res=>{
-      this.propiedades = res
+    this.firebaseService.getData('propiedades').subscribe((res) => {
+      this.propiedades = res;
       this.loadMarkers();
-    })
+    });
   }
 
-
   loadMarkers() {
-    this.propiedades.filter((marker: any)=> marker.isActive);
+    this.propiedades.filter((marker: any) => marker.isActive);
     if (this.propiedades && this.propiedades.length) {
       this.propiedades.forEach((marker: any) => {
         const oMarker = this.createMarker(marker);
@@ -124,15 +122,15 @@ export class MapaPageComponent {
         description: marker.description,
         position: marker.position,
         id: marker.id,
+        ...marker,
       },
     });
     return oMarker;
   }
 
-  goTo(marker:any){
-    this.router.navigate([`/propiedades/detalle/${marker.describe.id}`])
+  goTo(marker: any) {
+    this.router.navigate([`/propiedades/detalle/${marker.describe.id}`]);
   }
-
 
   addMarker(event: google.maps.MapMouseEvent) {
     this.markers = [
