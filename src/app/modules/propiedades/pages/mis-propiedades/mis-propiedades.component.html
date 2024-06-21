@@ -42,10 +42,15 @@
               alt="Property Image"
               class="w-10 h-10 rounded"
             />
-            {{ propiedad.title }}
+            {{ propiedad.viewTitle }}
           </td>
           <td class="px-6 py-4 font-semibold">
-            {{ propiedad.priceSale ? (propiedad.priceSale | currency:'USD':true:'1.2-2') : (propiedad.priceMonth | currency:'USD':true:'1.2-2') + ' mes' }}
+            {{
+              propiedad.priceSale
+                ? (propiedad.priceSale | currency : "USD" : true : "1.2-2")
+                : (propiedad.priceMonth | currency : "USD" : true : "1.2-2") +
+                  "/mes"
+            }}
           </td>
           <td class="px-6 py-4">{{ propiedad.transactionType }}</td>
           <td class="px-6 py-4">{{ propiedad.type | titlecase }}</td>
@@ -101,7 +106,7 @@
       />
       <div>
         <h2 class="text-lg font-bold text-gray-900 dark:text-white">
-          {{ propiedad.title }}
+          {{ propiedad.viewTitle }}
         </h2>
       </div>
     </div>
@@ -126,29 +131,33 @@
         >
         {{ propiedad.dimension }} m²
       </p>
-      <!-- <p>
-        <span class="font-semibold text-gray-900 dark:text-white">Oferta:</span>
-        <span *ngIf="propiedad.isOffer" class="text-green-500">Si</span>
-        <span *ngIf="!propiedad.isOffer" class="text-red-500">No</span>
-      </p> -->
+      <p>
+        <span class="font-semibold text-gray-900 dark:text-white">Precio:</span>
+        {{
+          propiedad.priceSale
+            ? (propiedad.priceSale | currency : "USD" : true : "1.2-2")
+            : (propiedad.priceMonth | currency : "USD" : true : "1.2-2") +
+              "/mes"
+        }}
+      </p>
       <p>
         <span class="font-semibold text-gray-900 dark:text-white">Estado:</span>
         <span *ngIf="propiedad.isActive" class="text-green-500">Activo</span>
         <span *ngIf="!propiedad.isActive" class="text-red-500">Inactivo</span>
       </p>
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-end">
       <button
         (click)="editarPropiedad(propiedad)"
-        class="px-4 py-2 text-xs font-medium text-white rounded-lg bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200"
+        class="text-white bg-amarillo-rocio hover:bg-amarillo-rocio/70 focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-2.5 py-2.5 text-center mx-1 mb-2"
       >
-        Editar
+        <i class="fas fa-edit"></i>
       </button>
       <button
         (click)="eliminarPropiedad(propiedad)"
-        class="px-4 py-2 text-xs font-medium text-white rounded-lg bg-gradient-to-br from-orange-400 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200"
+        class="text-white bg-red-600 hover:bg-red-600/70 focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-2.5 py-2.5 text-center mx-1 mb-2"
       >
-        Eliminar
+        <i class="fas fa-trash-alt"></i>
       </button>
     </div>
   </div>
