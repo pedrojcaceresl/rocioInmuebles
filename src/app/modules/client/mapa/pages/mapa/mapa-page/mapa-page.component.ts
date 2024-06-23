@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
-import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { FirebaseService } from '../../../../../../shared/services/firebase.service';
 import { Router } from '@angular/router';
 import { formatCurrency } from '../../../../../../core/helpers/index';
+
+
 @Component({
   selector: 'app-mapa-page',
   templateUrl: './mapa-page.component.html',
@@ -10,15 +12,21 @@ import { formatCurrency } from '../../../../../../core/helpers/index';
 export class MapaPageComponent {
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   @ViewChild('marker') mapMarker!: MapMarker;
+  @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
 
   cd = inject(ChangeDetectorRef);
   markerPositions: any[] = [];
   propiedades: any;
 
   markerInfo: any;
-  zoom = 12;
+  zoom = 7;
 
   formatCurrency = formatCurrency;
+
+  TRANSACTION_TYPE = {
+    ALQUILER: 'Alquiler',
+    VENTA: 'Venta',
+  };
 
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
@@ -27,64 +35,8 @@ export class MapaPageComponent {
       url: 'assets/images/pin-map.png',
     },
   };
-  markers = [
-    {
-      position: { lat: -25.533333, lng: -54.616667 },
-      title: 'Itaipu Dam (Represa Hidroeléctrica Itaipú Binacional)',
-      description: "One of the world's largest hydroelectric dams.",
-    },
-    {
-      position: { lat: -25.508333, lng: -54.608333 },
-      title: 'Friendship Bridge ( Puente de la Amistad)',
-      description:
-        'Bridge connecting Paraguay and Brazil over the Paraná River.',
-    },
-    {
-      position: { lat: -25.527778, lng: -54.583333 },
-      title: 'Shopping China Importados',
-      description: 'Major shopping mall with a wide variety of imported goods.',
-    },
-    {
-      position: { lat: -25.533333, lng: -54.591667 },
-      title: 'Shopping Paris',
-      description:
-        'Another popular shopping mall known for electronics and clothing.',
-    },
-    {
-      position: { lat: -25.525, lng: -54.577778 },
-      title: 'Catedral San Blas',
-      description: 'Beautiful cathedral in the city center.',
-    },
-    {
-      position: { lat: -25.533333, lng: -54.563889 },
-      title: 'Parque Verde',
-      description: 'Urban park with walking paths, playgrounds, and a lake.',
-    },
-    {
-      position: { lat: -25.683333, lng: -54.483333 },
-      title: 'Saltos del Monday (Monday Falls)',
-      description: 'Scenic waterfalls located a short drive outside the city.',
-    },
-    {
-      position: { lat: -25.580556, lng: -54.633056 },
-      title: 'Hito Tres Fronteras (Triple Frontier Landmark)',
-      description:
-        'Landmark marking the borders of Paraguay, Argentina, and Brazil.',
-    },
-    // Iguazu Falls are technically across the border but a popular day trip
-    {
-      position: { lat: -25.695278, lng: -54.545278 },
-      title: 'Iguazu Falls (Argentina Side)',
-      description:
-        "One of the world's most spectacular waterfalls (located in Argentina).",
-    },
-    // Another option across the border in Brazil
-    {
-      position: { lat: -25.700833, lng: -54.539167 },
-      title: 'Iguazu Falls (Brazil Side)',
-      description: 'Another view of the Iguazu Falls (located in Brazil).',
-    },
-  ];
+  markers: any[] = [];
+
   center: google.maps.LatLngLiteral = {
     lat: -25.48143701275906,
     lng: -54.66668507228658,
@@ -101,6 +53,13 @@ export class MapaPageComponent {
       this.loadMarkers();
     });
   }
+  
+
+  isForSale(property: any) {
+    return property.transactionType === this.TRANSACTION_TYPE.ALQUILER
+      ? property.priceMonth
+      : property.priceSale;
+  }
 
   loadMarkers() {
     this.propiedades.filter((marker: any) => marker.isActive);
@@ -109,7 +68,6 @@ export class MapaPageComponent {
         const oMarker = this.createMarker(marker);
         this.markerPositions.push(oMarker);
       });
-      this.cd.detectChanges();
     }
   }
 
@@ -146,5 +104,9 @@ export class MapaPageComponent {
   openInfoWindow(marker: MapMarker, index: any) {
     this.infoWindow.open(marker);
     this.markerInfo = this.markerPositions[index];
+    if (this.map) {
+      this.map.googleMap?.setZoom(15); // Set your desired zoom level
+      this.map.googleMap?.setCenter(marker.getPosition()!);
+    }
   }
 }

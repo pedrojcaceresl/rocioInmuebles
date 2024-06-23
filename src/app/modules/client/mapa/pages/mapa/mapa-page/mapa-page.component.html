@@ -2,13 +2,13 @@
   <map-marker #marker="mapMarker" *ngFor="let position of propiedades; let i = index"
     [position]="position.locationCoords" [options]="markerOptions" (mapClick)="openInfoWindow(marker, i)" />
   <map-info-window>
-    <div class="p-2 bg-white rounded-lg min-w-72" *ngIf="markerInfo">
+    <div class="px-2 bg-white rounded-lg min-w-72" *ngIf="markerInfo">
       <div class="space-x-4">
         <button class="uppercase bg-[#C0A700] text-sm text-white font-bold px-6 py-2 rounded-lg">
           Oferta
         </button>
         <button class="uppercase bg-[#0D1C39] text-sm text-white font-bold px-6 py-2 rounded-lg">
-          En venta
+          {{markerInfo.describe.transactionType}}
         </button>
       </div>
 
@@ -18,10 +18,17 @@
           <h4 class="font-normal text-[#717171]">{{ markerInfo.description}}</h4>
         </div>
         <div class="flex items-center">
-          <h1 class="text-xl font-bold text-[#181A20]">{{ formatCurrency(markerInfo.describe.priceSale)}}</h1>
+
+          <h1 class="text-xl font-bold text-green-500">
+            {{ formatCurrency(isForSale(markerInfo.describe))
+            }}<span class="text-xs font-normal">{{
+              markerInfo.describe.transactionType === TRANSACTION_TYPE.ALQUILER ? '/mes' : ''
+              }}</span>
+          </h1>
+
+
           <div class="flex justify-end w-full">
-            <button
-            title="Ver detalles"
+            <button title="Ver detalles"
               class="flex items-center hover:scale-105 px-4 py-1 text-sm font-bold text-white animate-pulse uppercase border-2 border-[#C0A700] rounded-lg"
               (click)="goTo(markerInfo)">
               <mat-icon class="text-[#C0A700] font-bold" fontIcon="arrow_right_alt"></mat-icon>
