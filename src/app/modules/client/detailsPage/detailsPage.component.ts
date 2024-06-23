@@ -34,6 +34,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
             [beds]="propiedad.beds"
             [dimension]="propiedad.dimension"
             [priceSale]="propiedad.priceSale"
+            [transactionType]="propiedad.transactionType"
           />
         </div>
       </div>
@@ -47,6 +48,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
           [beds]="propiedad.beds"
           [dimension]="propiedad.dimension"
           [priceSale]="propiedad.priceSale"
+          [transactionType]="propiedad.transactionType"
         />
       </div>
     </div>

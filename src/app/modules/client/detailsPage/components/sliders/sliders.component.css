@@ -1,3 +1,10 @@
 :host {
   display: block;
 }
+.slider-container {
+  position: relative;
+}
+
+.image-wrapper {
+  transition: opacity 100ms ease-in;
+}
