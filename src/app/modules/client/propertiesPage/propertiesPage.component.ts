@@ -52,6 +52,7 @@ export class PropertiesPageComponent {
   properties: any[] = [];
 
   onFilteredItems(filtered: any) {
+    // console.log('LA FILTRAMENTACION',filtered);
     if (filtered.length > 0) {
       this.filteredItems = filtered;
     } else {
@@ -63,7 +64,7 @@ export class PropertiesPageComponent {
     this.firebaseService.getData(this.path).subscribe((res) => {
       this.filteredItems = res;
       this.properties = res;
-      console.log("🚀 ~ PropertiesPageComponent ~ this.firebaseService.getData ~ this.properties:", this.properties)
+      // console.log("🚀  LAS properties a ser enviadas:", this.properties)
 
       this.cd.markForCheck();
     });
