@@ -4,7 +4,7 @@
   <map-info-window>
     <div class="px-2 bg-white rounded-lg min-w-72" *ngIf="markerInfo">
       <div class="space-x-4">
-        <button class="uppercase bg-[#C0A700] text-sm text-white font-bold px-6 py-2 rounded-lg">
+        <button *ngIf="markerInfo.describe.isOffer" class="uppercase bg-[#C0A700] text-sm text-white font-bold px-6 py-2 rounded-lg">
           Oferta
         </button>
         <button class="uppercase bg-[#0D1C39] text-sm text-white font-bold px-6 py-2 rounded-lg">

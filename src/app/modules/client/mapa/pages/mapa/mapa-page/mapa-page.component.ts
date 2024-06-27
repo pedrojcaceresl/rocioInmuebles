@@ -53,7 +53,7 @@ export class MapaPageComponent {
       this.loadMarkers();
     });
   }
-  
+
 
   isForSale(property: any) {
     return property.transactionType === this.TRANSACTION_TYPE.ALQUILER
@@ -78,6 +78,7 @@ export class MapaPageComponent {
     oMarker.setValues({
       describe: {
         description: marker.description,
+        isOffer: marker.isOffer,
         position: marker.position,
         id: marker.id,
         ...marker,

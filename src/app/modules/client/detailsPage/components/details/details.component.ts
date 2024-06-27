@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   template: `
     <div>
       <div class="space-x-5">
-        <button
+        <button *ngIf="isOffer"
           class="uppercase bg-[#C0A700] text-sm text-white font-bold px-6 py-2 rounded-lg"
         >
           Oferta
@@ -93,6 +93,7 @@ export class DetailsComponent {
   @Input() city: string = '178 Broadway, Brooklyn';
   @Input() beds: number = 0;
   @Input() baths: number = 0;
+  @Input() isOffer: boolean = true;
   @Input() dimension: number = 0;
   @Input() description: string =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.';
