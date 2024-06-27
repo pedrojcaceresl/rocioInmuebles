@@ -102,8 +102,40 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.data && this.firstFormGroup.reset(this.data.propiedad);
-    console.log('datossss', this.data);
+    if (this.data) {
+      const propiedad = this.data.propiedad;
+      this.firstFormGroup.patchValue({
+        baths: propiedad.baths,
+        beds: propiedad.beds,
+        transactionType: propiedad.transactionType,
+        dimension: propiedad.dimension,
+        description: propiedad.description,
+        imgUrl: propiedad.imgUrl,
+        imgUrls: propiedad.imgUrls,
+        locationCoords: '',
+        isActive: propiedad.isActive,
+        isOffer: propiedad.isOffer,
+        isSold: propiedad.isSold,
+        priceMonth: propiedad.priceMonth,
+        priceSale: propiedad.priceSale,
+        type: propiedad.type,
+        title: propiedad.title,
+        viewTitle: propiedad.viewTitle,
+        city: propiedad.city,
+        state: propiedad.state,
+      });
+
+      this.secondFormGroup.patchValue({
+        latitude: propiedad.locationCoords.lat,
+        longitude: propiedad.locationCoords.lng,
+      });
+
+      this.imgUrl = propiedad.imgUrl;
+      this.imgUrls = propiedad.imgUrls;
+      this.lat = propiedad.locationCoords.lat;
+      this.lng = propiedad.locationCoords.lng;
+    }
+
     this.http.get<any>('assets/geo-paraguay.json').subscribe((data) => {
       this.departamentos = data.departamentos;
     });
@@ -168,80 +200,70 @@ export class NuevaPropiedadPageComponent implements OnInit {
     console.log(this.secondFormGroup.value);
   }
 
-  onSubmit() {
-    const {
-      baths,
-      beds,
-      transactionType,
-      dimension,
-      description,
-      imgUrl,
-      isActive,
-      locationCoords,
-      isOffer,
-      isSold,
-      priceMonth,
-      priceSale,
-      type,
-      title,
-      viewTitle,
-      city,
-      state,
-    } = this.firstFormGroup.value;
-    // const { latitude, longitude } = this.secondFormGroup.value;
+ onSubmit() {
+  const {
+    baths,
+    beds,
+    transactionType,
+    dimension,
+    description,
+    isActive,
+    isOffer,
+    isSold,
+    priceMonth,
+    priceSale,
+    type,
+    title,
+    viewTitle,
+    city,
+    state,
+  } = this.firstFormGroup.value;
+  const { latitude, longitude } = this.secondFormGroup.value;
 
-    const propiedad: Propiedad = {
-      id: this.data && this.data.propiedad.id,
-      baths,
-      beds,
-      transactionType,
-      dimension,
-      description,
-      isSold: !!isSold,
-      imgUrl: this.imgUrl,
-      imgUrls: this.imgUrls,
-      isActive: !!isActive,
-      locationCoords: {
-        lat: this.lat,
-        lng: this.lng,
-      },
-      isOffer: !!isOffer,
-      priceMonth,
-      priceSale,
-      type,
-      title,
-      viewTitle,
-      city,
-      state,
-    };
+  const propiedad: Propiedad = {
+    id: this.data && this.data.propiedad.id,
+    baths,
+    beds,
+    transactionType,
+    dimension,
+    description,
+    isSold: !!isSold,
+    imgUrl: this.imgUrl,
+    imgUrls: this.imgUrls,
+    isActive: !!isActive,
+    locationCoords: {
+      lat: latitude,
+      lng: longitude,
+    },
+    isOffer: !!isOffer,
+    priceMonth,
+    priceSale,
+    type,
+    title,
+    viewTitle,
+    city,
+    state,
+  };
 
-    if (this.data && this.data.editMode) {
-      console.log('se editara');
-      this.firebaseService.updateData(propiedad, this.path);
-    } else {
-      console.log('LA PROPIEDAAAAADD', propiedad);
-      this.firebaseService.addData(propiedad, this.path);
-    }
-
-    console.log({ propiedad });
-    alert(`Guardado con exito`);
-    this.dialogRef.close();
+  if (this.data && this.data.editMode) {
+    this.firebaseService.updateData(propiedad, this.path);
+  } else {
+    this.firebaseService.addData(propiedad, this.path);
   }
+
+  alert(`Guardado con exito`);
+  this.dialogRef.close();
+}
 
   images: any;
 
   onImageUpload(event: any) {
-    // console.log("La fiesta",event);
-
     if (event.event === 'success') {
-      console.log('Lo que se viene', event.info.url);
-      this.imgUrl = event.info.url;
-      this.imgUrls.push(event.info.url);
-      this.images = [...this.images, event.info.url];
-      // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.images:", this.images)
-      // this.imgUrls = this.images
+      const imageUrl = event.info.url;
+      this.imgUrl = imageUrl;
+      this.imgUrls.push(imageUrl);
+      this.images = [...(this.images || []), imageUrl];
     }
-    // console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
   }
 
   onKeydown(event: KeyboardEvent) {
