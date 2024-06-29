@@ -7,3 +7,14 @@
   background-image: none; /* Remueve el gradiente al hacer hover */
   background-color: #ff7e5f; /* Cambia el color de fondo al hacer hover */
 }
+
+/* Estilos adicionales para el menú */
+@media (max-width: 1024px) {
+  #mobile-menu-2.hidden {
+    display: none;
+  }
+
+  #mobile-menu-2.flex {
+    display: flex;
+  }
+}
