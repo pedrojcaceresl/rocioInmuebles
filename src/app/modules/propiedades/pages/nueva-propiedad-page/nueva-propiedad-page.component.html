@@ -1,192 +1,259 @@
 <mat-card class="">
   <mat-card-content class="dark:bg-gray-700">
-    <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-white">
-        <div>
-          <h2 class="text-black">Alquiler/Venta</h2>
-          <mat-select
-            placeholder="Como se ofrece"
-            formControlName="transactionType"
-            required
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <mat-option value="Venta">En venta</mat-option>
-            <mat-option value="Alquiler">En alquiler</mat-option>
-          </mat-select>
+    <div class="py-5">
+      <label class="text-3xl font-extrabold text-gray-700"
+        >Cargar nueva propiedad</label
+      >
+    </div>
 
-          <h2 class="text-black">Titulo Largo</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Titulo largo"
-            required
-            formControlName="title"
-            type="text"
-          />
-
-          <h2 class="text-black">Titulo Corto</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Titulo corto"
-            required
-            formControlName="viewTitle"
-            type="text"
-          />
-
-          <h2 class="text-black">Descripcion</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Descripcion"
-            formControlName="description"
-            type="text"
-          />
-
-          <h2 class="text-black">URL Imagen</h2>
-          <shared-image-uploader
-            (onResponse)="onImageUpload($event)"
-            folder="rocio-inmuebles"
-            [multiple]="true"
-            >Subir imagen</shared-image-uploader
-          >
-        </div>
-        <div>
-          <h2 class="text-black">Precio mensual</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Mensualidad"
-            formControlName="priceMonth"
-            type="number"
-          />
-
-          <h2 class="text-black">Precio venta</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Precio de venta"
-            formControlName="priceSale"
-            type="number"
-          />
-
-          <h2 class="text-black">Vendido</h2>
-          <mat-select
-            placeholder="Esta vendido?"
-            formControlName="isSold"
-            required
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <mat-option value="true">Si</mat-option>
-            <mat-option value="false">No</mat-option>
-          </mat-select>
-
-          <h2 class="text-black">Oferta</h2>
-          <mat-select
-            placeholder="Esta en oferta?"
-            formControlName="isOffer"
-            required
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <mat-option value="true">Si</mat-option>
-            <mat-option value="false">No</mat-option>
-          </mat-select>
-        </div>
-        <div>
-          <h2 class="text-black">Baños</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Cantidad de baños"
-            formControlName="baths"
-            type="number"
-          />
-
-          <h2 class="text-black">Dormitorios</h2>
-          <mat-select
-            formControlName="beds"
-            required
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <mat-option
-              *ngFor="let dormitorio of dormitorios"
-              [value]="dormitorio"
+    <div class="overflow-y-auto max-h-[80vh]">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" (keydown)="onKeydown($event)">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <!-- Información del inmueble -->
+          <div>
+            <label class="text-xl font-semibold text-gray-700"
+              >Información del inmueble</label
             >
-              {{ dormitorio.nombre }}</mat-option
+
+            <div class="mb-4">
+              <h2 class="text-black">Titulo Corto</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Titulo corto"
+                required
+                formControlName="viewTitle"
+                type="text"
+              />
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Titulo Largo</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Titulo largo"
+                required
+                formControlName="title"
+                type="text"
+              />
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Tipos</h2>
+              <select
+                formControlName="type"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option *ngFor="let tipo of tipos" [value]="tipo">
+                  {{ tipo | titlecase }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Dimensiones</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Dimensiones en m2"
+                formControlName="dimension"
+                type="text"
+              />
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Precio mensual</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Mensualidad"
+                formControlName="priceMonth"
+                type="number"
+              />
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Precio venta</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Precio de venta"
+                formControlName="priceSale"
+                type="number"
+              />
+            </div>
+          </div>
+
+          <!-- Detalles del inmueble -->
+          <div>
+            <label class="text-xl font-semibold text-gray-700"
+              >Detalles del inmueble</label
             >
-          </mat-select>
 
-          <h2 class="text-black">Ciudad</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Ciudad"
-            required
-            formControlName="city"
-            type="text"
-          />
+            <div class="mb-4">
+              <h2 class="text-black">Descripción</h2>
 
-          <h2 class="text-black">Departamento</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Departamento"
-            required
-            formControlName="state"
-            type="text"
-          />
-        </div>
-        <div>
-          <h2 class="text-black">Dimensiones</h2>
-          <input
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Dimensiones en m2"
-            formControlName="dimension"
-            type="text"
-          />
+              <textarea
+                placeholder="Descripción"
+                formControlName="description"
+                rows="5"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              ></textarea>
+            </div>
 
-          <h2 class="text-black">Estado</h2>
-          <mat-select
-            placeholder="Estado"
-            formControlName="isActive"
-            required
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <mat-option value="trueW">Activo</mat-option>
-            <mat-option value="false">Inactivo</mat-option>
-          </mat-select>
+            <div class="mb-4">
+              <h2 class="text-black">Dormitorios</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Cantidad de dormitorios"
+                formControlName="beds"
+                type="number"
+              />
+            </div>
 
-          <h2 class="text-black">Tipos</h2>
-          <mat-select
-            formControlName="type"
-            required
-            class="bg-gray-50 border border-gray-300 max-w-xs text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <mat-option *ngFor="let tipo of tipos" [value]="tipo">
-              {{ tipo }}</mat-option
+            <div class="mb-4">
+              <h2 class="text-black">Baños</h2>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Cantidad de baños"
+                formControlName="baths"
+                type="number"
+              />
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Departamento</h2>
+              <select
+                (change)="onSelectDepartamento($event.target)"
+                formControlName="state"
+                id="departamento"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option value="">Selecciona un departamento</option>
+                <option
+                  *ngFor="let departamento of departamentos"
+                  [value]="departamento.nombre"
+                >
+                  {{ departamento.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Ciudad</h2>
+              <select
+                id="ciudad"
+                formControlName="city"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option value="">Selecciona una ciudad</option>
+                <option *ngFor="let ciudad of ciudades" value="{{ ciudad }}">
+                  {{ ciudad }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Configuraciones -->
+          <div>
+            <label class="text-xl font-semibold text-gray-700"
+              >Configuraciones</label
             >
-          </mat-select>
+
+            <div class="mb-4">
+              <h2 class="text-black">Alquiler/Venta</h2>
+              <select
+                placeholder="Como se ofrece"
+                formControlName="transactionType"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option value="Venta">En venta</option>
+                <option value="Alquiler">En alquiler</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Oferta</h2>
+              <select
+                placeholder="Esta en oferta?"
+                formControlName="isOffer"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option [ngValue]="true">Si</option>
+                <option [ngValue]="false">No</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Estado</h2>
+              <select
+                placeholder="Estado"
+                formControlName="isActive"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-black">Vendido</h2>
+              <select
+                placeholder="Esta vendido?"
+                formControlName="isSold"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option [ngValue]="true">Si</option>
+                <option [ngValue]="false">No</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Ubicación de la propiedad -->
+          <div >
+            <label class="text-xl font-semibold text-gray-700"
+              >Ubicación de la propiedad</label
+            >
+
+            <div class="mb-4">
+              <h1 class="text-slate-600 dark:text-white">
+                Selecciona la ubicación arrastrando el marcador
+              </h1>
+              <div class="map-container">
+                <google-map
+                  (mapInitialized)="onMapInitialized($event)"
+                  [center]="center"
+                  [zoom]="zoom"
+                  width="100%"
+                  height="100%"
+                ></google-map>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h1 class="text-black">Imágenes</h1>
+              <shared-image-uploader
+                (onResponse)="onImageUpload($event)"
+                folder="rocio-inmuebles"
+                [multiple]="true"
+                >Subir imágenes</shared-image-uploader
+              >
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="mt-4">
-        <h1 class="text-slate-600 dark:text-white">
-          Selecciona la ubicación arrastrando el marcador
-        </h1>
-        <div class="map-container">
-          <google-map
-            (mapInitialized)="onMapInitialized($event)"
-            [center]="center"
-            [zoom]="zoom"
-            width="100%"
-            height="100%"
-          />
+        <!-- Guardar -->
+        <div class="flex justify-end mt-4">
+          <button
+            type="submit"
+            color="primary"
+            class="text-white bg-amarillo-rocio hover:bg-amarillo-rocio/70 focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full sm:w-auto"
+          >
+            Guardar
+          </button>
         </div>
-      </div>
-
-      <div class="flex justify-between mt-4">
-        <span></span>
-
-        <button
-          type="submit"
-          color="primary"
-          class="bg-gray-600 text-white p-2 rounded-lg"
-        >
-          Guardar
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </mat-card-content>
 </mat-card>

@@ -7,9 +7,11 @@ import {
   Input,
   OnInit,
   Output,
+  SimpleChanges,
   inject,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import Propiedad from 'src/app/modules/propiedades/interfaces/propiedades.interface';
 
 @Component({
   selector: 'app-property-filters',
@@ -76,53 +78,64 @@ export class PropertyFiltersComponent implements OnInit {
   filters = [
     {
       title: 'Categoria',
-      options: ['alquiler', 'venta'],
+      options: ['Alquiler', 'Venta'],
     },
     {
-      title: 'Ubicacion',
+      title: 'UbicaciÓn',
       options: ['alto paraná', 'central'],
     },
     {
       title: 'Tipo',
-      options: ['casa', 'terreno', 'quinta'],
+      options: [
+        'casa quinta',
+        'casa',
+        'duplex',
+        'granja',
+        'terreno',
+        'departamento en pozo',
+        'lote en condominio',
+      ],
     },
   ];
 
   // Your list of items to be filtered
-  items = [
-    {
-      name: 'Item 1',
-      categoria: 'alquiler',
-      ubicacion: 'alto paraná',
-      tipo: 'casa',
-    },
-    {
-      name: 'Item 1',
-      categoria: 'alquiler',
-      ubicacion: 'central',
-      tipo: 'casa',
-    },
-    {
-      name: 'Item 2',
-      categoria: 'venta',
-      ubicacion: 'central',
-      tipo: 'terreno',
-    },
-    {
-      name: 'Item 3',
-      categoria: 'alquiler',
-      ubicacion: 'alto paraná',
-      tipo: 'quinta',
-    },
-    // Add more items as needed
-  ];
+  // items = [
+  //   {
+  //     name: 'Item 1',
+  //     categoria: 'alquiler',
+  //     ubicacion: 'alto paraná',
+  //     tipo: 'casa',
+  //   },
+  //   {
+  //     name: 'Item 1',
+  //     categoria: 'alquiler',
+  //     ubicacion: 'central',
+  //     tipo: 'casa',
+  //   },
+  //   {
+  //     name: 'Item 2',
+  //     categoria: 'venta',
+  //     ubicacion: 'central',
+  //     tipo: 'terreno',
+  //   },
+  //   {
+  //     name: 'Item 3',
+  //     categoria: 'alquiler',
+  //     ubicacion: 'alto paraná',
+  //     tipo: 'quinta',
+  //   },
+  //   // Add more items as needed
+  // ];
 
   filteredItems: any = [];
   ngOnInit() {
     this.createForm();
     this.setupFormChanges();
-    this.properties = this.properties;
-    console.log(this.properties);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.properties = changes['properties'].currentValue;
+    // console.log('LAS PROPERTIES RECIBIDAS', this.properties);
   }
 
   createForm() {
@@ -145,30 +158,89 @@ export class PropertyFiltersComponent implements OnInit {
 
   setupFormChanges() {
     this.filtersForm.valueChanges.subscribe((res) => {
-      this.filterItems();
+      // this.filterByTransactionType();
+      this.filterByTypes();
     });
   }
 
-  filterItems() {
+  // filterByTransactionType() {
+  //   const selectedValues: string[] = [];
+  //   const formValue = this.filtersForm.value;
+  //   Object.keys(formValue).forEach((key) => {
+  //     // console.log('LA LLAVE',key);
+  //     // Trae el array de los filtros 3 veces
+  //     // console.log('el formValue',formValue);
+  //     Object.keys(formValue[key]).forEach((name) => {
+  //       if (formValue[key][name]) {
+  //         // ACA DEVUELVE TRUE??
+  //         selectedValues.push(name);
+  //       }
+  //     });
+  //   });
+
+  //   console.log("TRANSACTION Los selectedValues", selectedValues);
+
+  //   console.log('DATA A SER FILTRADA',this.properties)
+
+  //   // Filter items based on selected values
+  //   this.filteredItems = this.properties.filter((item: any) =>
+
+  //     Object.keys(formValue).some((key) => {
+  //       // console.log('QUE ES ESTO',item.transactionType);
+  //       return item[key] === 'todos'
+  //       ? true
+  //       : selectedValues.includes(item.transactionType);
+  //     })
+
+  //   );
+
+  //   // console.log('EL FORM',formValue);
+  //   this.onFiltered.emit(this.filteredItems);
+  //   this.cd.markForCheck();
+  //   return;
+  // }
+
+  filterByTypes() {
     const selectedValues: string[] = [];
     const formValue = this.filtersForm.value;
     Object.keys(formValue).forEach((key) => {
+      // console.log('LA LLAVE',key);
+      // Trae el array de los filtros 3 veces
+      // console.log('el formValue',formValue);
       Object.keys(formValue[key]).forEach((name) => {
         if (formValue[key][name]) {
+          // ACA DEVUELVE TRUE??
           selectedValues.push(name);
         }
       });
     });
 
-    // Filter items based on selected values
+    // console.log("TYPES Los selectedValues", selectedValues);
+
     this.filteredItems = this.properties.filter((item: any) =>
       Object.keys(formValue).some((key) => {
+        // console.log('QUE ES ESTO',item.type);
         return item[key] === 'todos'
           ? true
-          : selectedValues.includes(item[key]);
+          : selectedValues.includes(item.type);
       })
     );
+
     this.onFiltered.emit(this.filteredItems);
     this.cd.markForCheck();
+    return;
   }
+
+
+  // filterProducts( products: any){
+  //   return products.filter(products=>{
+  //     return (
+  //       products.priceSale >= filters.minPrice &&
+  //       (
+  //         filters.category == 'all' ||
+  //         products.category == this.filters.category
+  //       )
+  //     )
+  //   })
+  // }
 }

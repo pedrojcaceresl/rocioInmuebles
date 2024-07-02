@@ -1,0 +1,352 @@
+{
+  "departamentos": [
+    {
+      "nombre": "Alto Paraguay",
+      "ciudades": [
+        "Bahía Negra",
+        "Capitán Carmelo Peralta",
+        "Fuerte Olimpo",
+        "Puerto Casado"
+      ]
+    },
+    {
+      "nombre": "Alto Paraná",
+      "ciudades": [
+        "Ciudad del Este",
+        "Doctor Juan León Mallorquín",
+        "Doctor Raúl Peña",
+        "Domingo Martínez de Irala",
+        "Hernandarias",
+        "Iruña",
+        "Itakyry",
+        "Juan Emiliano O'Leary",
+        "Los Cedrales",
+        "Mbaracayú",
+        "Minga Guazú",
+        "Minga Porá",
+        "Naranjal",
+        "Ñacunday",
+        "Presidente Franco",
+        "San Alberto",
+        "San Cristóbal",
+        "Santa Fe del Paraná",
+        "Santa Rita",
+        "Santa Rosa del Monday",
+        "Tavapy",
+        "Yguazú"
+      ]
+    },
+    {
+      "nombre": "Amambay",
+      "ciudades": [
+        "Bella Vista Norte",
+        "Capitán Bado",
+        "Cerro Corá",
+        "Karapaí",
+        "Pedro Juan Caballero",
+        "Zanja Pytá"
+      ]
+    },
+    {
+      "nombre": "Boquerón",
+      "ciudades": [
+        "Boquerón",
+        "Filadelfia",
+        "Loma Plata",
+        "Mariscal José Félix Estigarribia"
+      ]
+    },
+    {
+      "nombre": "Caaguazú",
+      "ciudades": [
+        "Caaguazú",
+        "Carayaó",
+        "Coronel Oviedo",
+        "Doctor Cecilio Báez",
+        "Doctor Juan Eulogio Estigarribia",
+        "Doctor Juan Manuel Frutos",
+        "José Domingo Ocampos",
+        "La Pastora",
+        "Mariscal Francisco Solano López",
+        "Nueva Londres",
+        "Nueva Toledo",
+        "Raúl Arsenio Oviedo",
+        "Regimiento de Infantería Tres Corrales",
+        "Repatriación",
+        "San Joaquín",
+        "San José de los Arroyos",
+        "Santa Rosa del Mbutuy",
+        "Simón Bolívar",
+        "Tembiaporá",
+        "Tres de Febrero",
+        "Vaquería",
+        "Yhú"
+      ]
+    },
+    {
+      "nombre": "Caazapá",
+      "ciudades": [
+        "Abaí",
+        "Buena Vista",
+        "Caazapá",
+        "Doctor Moisés Santiago Bertoni",
+        "Fulgencio Yegros",
+        "General Higinio Morínigo",
+        "Maciel",
+        "San Juan Nepomuceno",
+        "Tavaí",
+        "Tres de Mayo",
+        "Yuty"
+      ]
+    },
+    {
+      "nombre": "Canindeyú",
+      "ciudades": [
+        "Corpus Christi",
+        "Curuguaty",
+        "General Francisco Caballero Álvarez",
+        "Itanará",
+        "Katueté",
+        "La Paloma del Espíritu Santo",
+        "Laurel",
+        "Maracaná",
+        "Nueva Esperanza",
+        "Puerto Adela",
+        "Salto del Guairá",
+        "Villa Ygatimí",
+        "Yasy Cañy",
+        "Yby Pytá",
+        "Ybyrarobaná",
+        "Ypejhú"
+      ]
+    },
+    {
+      "nombre": "Central",
+      "ciudades": [
+        "Asunción",
+        "Areguá",
+        "Capiatá",
+        "Fernando de la Mora",
+        "Guarambaré",
+        "Itá",
+        "Itauguá",
+        "Julián Augusto Saldívar",
+        "Lambaré",
+        "Limpio",
+        "Luque",
+        "Mariano Roque Alonso",
+        "Nueva Italia",
+        "Ñemby",
+        "San Antonio",
+        "San Lorenzo",
+        "Villa Elisa",
+        "Villeta",
+        "Ypacaraí",
+        "Ypané"
+      ]
+    },
+    {
+      "nombre": "Concepción",
+      "ciudades": [
+        "Arroyito",
+        "Azotey",
+        "Belén",
+        "Concepción",
+        "Horqueta",
+        "Itacuá",
+        "Loreto",
+        "Paso Barreto",
+        "Paso Horqueta",
+        "San Alfredo",
+        "San Carlos del Apa",
+        "San Lázaro",
+        "Sargento José Félix López",
+        "Yby Yaú"
+      ]
+    },
+    {
+      "nombre": "Cordillera",
+      "ciudades": [
+        "Altos",
+        "Arroyos y Esteros",
+        "Atyrá",
+        "Caacupé",
+        "Caraguatay",
+        "Emboscada",
+        "Eusebio Ayala",
+        "Isla Pucú",
+        "Itacurubí de la Cordillera",
+        "Juan de Mena",
+        "Loma Grande",
+        "Mbocayaty del Yhaguy",
+        "Nueva Colombia",
+        "Piribebuy",
+        "Primero de Marzo",
+        "San Bernardino",
+        "San José Obrero",
+        "Santa Elena",
+        "Tobatí",
+        "Valenzuela"
+      ]
+    },
+    {
+      "nombre": "Guairá",
+      "ciudades": [
+        "Borja",
+        "Capitán Mauricio José Troche",
+        "Coronel Martínez",
+        "Doctor Bottrell",
+        "Félix Pérez Cardozo",
+        "General Eugenio Alejandrino Garay",
+        "Independencia",
+        "Itapé",
+        "Iturbe",
+        "José A. Fassardi",
+        "Mbocayaty del Guairá",
+        "Natalicio Talavera",
+        "Ñumí",
+        "Paso Yobái",
+        "San Salvador",
+        "Tebicuary",
+        "Villarrica",
+        "Yataity del Guairá"
+      ]
+    },
+    {
+      "nombre": "Itapúa",
+      "ciudades": [
+        "Alto Verá",
+        "Bella Vista",
+        "Cambyretá",
+        "Capitán Meza",
+        "Capitán Miranda",
+        "Carlos Antonio López",
+        "Carmen del Paraná",
+        "Coronel José Félix Bogado",
+        "Edelira",
+        "Encarnación",
+        "Fram",
+        "General Artigas",
+        "General Delgado",
+        "Hohenau",
+        "Itapúa Poty",
+        "Jesús",
+        "José Leandro Oviedo",
+        "La Paz",
+        "Mayor Otaño",
+        "Natalio",
+        "Nueva Alborada",
+        "Obligado",
+        "Pirapó",
+        "San Cosme y Damián",
+        "San Juan del Paraná",
+        "San Pedro del Paraná",
+        "San Rafael del Paraná",
+        "Tomás Romero Pereira",
+        "Trinidad",
+        "Yatytay"
+      ]
+    },
+    {
+      "nombre": "Misiones",
+      "ciudades": [
+        "Ayolas",
+        "San Ignacio Guazú",
+        "San Juan Bautista",
+        "San Miguel",
+        "San Patricio",
+        "Santa María de Fe",
+        "Santa Rosa de Lima",
+        "Santiago",
+        "Villa Florida",
+        "Yabebyry"
+      ]
+    },
+    {
+      "nombre": "Ñeembucú",
+      "ciudades": [
+        "Alberdi",
+        "Cerrito",
+        "Desmochados",
+        "General José Eduvigis Díaz",
+        "Guazú Cuá",
+        "Humaitá",
+        "Isla Umbú",
+        "Laureles",
+        "Mayor José Martínez",
+        "Paso de Patria",
+        "Pilar",
+        "San Juan Bautista del Ñeembucú",
+        "Tacuaras",
+        "Villa Franca",
+        "Villa Oliva",
+        "Villalbín"
+      ]
+    },
+    {
+      "nombre": "Paraguarí",
+      "ciudades": [
+        "Acahay",
+        "Caapucú",
+        "Carapeguá",
+        "Escobar",
+        "General Bernardino Caballero",
+        "La Colmena",
+        "María Antonia",
+        "Mbuyapey",
+        "Paraguarí",
+        "Pirayú",
+        "Quiindy",
+        "Quyquyhó",
+        "San Roque González de Santa Cruz",
+        "Sapucai",
+        "Tebicuarymí",
+        "Yaguarón",
+        "Ybycuí",
+        "Ybytymí"
+      ]
+    },
+    {
+      "nombre": "Presidente Hayes",
+      "ciudades": [
+        "Benjamín Aceval",
+        "Campo Aceval",
+        "General José María Bruguez",
+        "José Falcón",
+        "Nanawa",
+        "Nueva Asunción",
+        "Puerto Pinasco",
+        "Teniente Esteban Martínez",
+        "Teniente Primero Manuel Irala Fernández",
+        "Villa Hayes"
+      ]
+    },
+    {
+      "nombre": "San Pedro",
+      "ciudades": [
+        "San Estanislao",
+        "Capiibary",
+        "Santa Rosa del Aguaray",
+        "San Pedro de Ycuamandiyú",
+        "Guayaibí",
+        "Choré",
+        "Liberación",
+        "General Isidoro Resquín",
+        "General Elizardo Aquino",
+        "Yrybucuá",
+        "Tacuatí",
+        "Yataity del Norte",
+        "Lima",
+        "Itacurubí del Rosario",
+        "Villa del Rosario",
+        "25 de Diciembre",
+        "Nueva Germania",
+        "Unión",
+        "Antequera",
+        "San Pablo",
+        "San Vicente Pancholo",
+        "San José del Rosario"
+      ]
+    }
+  ]
+}

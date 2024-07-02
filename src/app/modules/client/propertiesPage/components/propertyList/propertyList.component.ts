@@ -4,27 +4,29 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  inject,
+  inject
 } from '@angular/core';
 import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { Router, RouterModule } from '@angular/router';
+import Propiedad from '../../../../propiedades/interfaces/propiedades.interface';
 
 @Component({
   selector: 'app-property-list',
   standalone: true,
-  imports: [CommonModule, PropertyCardComponent, SharedModule],
+  imports: [CommonModule, PropertyCardComponent, SharedModule, RouterModule],
   template: `
     <div class="max-w-6xl mx-auto flex flex-col justify-between">
       <div class="lg:grid grid-cols-3 gap-10 mx-10">
         <div
           *ngFor="
-            let item of properties.slice(
+            let item of filterActiveProperties(properties).slice(
               (currentPage - 1) * ITEMS_PER_PAGE,
               currentPage * ITEMS_PER_PAGE
             )
           "
         >
-          <app-property-card [property]="item" />
+          <app-property-card (click)="onView(item)" [property]="item" />
         </div>
       </div>
       <div class="flex justify-center lg:mx-10 w-full mb-10">
@@ -46,13 +48,21 @@ import { SharedModule } from 'src/app/shared/shared.module';
 export class PropertyListComponent {
   @Input() properties: any = [];
   cd = inject(ChangeDetectorRef);
+  router = inject(Router);
+
+
 
   ITEMS_PER_PAGE: number = 9; // Cantidad de elementos por página
   currentPage: number = 1; // Página actual
   totalPages: any;
 
+  constructor(){}
   ngOnChanges() {
     this.totalPages = Math.ceil(this.properties.length / this.ITEMS_PER_PAGE);
+  }
+
+  filterActiveProperties(propiedades: []){
+    return propiedades.filter((propiedad: any) => propiedad.isActive)
   }
 
   onPageChange(newPage: number) {
@@ -72,5 +82,10 @@ export class PropertyListComponent {
       this.currentPage += 1;
       this.cd.markForCheck();
     }
+  }
+
+  onView(data: any){
+    console.log(data);
+    this.router.navigate([`propiedades/detalle/${data.id}`])
   }
 }
