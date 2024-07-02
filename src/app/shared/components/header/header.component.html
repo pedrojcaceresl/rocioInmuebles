@@ -27,7 +27,7 @@
                     <li *ngFor="let item of menuItems"
                         class="block py-2 pr-4 pl-3 text-[#545454] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-amarillo-rocio lg:p-0 uppercase no-underline cursor-pointer">
                         <a [routerLink]="item.route" routerLinkActive="text-amarillo-rocio"
-                            [routerLinkActiveOptions]="{ exact: true }">{{item.title}}</a>
+                            [routerLinkActiveOptions]="{ exact: false }">{{item.title}}</a>
                     </li>
                 </ul>
             </div>
