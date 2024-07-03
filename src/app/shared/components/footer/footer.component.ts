@@ -44,7 +44,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         </span>
         <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
           <a
-            href="https://www.facebook.com/rocio.gonzalez.7330"
+            href="https://www.facebook.com/profile.php?id=100063693392997"
             class="text-gray-500 hover:text-amarillo-rocio dark:hover:text-white"
           >
             <svg

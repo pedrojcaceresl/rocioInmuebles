@@ -9,6 +9,7 @@ import {
 import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Router, RouterModule } from '@angular/router';
+import Propiedad from '../../../../propiedades/interfaces/propiedades.interface';
 
 @Component({
   selector: 'app-property-list',
@@ -19,7 +20,7 @@ import { Router, RouterModule } from '@angular/router';
       <div class="lg:grid grid-cols-3 gap-10 mx-10">
         <div
           *ngFor="
-            let item of properties.slice(
+            let item of filterActiveProperties(properties).slice(
               (currentPage - 1) * ITEMS_PER_PAGE,
               currentPage * ITEMS_PER_PAGE
             )
@@ -58,6 +59,10 @@ export class PropertyListComponent {
   constructor(){}
   ngOnChanges() {
     this.totalPages = Math.ceil(this.properties.length / this.ITEMS_PER_PAGE);
+  }
+
+  filterActiveProperties(propiedades: []){
+    return propiedades.filter((propiedad: any) => propiedad.isActive)
   }
 
   onPageChange(newPage: number) {

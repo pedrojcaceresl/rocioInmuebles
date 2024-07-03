@@ -6,6 +6,7 @@ import { MaterialModule } from '../../material/material.module';
 import { PropertiesPageComponent } from './propertiesPage.component';
 import { PropertyCardComponent } from './components/propertyCard/propertyCard.component';
 import { PropertyListComponent } from './components/propertyList/propertyList.component';
+import { PropertySearchComponent } from './components/propertySearch/propertySearch.component';
 
 
 
@@ -20,6 +21,7 @@ import { PropertyListComponent } from './components/propertyList/propertyList.co
     PropertiesPageComponent,
     PropertyCardComponent,
     PropertyListComponent,
+    PropertySearchComponent
   ],
   exports:[
   ]

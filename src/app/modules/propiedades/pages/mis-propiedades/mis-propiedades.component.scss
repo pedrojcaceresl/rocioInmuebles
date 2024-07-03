@@ -3,3 +3,22 @@
   justify-content: center;
 }
 
+/* Para pantallas mayores de 1250px */
+@media screen and (min-width: 1251px) {
+  #div1 {
+    display: flex;
+  }
+  #div2 {
+    display: none;
+  }
+}
+
+/* Para pantallas de 1250px o menos */
+@media screen and (max-width: 1250px) {
+  #div1 {
+    display: none;
+  }
+  #div2 {
+    display: block;
+  }
+}

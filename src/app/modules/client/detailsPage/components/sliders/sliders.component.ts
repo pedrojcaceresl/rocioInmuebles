@@ -26,20 +26,37 @@ import { Lightbox, LightboxModule } from 'ngx-lightbox';
       </button>
 
       <!-- indicators -->
+    <div class="slider-container">
       <div
-        class="z-30 flex space-x-3 rtl:space-x-reverse absolute bottom-4 w-full justify-center"
+        class="relative min-h-96 h-[600px] rounded-lg bg-cover bg-center image-wrapper"
+        [ngStyle]="{
+          'background-image': 'url(' + images[currentIndex] + ')',
+          opacity: currentOpacity
+        }"
       >
-        <button
-          type="button"
-          *ngFor="let item of indicators; let i = index"
-          class="w-3 h-3 rounded-full"
-          [ngClass]="{
-            'bg-white': i === currentIndex,
-            'border-2 border-solid border-white': i !== currentIndex
-          }"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
+        <button (click)="prevSlide()" class="absolute top-1/2 left-2">
+          <img src="/assets/icons/arrow-left.png" alt="" />
+        </button>
+        <button (click)="nextSlide()" class="absolute top-1/2 right-2">
+          <img src="/assets/icons/arrow-right.png" alt="" />
+        </button>
+
+        <!-- indicators -->
+        <div
+          class="z-30 flex space-x-3 rtl:space-x-reverse absolute bottom-4 w-full justify-center"
+        >
+          <button
+            type="button"
+            *ngFor="let item of indicators; let i = index"
+            class="w-3 h-3 rounded-full"
+            [ngClass]="{
+              'bg-white': i === currentIndex,
+              'border-2 border-solid border-white': i !== currentIndex
+            }"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+        </div>
       </div>
     </div>
   `,
@@ -47,17 +64,19 @@ import { Lightbox, LightboxModule } from 'ngx-lightbox';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlidersComponent {
-  @Input() autoplay: Boolean = false;
-  @Input() time: number = 2000; // 2000 by default
-  @Input() images = [];
-
-  cd = inject(ChangeDetectorRef);
-  _lightbox = inject(Lightbox);
   currentIndex = 0;
   indicators: number[] = [];
+  cd = inject(ChangeDetectorRef);
+  _lightbox = inject(Lightbox);
   interval: any;
 
   private _album: any = [];
+  currentOpacity = 1;
+  interval: any;
+
+  @Input() autoplay: Boolean = false;
+  @Input() time: number = 2000; // 2000 by default
+  @Input() images = [];
 
   ngOnInit() {
     this.indicators = Array(this.images.length).fill(0);
@@ -86,12 +105,15 @@ export class SlidersComponent {
   }
 
   nextSlide() {
-    const imgLength = this.images.length - 1;
-    if (this.currentIndex < imgLength) {
-      this.currentIndex++;
-    } else if (this.currentIndex === imgLength) {
-      this.currentIndex = 0;
-    }
+    this.fadeOut(() => {
+      const imgLength = this.images.length - 1;
+      if (this.currentIndex < imgLength) {
+        this.currentIndex++;
+      } else if (this.currentIndex === imgLength) {
+        this.currentIndex = 0;
+      }
+      this.fadeIn();
+    });
   }
 
   goToNext(time: number) {
@@ -102,12 +124,30 @@ export class SlidersComponent {
   }
 
   prevSlide() {
-    const imgLength = this.images.length - 1;
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-    } else if (this.currentIndex === 0) {
-      this.currentIndex = imgLength;
-    }
+    this.fadeOut(() => {
+      const imgLength = this.images.length - 1;
+      if (this.currentIndex > 0) {
+        this.currentIndex--;
+      } else if (this.currentIndex === 0) {
+        this.currentIndex = imgLength;
+      }
+      this.fadeIn();
+    });
+  }
+
+  fadeOut(callback: () => void) {
+    this.currentOpacity = 0.7;
+    this.cd.markForCheck();
+    setTimeout(() => {
+      callback();
+    }, 100); // Match this duration with your CSS transition
+  }
+
+  fadeIn() {
+    setTimeout(() => {
+      this.currentOpacity = 1;
+      this.cd.markForCheck();
+    }, 0); // Immediately start fading in after fading out
   }
 
   ngOnDestroy() {

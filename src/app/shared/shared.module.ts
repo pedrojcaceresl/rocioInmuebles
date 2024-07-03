@@ -5,7 +5,6 @@ import { SidebarComponent, SidebarItemComponent, SidebarItemGroupComponent } fro
 import { SanitizeHtmlPipe } from './pipes';
 import { RouterModule } from '@angular/router';
 import { DarkThemeToggleComponent } from './components/dark-theme-toggle';
-import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { PaginadorComponent } from './components/paginador/paginador.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -22,7 +21,6 @@ import { FooterComponent } from './components/footer/footer.component';
     SidebarItemGroupComponent,
     SanitizeHtmlPipe,
     DarkThemeToggleComponent,
-    SearchBoxComponent,
     ImageUploaderComponent,
     PaginadorComponent,
     HeaderComponent,
@@ -37,7 +35,6 @@ import { FooterComponent } from './components/footer/footer.component';
     SidebarItemGroupComponent,
     NavbarComponent,
     DarkThemeToggleComponent,
-    SearchBoxComponent,
     ImageUploaderComponent,
     PaginadorComponent,
     HeaderComponent,

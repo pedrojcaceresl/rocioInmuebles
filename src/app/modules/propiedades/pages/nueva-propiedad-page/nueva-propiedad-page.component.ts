@@ -21,13 +21,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./nueva-propiedad-page.component.scss'],
 })
 export class NuevaPropiedadPageComponent implements OnInit {
-  tipos: string[] = ['lote', 'duplex', 'casa', 'terreno'];
+  tipos: string[] = [
+    'casa quinta',
+    'casa',
+    'duplex',
+    'granja',
+    'terreno',
+    'departamento en pozo',
+    'lote en condominio',
+  ];
   path: string = 'propiedades';
   imgUrls: string[] = [];
   imgUrl: string = '';
   departamentos: any[] = [];
   ciudades: string[] = [];
-
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -35,15 +42,15 @@ export class NuevaPropiedadPageComponent implements OnInit {
   });
 
   firstFormGroup = this._formBuilder.group({
-    baths: [null],
+    baths: [0],
     beds: [0],
     transactionType: ['Venta', Validators.required],
     dimension: [null],
     description: [''],
     imgUrl: ['', Validators.required],
     imgUrls: [[]],
-    isActive: [false, Validators.required],
     locationCoords: ['', Validators.required],
+    isActive: [true, Validators.required],
     isOffer: [false],
     isSold: [false],
     priceMonth: [0],
@@ -82,7 +89,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   };
 
   estados: Filtro[] = [];
-  dormitorios:any;
+  dormitorios: any;
 
   constructor(
     private http: HttpClient,
@@ -92,31 +99,55 @@ export class NuevaPropiedadPageComponent implements OnInit {
     public dialogRef: MatDialogRef<NuevaPropiedadPageComponent>,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.firebaseService.getData('dormitorios').subscribe((res) => {
-      this.dormitorios = res
-    })
+  ) {}
 
-    this.firebaseService.getData('filtros').subscribe((res) => {
-      this.estados = res.filter((estado: any) => estado.categoria === 'Estado');
-      console.log(this.estados);
+  ngOnInit(): void {
+    if (this.data) {
+      const propiedad = this.data.propiedad;
+      this.firstFormGroup.patchValue({
+        baths: propiedad.baths,
+        beds: propiedad.beds,
+        transactionType: propiedad.transactionType,
+        dimension: propiedad.dimension,
+        description: propiedad.description,
+        imgUrl: propiedad.imgUrl,
+        imgUrls: propiedad.imgUrls,
+        locationCoords: '',
+        isActive: propiedad.isActive,
+        isOffer: propiedad.isOffer,
+        isSold: propiedad.isSold,
+        priceMonth: propiedad.priceMonth,
+        priceSale: propiedad.priceSale,
+        type: propiedad.type,
+        title: propiedad.title,
+        viewTitle: propiedad.viewTitle,
+        city: propiedad.city,
+        state: propiedad.state,
+      });
+
+      this.secondFormGroup.patchValue({
+        latitude: propiedad.locationCoords.lat,
+        longitude: propiedad.locationCoords.lng,
+      });
+
+      this.imgUrl = propiedad.imgUrl;
+      this.imgUrls = propiedad.imgUrls;
+      this.lat = propiedad.locationCoords.lat;
+      this.lng = propiedad.locationCoords.lng;
+    }
+
+    this.http.get<any>('assets/geo-paraguay.json').subscribe((data) => {
+      this.departamentos = data.departamentos;
     });
   }
 
-  ngOnInit(): void {
-    this.data && this.firstFormGroup.reset(this.data.propiedad);
-    console.log('datossss', this.data);
-    this.http.get<any>('assets/geo-paraguay.json').subscribe(data => {
-      this.departamentos = data.departamentos;
-    });
-  }
-
   onSelectDepartamento(nombreDepartamento: any): void {
-    nombreDepartamento = nombreDepartamento.value
-    const departamento = this.departamentos.find(dep => dep.nombre === nombreDepartamento);
+    nombreDepartamento = nombreDepartamento.value;
+    const departamento = this.departamentos.find(
+      (dep) => dep.nombre === nombreDepartamento
+    );
     this.ciudades = departamento ? departamento.ciudades : [];
   }
-
 
   onMapInitialized(map: google.maps.Map) {
     this.mapInitialized = map;
@@ -169,78 +200,76 @@ export class NuevaPropiedadPageComponent implements OnInit {
     console.log(this.secondFormGroup.value);
   }
 
-  onSubmit() {
-    const {
-      baths,
-      beds,
-      transactionType,
-      dimension,
-      description,
-      imgUrl,
-      isActive,
-      locationCoords,
-      isOffer,
-      isSold,
-      priceMonth,
-      priceSale,
-      type,
-      title,
-      viewTitle,
-      city,
-      state,
-    } = this.firstFormGroup.value;
-    // const { latitude, longitude } = this.secondFormGroup.value;
+ onSubmit() {
+  const {
+    baths,
+    beds,
+    transactionType,
+    dimension,
+    description,
+    isActive,
+    isOffer,
+    isSold,
+    priceMonth,
+    priceSale,
+    type,
+    title,
+    viewTitle,
+    city,
+    state,
+  } = this.firstFormGroup.value;
+  const { latitude, longitude } = this.secondFormGroup.value;
 
-    const propiedad: Propiedad = {
-      id: this.data && this.data.propiedad.id,
-      baths,
-      beds,
-      transactionType,
-      dimension,
-      description,
-      isSold,
-      imgUrl: this.imgUrl,
-      imgUrls: this.imgUrls,
-      isActive,
-      locationCoords: {
-        lat: this.lat,
-        lng: this.lng,
-      },
-      isOffer,
-      priceMonth,
-      priceSale,
-      type,
-      title,
-      viewTitle,
-      city,
-      state,
-    };
+  const propiedad: Propiedad = {
+    id: this.data && this.data.propiedad.id,
+    baths,
+    beds,
+    transactionType,
+    dimension,
+    description,
+    isSold: !!isSold,
+    imgUrl: this.imgUrl,
+    imgUrls: this.imgUrls,
+    isActive: !!isActive,
+    locationCoords: {
+      lat: latitude,
+      lng: longitude,
+    },
+    isOffer: !!isOffer,
+    priceMonth,
+    priceSale,
+    type,
+    title,
+    viewTitle,
+    city,
+    state,
+  };
 
-    if (this.data && this.data.editMode) {
-      console.log('se editara');
-      this.firebaseService.updateData(propiedad, this.path);
-    } else {
-      this.firebaseService.addData(propiedad, this.path);
-    }
-
-    console.log({ propiedad });
-    alert(`Guardado con exito`);
-    this.dialogRef.close();
+  if (this.data && this.data.editMode) {
+    this.firebaseService.updateData(propiedad, this.path);
+  } else {
+    this.firebaseService.addData(propiedad, this.path);
   }
+
+  alert(`Guardado con exito`);
+  this.dialogRef.close();
+}
 
   images: any;
 
   onImageUpload(event: any) {
-    // console.log("La fiesta",event);
-
     if (event.event === 'success') {
-      console.log('Lo que se viene', event.info.url);
-      this.imgUrl = event.info.url;
-      this.imgUrls.push(event.info.url);
-      this.images = [...this.images, event.info.url]
-      console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.images:", this.images)
-      // this.imgUrls = this.images
+      const imageUrl = event.info.url;
+      this.imgUrl = imageUrl;
+      this.imgUrls.push(imageUrl);
+      this.images = [...(this.images || []), imageUrl];
     }
-      console.log("🚀 ~ NuevaPropiedadPageComponent ~ onImageUpload ~ this.imgUrls:", this.imgUrls)
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.onSubmit();
+    }
   }
 }
