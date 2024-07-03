@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
         <button
           class="uppercase bg-[#0D1C39] text-sm text-white font-bold px-6 py-2 rounded-lg"
         >
-          {{ transactionType }}
+          {{ transactionType || 'En venta' }}
         </button>
       </div>
 
@@ -100,11 +100,12 @@ export class DetailsComponent {
   @Input() isOffer: boolean = true
   @Input() dimension: number = 0
   @Input() description: string =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.'
-  @Input() transactionType: string = ''
-  @Input() contactNumber: string = '+595 994 329 377'
-  @Input() email: string = 'contacto.rocioinmuebles@gmail.com'
-  @Input() priceSale: number = 180000
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.';
+  @Input() transactionType: string = '';
+  @Input() contactNumber: string = '+595 994 329 377';
+  @Input() email: string = 'contacto.rocioinmuebles@gmail.com';
+  @Input() priceSale: number = 180000;
+
   descripcionHtml: string = `   <h1>Inversión en Complejo de Edificio 🏢✨</h1>
     <h2>Características del Complejo</h2>
     <p>Descubre una oportunidad única de inversión en un complejo de edificio con áreas comunes y servicios de primer nivel:</p>
@@ -181,7 +182,6 @@ export class DetailsComponent {
     const phoneNumber = '595973205207'
     const url = `https://rocioinmuebles.com/propiedades/detalle/${this.id}`
     const message = `Estoy interesado en la propiedad: ${title}. La url aquí: ${url}`
-
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
   }
 }
