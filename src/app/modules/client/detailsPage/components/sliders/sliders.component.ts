@@ -1,14 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
+import { Lightbox, LightboxModule } from 'ngx-lightbox';
 
 @Component({
   selector: 'app-sliders',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LightboxModule],
   template: `
     <div
-      class="relative min-h-96 h-[600px] rounded-lg bg-cover bg-center"
-      [ngStyle]="{'background-image': 'url(' + images[currentIndex] + ')'}"
+      class="relative cursor-pointer min-h-96 h-[600px] rounded-lg bg-cover bg-center"
+      (click)="open(currentIndex)"
+      [ngStyle]="{ 'background-image': 'url(' + images[currentIndex] + ')' }"
     >
       <button (click)="prevSlide()" class="absolute top-1/2 left-2">
         <img src="/assets/icons/arrow-left.png" alt="" />
@@ -39,50 +47,42 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlidersComponent {
-  currentIndex = 0;
-  indicators: number[] = [];
-  cd = inject(ChangeDetectorRef)
-
-  interval: any;
-
   @Input() autoplay: Boolean = false;
   @Input() time: number = 2000; // 2000 by default
-
   @Input() images = [];
 
-  // @Input() images = [
-  //   {
-  //     url: 'https://v2b.com.mx/wp-content/uploads/2020/09/20200226_180902-scaled.jpg',
-  //     alt: 'casa residencial 1',
-  //   },
-  //   {
-  //     url: 'https://assets.easybroker.com/property_images/2521852/39381760/EB-IR1852.jpeg?version=1633924491',
-  //     alt: 'casa residencial 1',
-  //   },
-  //   {
-  //     url: 'https://v2b.com.mx/wp-content/uploads/2020/09/20200226_180902-scaled.jpg',
-  //     alt: 'casa residencial 1',
-  //   },
-  //   {
-  //     url: 'https://assets.easybroker.com/property_images/2521852/39381760/EB-IR1852.jpeg?version=1633924491',
-  //     alt: 'casa residencial 1',
-  //   },
-  //   {
-  //     url: 'https://v2b.com.mx/wp-content/uploads/2020/09/20200226_180902-scaled.jpg',
-  //     alt: 'casa residencial 1',
-  //   },
-  //   {
-  //     url: 'https://assets.easybroker.com/property_images/2521852/39381760/EB-IR1852.jpeg?version=1633924491',
-  //     alt: 'casa residencial 1',
-  //   },
-  // ];
+  cd = inject(ChangeDetectorRef);
+  _lightbox = inject(Lightbox);
+  currentIndex = 0;
+  indicators: number[] = [];
+  interval: any;
+
+  private _album: any = [];
 
   ngOnInit() {
     this.indicators = Array(this.images.length).fill(0);
-    console.log(this.indicators);
     if (this.autoplay) {
       this.goToNext(this.time);
     }
+
+    for (let i = 0; i < this.images.length; i++) {
+      const src = this.images[i];
+      const caption = 'Imagen' + i;
+      const thumb = this.images[i];
+      const album = { src: src, caption: caption, thumb: thumb };
+      this._album.push(album);
+    }
+  }
+
+  open(index: number): void {
+    this._lightbox.open(this._album, index, {
+      alwaysShowNavOnTouchDevices: true,
+      wrapAround: true,
+    });
+  }
+
+  close(): void {
+    this._lightbox.close();
   }
 
   nextSlide() {
@@ -97,7 +97,7 @@ export class SlidersComponent {
   goToNext(time: number) {
     this.interval = setInterval(() => {
       this.nextSlide();
-      this.cd.markForCheck()
+      this.cd.markForCheck();
     }, time);
   }
 

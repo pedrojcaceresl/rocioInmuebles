@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   inject,
@@ -20,12 +21,14 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
     >
       <div class="lg:w-[873px]">
         <app-sliders
-          [images]="propiedad.imgUrls"
+          *ngIf="propiedad"
+          [images]="propiedad?.imgUrls"
           [autoplay]="true"
           [time]="4000"
         />
         <div class="lg:hidden my-10">
           <app-details
+            *ngIf="propiedad"
             [id]="id"
             [description]="propiedad.description"
             [title]="propiedad.title"
@@ -39,6 +42,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
       </div>
       <div class="w-1/3 lg:ml-10 hidden lg:flex  mt-10">
         <app-details
+          *ngIf="propiedad"
           [id]="id"
           [description]="propiedad.description"
           [title]="propiedad.title"
@@ -59,7 +63,8 @@ export class DetailsPageComponent {
   private propertyService = inject(FirebaseService);
   private path = 'propiedades'; //path en donde esta la info en firebase
   id = '';
-  propiedad: any;
+  propiedad: any = undefined;
+  cd = inject(ChangeDetectorRef);
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -72,6 +77,7 @@ export class DetailsPageComponent {
     this.propertyService.getDataById(id, this.path).subscribe((res) => {
       console.log(res);
       this.propiedad = res;
+      this.cd.markForCheck();
     });
   }
 }

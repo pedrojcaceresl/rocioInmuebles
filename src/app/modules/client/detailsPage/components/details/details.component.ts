@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         <button
           class="uppercase bg-[#0D1C39] text-sm text-white font-bold px-6 py-2 rounded-lg"
         >
-          En venta
+          {{ transactionType || 'En venta' }}
         </button>
       </div>
 
@@ -96,6 +96,7 @@ export class DetailsComponent {
   @Input() dimension: number = 0;
   @Input() description: string =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic repudiandae magnam cum mollitia aliquam eos totam doloribus magni. Repudiandae aperiam officia minima ullam aut? Illo tempore sint doloribus commodi.';
+  @Input() transactionType: string = '';
   @Input() contactNumber: string = '+595 994 329 377';
   @Input() email: string = 'contacto.rocioinmuebles@gmail.com';
   @Input() priceSale: number = 180000;
@@ -107,8 +108,8 @@ export class DetailsComponent {
   }
 
   getWhatsAppLink(title: string): string {
-    const phoneNumber = '595994329377';
-    const url = `https://www.rocioinmuebles.com/propiedades/detalle/${this.id}`;
+    const phoneNumber = '595973205207';
+    const url = `https://rocioinmuebles.com/propiedades/detalle/${this.id}`;
     const message = `Estoy interesado en la propiedad: ${title}. La url aquí: ${url}`;
 
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
