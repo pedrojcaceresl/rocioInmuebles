@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { last } from 'rxjs';
-
 
 type MenuItem = {
   route: string;
@@ -27,4 +25,10 @@ export class HeaderComponent {
       title: 'sobre mi',
     },
   ];
+
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 }

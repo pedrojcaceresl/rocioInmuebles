@@ -34,6 +34,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
             [beds]="propiedad.beds"
             [dimension]="propiedad.dimension"
             [priceSale]="propiedad.priceSale"
+            [isOffer]="propiedad.isOffer"
             [transactionType]="propiedad.transactionType"
           />
         </div>
