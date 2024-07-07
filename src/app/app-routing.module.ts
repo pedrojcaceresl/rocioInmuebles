@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutModule } from './modules/client/about/about.module';
 
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +16,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./modules/layout/layout.module').then((m) => m.LayoutModule),
+    ...canActivate(()=> redirectUnauthorizedTo(['/auth/login']))
   },
   {
     path: 'propiedades',
