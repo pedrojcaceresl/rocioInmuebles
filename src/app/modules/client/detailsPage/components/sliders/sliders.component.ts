@@ -72,7 +72,6 @@ export class SlidersComponent {
 
   private _album: any = [];
   currentOpacity = 1;
-  interval: any;
 
   @Input() autoplay: Boolean = false;
   @Input() time: number = 2000; // 2000 by default

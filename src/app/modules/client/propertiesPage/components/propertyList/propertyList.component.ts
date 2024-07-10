@@ -9,7 +9,6 @@ import {
 import { PropertyCardComponent } from '../propertyCard/propertyCard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Router, RouterModule } from '@angular/router';
-import Propiedad from '../../../../propiedades/interfaces/propiedades.interface';
 
 @Component({
   selector: 'app-property-list',

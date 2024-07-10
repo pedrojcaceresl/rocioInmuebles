@@ -19,7 +19,7 @@ import Propiedad from 'src/app/modules/propiedades/interfaces/propiedades.interf
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <div>
-      <form [formGroup]="filtersForm">
+      <form [formGroup]="mainForm">
         <div class="my-4">
           <h1 class="font-bold text-xl">Precio</h1>
           <div class="flex gap-4">
@@ -39,25 +39,33 @@ import Propiedad from 'src/app/modules/propiedades/interfaces/propiedades.interf
             />
           </div>
         </div>
-        <div *ngFor="let filter of filters" class="my-4">
-          <h1 class="font-bold text-xl">{{ filter.title }}</h1>
-          <div>
-            <div
-              [formGroupName]="filter.title.toLowerCase()"
-              class="gap-x-2 flex items-center"
-              *ngFor="let filterOption of filter.options"
-            >
+
+        <div class="my-4">
+          <h1 class="font-bold text-xl">Categoria</h1>
+          <div formGroupName="categoria">
+            <div class="gap-x-2 flex items-center">
               <input
                 class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
                 type="checkbox"
-                [formControlName]="filterOption"
-                [value]="filterOption"
-                [name]="filterOption"
-                [id]="filterOption"
+                formControlName="alquiler"
+                value="alquiler"
+                name="alquiler"
+                id="alquiler"
               />
-              <label class="capitalize" [for]="filterOption">{{
-                filterOption
-              }}</label>
+              <label class="capitalize">Alquiler</label>
+            </div>
+          </div>
+          <div formGroupName="categoria">
+            <div class="gap-x-2 flex items-center">
+              <input
+                class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
+                type="checkbox"
+                formControlName="venta"
+                value="venta"
+                name="venta"
+                id="venta"
+              />
+              <label class="capitalize">Venta</label>
             </div>
           </div>
         </div>
@@ -75,172 +83,78 @@ export class PropertyFiltersComponent implements OnInit {
   @Input() properties: any[] = [];
   @Output() onFiltered = new EventEmitter();
 
-  filters = [
-    {
-      title: 'Categoria',
-      options: ['Alquiler', 'Venta'],
-    },
-    {
-      title: 'UbicaciÓn',
-      options: ['alto paraná', 'central'],
-    },
-    {
-      title: 'Tipo',
-      options: [
-        'casa quinta',
-        'casa',
-        'duplex',
-        'granja',
-        'terreno',
-        'departamento en pozo',
-        'lote en condominio',
-      ],
-    },
+  categoriaForm!: FormGroup;
+  ubicacionForm!: FormGroup;
+  tipoForm!: FormGroup;
+  mainForm!: FormGroup;
+
+  categoriaFilters = ['Alquiler', 'Venta'];
+  ubicacion = ['alto paraná', 'central'];
+  tipo = [
+    'casa quinta',
+    'casa',
+    'duplex',
+    'granja',
+    'terreno',
+    'departamento en pozo',
+    'lote en condominio',
   ];
 
-  // Your list of items to be filtered
-  // items = [
-  //   {
-  //     name: 'Item 1',
-  //     categoria: 'alquiler',
-  //     ubicacion: 'alto paraná',
-  //     tipo: 'casa',
-  //   },
-  //   {
-  //     name: 'Item 1',
-  //     categoria: 'alquiler',
-  //     ubicacion: 'central',
-  //     tipo: 'casa',
-  //   },
-  //   {
-  //     name: 'Item 2',
-  //     categoria: 'venta',
-  //     ubicacion: 'central',
-  //     tipo: 'terreno',
-  //   },
-  //   {
-  //     name: 'Item 3',
-  //     categoria: 'alquiler',
-  //     ubicacion: 'alto paraná',
-  //     tipo: 'quinta',
-  //   },
-  //   // Add more items as needed
-  // ];
-
-  filteredItems: any = [];
+  filteredProperties: any = [];
   ngOnInit() {
     this.createForm();
     this.setupFormChanges();
+
+    this.mainForm = this.formBuilder.group({});
+
+    this.categoriaForm = this.formBuilder.group({
+      alquiler: [false],
+      venta: [false],
+    });
+
+    this.mainForm.addControl('categoria', this.categoriaForm);
+
+    // Subscríbete a los cambios en el formulario una vez
+    this.mainForm.valueChanges.subscribe((values) => {
+      this.filterByCategoria(values);
+    });
+
+    this.filterByCategoria(this.mainForm.value);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.properties = changes['properties'].currentValue;
-    // console.log('LAS PROPERTIES RECIBIDAS', this.properties);
   }
+
+  filterByCategoria(values: any): void {
+    const categoriaValues = values.categoria;
+
+    const activeFilters = Object.keys(categoriaValues)
+      .filter((key) => categoriaValues[key])
+      .map((key) => key.toLowerCase());
+
+    console.log('activeFilters ', activeFilters);
+
+    if (activeFilters.length === 0) {
+      this.filteredProperties = this.properties;
+    } else {
+      this.filteredProperties = this.properties.filter((property) => {
+        const transactioType = property.transactionType.toLowerCase();
+        return activeFilters.includes(transactioType);
+      });
+    }
+    console.log(this.filteredProperties);
+    this.onFiltered.emit(this.filteredProperties);
+  }
+
 
   createForm() {
     const formGroup: any = {};
-    let optionsGroup: any = {};
-
-    // se crea el fromGroup y formControl de cada cosa
-    for (let i = 0; i < this.filters.length; i++) {
-      const filterName = this.filters[i];
-      filterName.options.forEach((option: any) => {
-        optionsGroup[option] = this.formBuilder.control(false);
-      });
-      formGroup[filterName.title.toLowerCase()] =
-        this.formBuilder.group(optionsGroup);
-      optionsGroup = {}; // se reinicia el grupo para crear otro
-    }
 
     this.filtersForm = this.formBuilder.group(formGroup);
   }
 
   setupFormChanges() {
-    this.filtersForm.valueChanges.subscribe((res) => {
-      // this.filterByTransactionType();
-      this.filterByTypes();
-    });
+    this.filtersForm.valueChanges.subscribe((res) => {});
   }
-
-  // filterByTransactionType() {
-  //   const selectedValues: string[] = [];
-  //   const formValue = this.filtersForm.value;
-  //   Object.keys(formValue).forEach((key) => {
-  //     // console.log('LA LLAVE',key);
-  //     // Trae el array de los filtros 3 veces
-  //     // console.log('el formValue',formValue);
-  //     Object.keys(formValue[key]).forEach((name) => {
-  //       if (formValue[key][name]) {
-  //         // ACA DEVUELVE TRUE??
-  //         selectedValues.push(name);
-  //       }
-  //     });
-  //   });
-
-  //   console.log("TRANSACTION Los selectedValues", selectedValues);
-
-  //   console.log('DATA A SER FILTRADA',this.properties)
-
-  //   // Filter items based on selected values
-  //   this.filteredItems = this.properties.filter((item: any) =>
-
-  //     Object.keys(formValue).some((key) => {
-  //       // console.log('QUE ES ESTO',item.transactionType);
-  //       return item[key] === 'todos'
-  //       ? true
-  //       : selectedValues.includes(item.transactionType);
-  //     })
-
-  //   );
-
-  //   // console.log('EL FORM',formValue);
-  //   this.onFiltered.emit(this.filteredItems);
-  //   this.cd.markForCheck();
-  //   return;
-  // }
-
-  filterByTypes() {
-    const selectedValues: string[] = [];
-    const formValue = this.filtersForm.value;
-    Object.keys(formValue).forEach((key) => {
-      // console.log('LA LLAVE',key);
-      // Trae el array de los filtros 3 veces
-      // console.log('el formValue',formValue);
-      Object.keys(formValue[key]).forEach((name) => {
-        if (formValue[key][name]) {
-          // ACA DEVUELVE TRUE??
-          selectedValues.push(name);
-        }
-      });
-    });
-
-    // console.log("TYPES Los selectedValues", selectedValues);
-
-    this.filteredItems = this.properties.filter((item: any) =>
-      Object.keys(formValue).some((key) => {
-        // console.log('QUE ES ESTO',item.type);
-        return item[key] === 'todos'
-          ? true
-          : selectedValues.includes(item.type);
-      })
-    );
-
-    this.onFiltered.emit(this.filteredItems);
-    this.cd.markForCheck();
-    return;
-  }
-
-
-  // filterProducts( products: any){
-  //   return products.filter(products=>{
-  //     return (
-  //       products.priceSale >= filters.minPrice &&
-  //       (
-  //         filters.category == 'all' ||
-  //         products.category == this.filters.category
-  //       )
-  //     )
-  //   })
-  // }
 }
