@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
-import { authGuard } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutPageComponent,
-    canActivate: [authGuard],
     children: [
       {
         path: 'propiedades',
@@ -19,33 +17,6 @@ const routes: Routes = [
         redirectTo: 'propiedades'
       }
     ],
-    // children: [
-    //   {
-    //     path: 'dashboard',
-    //     loadChildren: () =>
-    //       import('../modules/dashboard/dashboard.module').then(
-    //         (m) => m.DashboardModule
-    //       ),
-    //   },
-    //   {
-    //     path: 'apointments',
-    //     loadChildren: () =>
-    //       import('../modules/apointments/apointments.module').then(
-    //         (m) => m.ApointmentsModule
-    //       ),
-    //   },
-    //   {
-    //     path: 'clients',
-    //     loadChildren: () =>
-    //       import('../modules/clients/clients.module').then(
-    //         (m) => m.ClientsModule
-    //       ),
-    //   },
-    //   {
-    //     path: '**',
-    //     redirectTo: 'dashboard',
-    //   },
-    // ],
   },
 ];
 
