@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -16,6 +16,9 @@ export class LoginPageComponent {
   router = inject(Router);
   errorMessage: string = '';
 
+  isAuthenticated = false;
+
+
   ngOnInit() {
     this.initializeForm();
   }
@@ -28,18 +31,17 @@ export class LoginPageComponent {
   }
 
   onLogin(): void {
-    console.log('submit!')
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      const isLogged = this.authService.login(email, password);
-
-      if (isLogged) {
-          this.router.navigate(['/admin']);
-      } else {
-          this.router.navigate(['/propiedades']);
-
-        this.errorMessage = "Email o contraseña inválido";
-      }
+      this.authService.login(this.loginForm.value)
+      .then(response=>{
+        console.log(response)
+        this.isAuthenticated = true;
+        sessionStorage.setItem("authToken", "mock-token");
+        this.router.navigate(['/admin']);
+      })
+      .catch(error=>{
+        console.log(error)
+      });
     }
   }
 }

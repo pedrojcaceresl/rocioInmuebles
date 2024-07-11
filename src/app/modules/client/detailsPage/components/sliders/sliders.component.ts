@@ -68,7 +68,6 @@ export class SlidersComponent {
   indicators: number[] = [];
   cd = inject(ChangeDetectorRef);
   _lightbox = inject(Lightbox);
-  interval: any;
 
   private _album: any = [];
   currentOpacity = 1;

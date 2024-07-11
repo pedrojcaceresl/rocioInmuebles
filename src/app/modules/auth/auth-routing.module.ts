@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: 'login', component: LoginPageComponent },
-      { path: 'register', component: RegisterPageComponent },
+      // { path: 'register', component: RegisterPageComponent },
       { path: 'forgot-pass', component: ForgotPasswordComponent },
       { path: '**', redirectTo: 'login' },
     ],

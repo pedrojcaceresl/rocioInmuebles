@@ -1,26 +1,31 @@
 
 import { Injectable } from "@angular/core";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "@angular/fire/auth";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-
     private isAuthenticated = false;
 
-    public login(email: string, password: string): boolean {
-        console.log('logged in succesfully');
-        if (email === 'admin' && password === "password") {
-            this.isAuthenticated = true;
-            sessionStorage.setItem("authToken", "mock-token");
-            return true;
-        }
-        return false;
+    constructor(
+        private auth: Auth
+    ){}
+
+    register({email, password}:any){
+        return createUserWithEmailAndPassword(this.auth, email, password);
     }
 
-    public logout(): void {
-        this.isAuthenticated = false;
-        sessionStorage.removeItem("authToken");
+    login({email, password}:any){
+        return signInWithEmailAndPassword(this.auth, email, password);
+    }
+
+    logout(){
+        return signOut(this.auth);
+    }
+
+    forgotPassword({email}: any){
+        return sendPasswordResetEmail(this.auth, email)
     }
 
     isLogged(): boolean {

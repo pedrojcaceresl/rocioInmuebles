@@ -1,6 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { components } from '../components';
 import { SidebarService } from 'src/app/core/services';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './layout-page.component.html',
@@ -9,7 +11,11 @@ import { SidebarService } from 'src/app/core/services';
 export class LayoutPageComponent {
   components = components;
   isMobile!: boolean;
-  constructor(public sidebarService: SidebarService) {
+  constructor(
+    public sidebarService: SidebarService,
+    public authService: AuthService,
+    public router: Router,
+  ) {
     sidebarService.loadCollapsedState();
   }
 
@@ -22,6 +28,11 @@ export class LayoutPageComponent {
   onClickOutside() {
     if (!this.isMobile) return;
     this.sidebarService.setCollapsed(true);
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/propiedades'])
   }
 
 }

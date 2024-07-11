@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
-import { authGuard } from '../auth/guards/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutPageComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'propiedades',
