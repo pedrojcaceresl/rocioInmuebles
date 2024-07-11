@@ -59,12 +59,12 @@ export class PropertiesPageComponent {
   filteredProperties = [...this.properties]; // Inicialmente todas las propiedades
 
   onFilteredItems(filtered: any) {
-    // console.log('LA FILTRAMENTACION',filtered);
     if (filtered.length > 0) {
       this.filteredItems = filtered;
     } else {
       this.filteredItems = this.properties;
     }
+    this.cd.markForCheck();
   }
 
   ngOnInit() {
