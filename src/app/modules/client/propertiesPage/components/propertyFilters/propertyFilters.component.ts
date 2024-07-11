@@ -42,30 +42,33 @@ import Propiedad from 'src/app/modules/propiedades/interfaces/propiedades.interf
 
         <div class="my-4">
           <h1 class="font-bold text-xl">Categoria</h1>
-          <div formGroupName="categoria">
+          <div formGroupName="categoria" *ngFor="let item of categoriaFilters">
             <div class="gap-x-2 flex items-center">
               <input
                 class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
                 type="checkbox"
-                formControlName="alquiler"
-                value="alquiler"
-                name="alquiler"
-                id="alquiler"
+                [formControlName]="item"
+                [value]="item"
+                [name]="item"
+                [id]="item"
               />
-              <label class="capitalize">Alquiler</label>
+              <label class="capitalize">{{ item }}</label>
             </div>
           </div>
-          <div formGroupName="categoria">
+        </div>
+        <div class="my-4">
+          <h1 class="font-bold text-xl">Ubicación</h1>
+          <div formGroupName="ubicacion" *ngFor="let item of ubicacion">
             <div class="gap-x-2 flex items-center">
               <input
                 class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
                 type="checkbox"
-                formControlName="venta"
-                value="venta"
-                name="venta"
-                id="venta"
+                [formControlName]="item"
+                [value]="item"
+                [name]="item"
+                [id]="item"
               />
-              <label class="capitalize">Venta</label>
+              <label class="capitalize">{{ item }}</label>
             </div>
           </div>
         </div>
@@ -88,7 +91,7 @@ export class PropertyFiltersComponent implements OnInit {
   tipoForm!: FormGroup;
   mainForm!: FormGroup;
 
-  categoriaFilters = ['Alquiler', 'Venta'];
+  categoriaFilters = ['alquiler', 'venta'];
   ubicacion = ['alto paraná', 'central'];
   tipo = [
     'casa quinta',
@@ -112,14 +115,20 @@ export class PropertyFiltersComponent implements OnInit {
       venta: [false],
     });
 
-    this.mainForm.addControl('categoria', this.categoriaForm);
+    this.ubicacionForm = this.formBuilder.group({
+      'alto paraná': [false],
+      'central': [false]
+    })
 
-    // Subscríbete a los cambios en el formulario una vez
+    this.mainForm.addControl('categoria', this.categoriaForm);
+    this.mainForm.addControl('ubicacion', this.ubicacionForm);
+
     this.mainForm.valueChanges.subscribe((values) => {
       this.filterByCategoria(values);
     });
 
     this.filterByCategoria(this.mainForm.value);
+    this.filterByUbicacion(this.mainForm.value);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -147,6 +156,26 @@ export class PropertyFiltersComponent implements OnInit {
     this.onFiltered.emit(this.filteredProperties);
   }
 
+  filterByUbicacion(values: any): void {
+    const categoriaValues = values.categoria;
+
+    const activeFilters = Object.keys(categoriaValues)
+      .filter((key) => categoriaValues[key])
+      .map((key) => key.toLowerCase());
+
+    console.log('activeFilters ', activeFilters);
+
+    if (activeFilters.length === 0) {
+      this.filteredProperties = this.properties;
+    } else {
+      this.filteredProperties = this.properties.filter((property) => {
+        const state = property.state.toLowerCase();
+        return activeFilters.includes(state);
+      });
+    }
+    console.log(this.filteredProperties);
+    this.onFiltered.emit(this.filteredProperties);
+  }
 
   createForm() {
     const formGroup: any = {};
