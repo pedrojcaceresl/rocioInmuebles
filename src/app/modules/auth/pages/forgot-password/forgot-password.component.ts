@@ -1,85 +1,37 @@
-import { Component, inject } from '@angular/core';
-import { FormControl, Validators, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { AlertService } from 'src/app/shared/services/alert.service';
+import { FormGroup,FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styles: [
-    `
-      .error {
-        color: red;
-      }
-
-      .success {
-        color: green;
-      }
-    `,
-  ],
+  styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent {
-  public currentLanguage = '';
+export class ForgotPasswordComponent implements OnInit{
+  form!: FormGroup;
 
-  windowWidth: number = 0;
-
-  passForm = new FormGroup({
-    email: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, this.customEmailValidator()],
-    }),
-  });
-
-  resetError!: string;
-  resetSuccess!: boolean;
-  wrongPass: any = false;
-
-  constructor(
-    private router: Router,
+  constructor( 
     private authService: AuthService,
-    private alertService: AlertService
-  ) {
-    this.updateWindowWidth();
+    private fb: FormBuilder,
+    private router: Router,
+  ){}
+
+  ngOnInit() {
+    this.initializeForm();
   }
 
-  resetPassword() {
-    if (this.passForm.invalid) return;
-    this.authService
-      .resetPassword(this.passForm.value)
-      .then(() => {
-        this.alertService.openAlert(
-          'Link de reestablecimiento de contraseña enviado, revise su correo y siga las instrucciones.'
-        );
-        this.passForm.reset();
-      })
-      .catch((error) => {
-        if ('Firebase: Error (auth/user-not-found).') {
-          this.alertService.openAlertError(
-            'Usuario no encontrado, revise el correo.'
-          );
-          this.passForm.reset();
-        }
-      });
+  initializeForm() {
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+    })
   }
 
-  customEmailValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const emailPattern = /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
-
-      if (!emailPattern.test(control.value)) {
-        return { invalidEmail: true };
-      }
-
-      return null;
-    };
+  onSubmit(){
+    console.log(this.form.value)
+    this.authService.forgotPassword(this.form.value)
+    alert('Por favor verifique su correo!')
+    this.router.navigate(['/auth/login'])
   }
 
-  goBack(): void {
-    window.history.back();
-  }
 
-  updateWindowWidth() {
-    this.windowWidth = window.innerWidth;
-  }
 }
