@@ -11,7 +11,6 @@ import {
   inject,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import Propiedad from 'src/app/modules/propiedades/interfaces/propiedades.interface';
 
 @Component({
   selector: 'app-property-filters',
@@ -19,45 +18,72 @@ import Propiedad from 'src/app/modules/propiedades/interfaces/propiedades.interf
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <div>
-      <form [formGroup]="filtersForm">
-        <div class="my-4">
+      <form [formGroup]="filterForm">
+        <div class="my-4" formGroupName="priceRange">
           <h1 class="font-bold text-xl">Precio</h1>
           <div class="flex gap-4">
-            <input
-              class="rounded-md border-gray-300 border-2 max-w-[128px]"
-              type="text"
-              name="min"
-              id="min"
-              placeholder="Min"
-            />
-            <input
-              class="rounded-md border-gray-300 border-2 max-w-[128px]"
-              type="text"
-              name="max"
-              id="max"
-              placeholder="Max"
-            />
+            <label>
+              Min
+              <input
+                class="rounded-md border-gray-300 border-2 max-w-[128px]"
+                type="text"
+                name="min"
+                id="min"
+                placeholder="Min"
+                formControlName="min"
+              />
+            </label>
+            <label for="max"
+              >Max
+              <input
+                class="rounded-md border-gray-300 border-2 max-w-[128px]"
+                type="text"
+                name="max"
+                id="max"
+                placeholder="Max"
+                formControlName="max"
+              />
+            </label>
           </div>
         </div>
-        <div *ngFor="let filter of filters" class="my-4">
-          <h1 class="font-bold text-xl">{{ filter.title }}</h1>
-          <div>
-            <div
-              [formGroupName]="filter.title.toLowerCase()"
-              class="gap-x-2 flex items-center"
-              *ngFor="let filterOption of filter.options"
-            >
+
+        <div class="my-4" formGroupName="categories">
+          <h1 class="font-bold text-xl">Categoria</h1>
+          <div *ngFor="let category of categories">
+            <div class="gap-x-2 flex items-center">
               <input
                 class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
                 type="checkbox"
-                [formControlName]="filterOption"
-                [value]="filterOption"
-                [name]="filterOption"
-                [id]="filterOption"
+                [formControlName]="category"
               />
-              <label class="capitalize" [for]="filterOption">{{
-                filterOption
-              }}</label>
+              <label class="capitalize">{{ category }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="my-4" formGroupName="locations">
+          <h1 class="font-bold text-xl">Ubicación</h1>
+          <div *ngFor="let location of locations">
+            <div class="gap-x-2 flex items-center">
+              <input
+                class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
+                type="checkbox"
+                [formControlName]="location"
+              />
+              <label class="capitalize">{{ location }}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4" formGroupName="types">
+          <h1 class="font-bold text-xl">Tipo</h1>
+          <div *ngFor="let type of types">
+            <div class="gap-x-2 flex items-center">
+              <input
+                class="rounded-sm border-2 border-gray-300 bg-gray-100 focus:outline-none"
+                type="checkbox"
+                [formControlName]="type"
+              />
+              <label class="capitalize">{{ type }}</label>
             </div>
           </div>
         </div>
@@ -75,172 +101,75 @@ export class PropertyFiltersComponent implements OnInit {
   @Input() properties: any[] = [];
   @Output() onFiltered = new EventEmitter();
 
-  filters = [
-    {
-      title: 'Categoria',
-      options: ['Alquiler', 'Venta'],
-    },
-    {
-      title: 'UbicaciÓn',
-      options: ['alto paraná', 'central'],
-    },
-    {
-      title: 'Tipo',
-      options: [
-        'casa quinta',
-        'casa',
-        'duplex',
-        'granja',
-        'terreno',
-        'departamento en pozo',
-        'lote en condominio',
-      ],
-    },
+  categoriaForm!: FormGroup;
+  ubicacionForm!: FormGroup;
+  tipoForm!: FormGroup;
+  mainForm!: FormGroup;
+  filteredProperties: any = [];
+
+  filterForm!: FormGroup;
+
+  categories = ['Alquiler', 'Venta'];
+  locations = ['Alto Paraná', 'Central', 'Itapúa'];
+  types = [
+    'casa quinta',
+    'casa',
+    'duplex',
+    'granja',
+    'terreno',
+    'departamento en pozo',
+    'lote en condominio',
   ];
 
-  // Your list of items to be filtered
-  // items = [
-  //   {
-  //     name: 'Item 1',
-  //     categoria: 'alquiler',
-  //     ubicacion: 'alto paraná',
-  //     tipo: 'casa',
-  //   },
-  //   {
-  //     name: 'Item 1',
-  //     categoria: 'alquiler',
-  //     ubicacion: 'central',
-  //     tipo: 'casa',
-  //   },
-  //   {
-  //     name: 'Item 2',
-  //     categoria: 'venta',
-  //     ubicacion: 'central',
-  //     tipo: 'terreno',
-  //   },
-  //   {
-  //     name: 'Item 3',
-  //     categoria: 'alquiler',
-  //     ubicacion: 'alto paraná',
-  //     tipo: 'quinta',
-  //   },
-  //   // Add more items as needed
-  // ];
-
-  filteredItems: any = [];
-  ngOnInit() {
-    this.createForm();
-    this.setupFormChanges();
+  constructor() {
+    this.onCreateForm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.properties = changes['properties'].currentValue;
-    // console.log('LAS PROPERTIES RECIBIDAS', this.properties);
   }
 
-  createForm() {
-    const formGroup: any = {};
-    let optionsGroup: any = {};
-
-    // se crea el fromGroup y formControl de cada cosa
-    for (let i = 0; i < this.filters.length; i++) {
-      const filterName = this.filters[i];
-      filterName.options.forEach((option: any) => {
-        optionsGroup[option] = this.formBuilder.control(false);
-      });
-      formGroup[filterName.title.toLowerCase()] =
-        this.formBuilder.group(optionsGroup);
-      optionsGroup = {}; // se reinicia el grupo para crear otro
-    }
-
-    this.filtersForm = this.formBuilder.group(formGroup);
-  }
-
-  setupFormChanges() {
-    this.filtersForm.valueChanges.subscribe((res) => {
-      // this.filterByTransactionType();
-      this.filterByTypes();
-    });
-  }
-
-  // filterByTransactionType() {
-  //   const selectedValues: string[] = [];
-  //   const formValue = this.filtersForm.value;
-  //   Object.keys(formValue).forEach((key) => {
-  //     // console.log('LA LLAVE',key);
-  //     // Trae el array de los filtros 3 veces
-  //     // console.log('el formValue',formValue);
-  //     Object.keys(formValue[key]).forEach((name) => {
-  //       if (formValue[key][name]) {
-  //         // ACA DEVUELVE TRUE??
-  //         selectedValues.push(name);
-  //       }
-  //     });
-  //   });
-
-  //   console.log("TRANSACTION Los selectedValues", selectedValues);
-
-  //   console.log('DATA A SER FILTRADA',this.properties)
-
-  //   // Filter items based on selected values
-  //   this.filteredItems = this.properties.filter((item: any) =>
-
-  //     Object.keys(formValue).some((key) => {
-  //       // console.log('QUE ES ESTO',item.transactionType);
-  //       return item[key] === 'todos'
-  //       ? true
-  //       : selectedValues.includes(item.transactionType);
-  //     })
-
-  //   );
-
-  //   // console.log('EL FORM',formValue);
-  //   this.onFiltered.emit(this.filteredItems);
-  //   this.cd.markForCheck();
-  //   return;
-  // }
-
-  filterByTypes() {
-    const selectedValues: string[] = [];
-    const formValue = this.filtersForm.value;
-    Object.keys(formValue).forEach((key) => {
-      // console.log('LA LLAVE',key);
-      // Trae el array de los filtros 3 veces
-      // console.log('el formValue',formValue);
-      Object.keys(formValue[key]).forEach((name) => {
-        if (formValue[key][name]) {
-          // ACA DEVUELVE TRUE??
-          selectedValues.push(name);
-        }
-      });
-    });
-
-    // console.log("TYPES Los selectedValues", selectedValues);
-
-    this.filteredItems = this.properties.filter((item: any) =>
-      Object.keys(formValue).some((key) => {
-        // console.log('QUE ES ESTO',item.type);
-        return item[key] === 'todos'
-          ? true
-          : selectedValues.includes(item.type);
-      })
+  ngOnInit() {
+    this.filterForm.valueChanges.subscribe((value) =>
+      this.onFilterChange(value)
     );
-
-    this.onFiltered.emit(this.filteredItems);
-    this.cd.markForCheck();
-    return;
   }
 
+  onCreateForm() {
+    this.filterForm = this.formBuilder.group({
+      priceRange: this.formBuilder.group({
+        min: [0],
+        max: [100000000],
+      }),
+      categories: this.formBuilder.group(
+        this.categories.reduce(
+          (acc: any, curr) => ((acc[curr] = false), acc),
+          {}
+        )
+      ),
+      locations: this.formBuilder.group(
+        this.locations.reduce(
+          (acc: any, curr) => ((acc[curr] = false), acc),
+          {}
+        )
+      ),
+      types: this.formBuilder.group(
+        this.types.reduce((acc: any, curr) => ((acc[curr] = false), acc), {})
+      ),
+    });
+  }
 
-  // filterProducts( products: any){
-  //   return products.filter(products=>{
-  //     return (
-  //       products.priceSale >= filters.minPrice &&
-  //       (
-  //         filters.category == 'all' ||
-  //         products.category == this.filters.category
-  //       )
-  //     )
-  //   })
-  // }
+  onFilterChange(value: any) {
+    const filter = {
+      priceRange: value.priceRange,
+      categories: Object.keys(value.categories).filter(
+        (key) => value.categories[key]
+      ),
+      locations: Object.keys(value.locations).filter(
+        (key) => value.locations[key]
+      ),
+      types: Object.keys(value.types).filter((key) => value.types[key]),
+    };
+    this.onFiltered.emit(filter);
+  }
 }
