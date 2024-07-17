@@ -7,20 +7,21 @@ import {
 } from '@angular/core';
 import { PropertyListComponent } from './components/propertyList/propertyList.component';
 import { PropertyFiltersComponent } from './components/propertyFilters/propertyFilters.component';
-import { PropertySearchComponent } from "./components/propertySearch/propertySearch.component";
+import { PropertySearchComponent } from './components/propertySearch/propertySearch.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
-    selector: 'app-properties-page',
-    standalone: true,
-    template: `
+  selector: 'app-properties-page',
+  standalone: true,
+  template: `
     <div class="flex flex-col xl:max-xl-[1920px] lg:max-w-7xl mx-auto">
       <div class="flex w-full" *ngIf="properties">
         <div class="hidden lg:block">
           <app-property-search
-          [properties]="properties"
-          (filteredProperties)="onFilteredItems($event)">></app-property-search>
+            [properties]="properties"
+            (filteredProperties)="onSearch($event)"
+          ></app-property-search>
           <app-property-filters
             (onFiltered)="onFilteredItems($event)"
             [properties]="properties"
@@ -30,16 +31,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
       </div>
     </div>
   `,
-    styleUrls: ['./propertiesPage.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        CommonModule,
-        PropertyListComponent,
-        PropertyFiltersComponent,
-        HttpClientModule,
-        SharedModule,
-        PropertySearchComponent
-    ]
+  styleUrls: ['./propertiesPage.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    PropertyListComponent,
+    PropertyFiltersComponent,
+    HttpClientModule,
+    SharedModule,
+    PropertySearchComponent,
+  ],
 })
 export class PropertiesPageComponent {
   // injections
@@ -58,13 +59,32 @@ export class PropertiesPageComponent {
 
   filteredProperties = [...this.properties]; // Inicialmente todas las propiedades
 
-  onFilteredItems(filtered: any) {
+  onFilteredItems(filter: any) {
+    this.filteredItems = this.properties.filter((property) => {
+      const matchesPrice =
+        (!filter.priceRange.min && !filter.priceRange.max) ||
+        (property.priceSale >= filter.priceRange.min &&
+          property.priceSale <= filter.priceRange.max);
+      const matchesCategory =
+        filter.categories.length === 0 ||
+        filter.categories.includes(property.transactionType);
+      const matchesLocation =
+        filter.locations.length === 0 ||
+        filter.locations.includes(property.state);
+      const matchesType =
+        filter.types.length === 0 || filter.types.includes(property.type);
+
+      return matchesPrice && matchesCategory && matchesLocation && matchesType;
+    });
+    this.cd.markForCheck();
+  }
+
+  onSearch(filtered: any) {
     if (filtered.length > 0) {
       this.filteredItems = filtered;
     } else {
       this.filteredItems = this.properties;
     }
-    this.cd.markForCheck();
   }
 
   ngOnInit() {
@@ -74,5 +94,4 @@ export class PropertiesPageComponent {
       this.cd.markForCheck();
     });
   }
-
 }
