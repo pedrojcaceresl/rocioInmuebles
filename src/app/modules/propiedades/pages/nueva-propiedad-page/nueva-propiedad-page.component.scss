@@ -1,15 +1,17 @@
-// .mat-stepper-vertical {
-//   margin-top: 8px;
-// }
+/* file-upload.component.css */
 
-// .mat-mdc-form-field {
-//   margin-top: 16px;
-// }
+.mat-progress-spinner {
+  display: block;
+  margin: 0 auto;
+}
 
-// .modal{
-//   height: 500px;
-// }
+.mt-2 {
+  margin-top: 0.5rem;
+}
 
+.text-green-500 {
+  color: #48bb78;
+}
 .map-container {
   position: relative;
   width: 100%;

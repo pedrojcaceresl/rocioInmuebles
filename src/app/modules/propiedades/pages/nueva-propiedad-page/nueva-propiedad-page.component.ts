@@ -1,20 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import Propiedad from '../../interfaces/propiedades.interface';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
 import { filter, map } from 'rxjs';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import Filtro from '../../interfaces/filtros.interface';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+
+import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+
+import Propiedad from '../../interfaces/propiedades.interface';
+import Filtro from '../../interfaces/filtros.interface';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
@@ -35,6 +29,9 @@ export class NuevaPropiedadPageComponent implements OnInit {
   imgUrl: string = '';
   departamentos: any[] = [];
   ciudades: string[] = [];
+  urlBrochure:any;
+  isLoading = false;
+  uploadSuccess = false;
 
   locationForm = new FormGroup({
     latitude: new FormControl(),
@@ -60,6 +57,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     viewTitle: ['', Validators.required],
     city: ['', Validators.required],
     state: ['', Validators.required],
+    linkBrochure: [''],
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -93,6 +91,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private storage: Storage,
     private _formBuilder: FormBuilder,
     private firebaseService: FirebaseService,
     // private dialog: MatDialog
@@ -102,6 +101,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('LA DATA',this.data)
     if (this.data) {
       const propiedad = this.data.propiedad;
       this.firstFormGroup.patchValue({
@@ -123,6 +123,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
         viewTitle: propiedad.viewTitle,
         city: propiedad.city,
         state: propiedad.state,
+        linkBrochure: propiedad.linkBrochure,
       });
 
       this.secondFormGroup.patchValue({
@@ -243,6 +244,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     viewTitle,
     city,
     state,
+    linkBrochure: this.urlBrochure,
   };
 
   if (this.data && this.data.editMode) {
@@ -272,4 +274,24 @@ export class NuevaPropiedadPageComponent implements OnInit {
       this.onSubmit();
     }
   }
+
+  updateFileUrl(url: string) {
+    this.firstFormGroup.patchValue({ linkBrochure: url});
+  }
+
+  uploadFile($event: any) {
+    const file = $event.target.files[0];
+    const docRef = ref(this.storage, `brochures/${file.name}`);
+
+    uploadBytes(docRef, file)
+      .then(async (response) => {
+        const url = await getDownloadURL(docRef);
+        this.updateFileUrl(url)
+        this.urlBrochure = url;
+        console.log('CARGADO?',url);
+      })
+      .catch((error) => console.error());
+  }
+
+  
 }

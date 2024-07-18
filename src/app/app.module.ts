@@ -17,6 +17,7 @@ import {
 } from '@angular/fire/analytics';
 
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 // import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
@@ -35,6 +36,7 @@ import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
   ],
   providers: [

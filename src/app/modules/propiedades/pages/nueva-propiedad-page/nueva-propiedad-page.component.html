@@ -212,8 +212,8 @@
 
             <div class="mb-4">
               <h2 class="text-black">Brochure</h2>
-              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" type="file">
-          </div>
+              <input (change)="uploadFile($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" type="file">
+            </div>
         </div>
 
           <!-- Ubicación de la propiedad -->
