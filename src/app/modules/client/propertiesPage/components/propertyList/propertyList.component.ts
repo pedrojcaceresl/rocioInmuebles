@@ -82,7 +82,7 @@ export class PropertyListComponent {
   }
 
   onView(data: any) {
-    console.log(data);
+    // console.log(data);
     this.router.navigate([`propiedades/detalle/${data.id}`]);
   }
 }
