@@ -11,7 +11,7 @@ import { formatCurrency } from 'src/app/core/helpers';
   imports: [CommonModule, ButtonBadgeComponent],
   template: `
     <div
-      class="my-10 cursor-pointer hover:scale-105 rounded-2xl p-3 w-[306px] shadow-md h-[383px]"
+      class="mb-8 cursor-pointer hover:scale-105 rounded-2xl p-3 w-[306px] shadow-md h-[383px]"
       *ngIf="property"
     >
       <!-- image -->

@@ -15,18 +15,18 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, PropertyCardComponent, SharedModule, RouterModule],
   template: `
-    <div class="max-w-6xl mx-auto flex flex-col justify-between">
-      <div class="lg:grid grid-cols-3 gap-10 mx-10">
-        <div
+    <div class="flex justify-center items-center flex-col">
+      <div class="flex flex-wrap justify-center gap-x-10 lg:gap-x-0 lg:justify-between px-4">
+        <app-property-card
           *ngFor="
             let item of filterActiveProperties(properties).slice(
               (currentPage - 1) * ITEMS_PER_PAGE,
               currentPage * ITEMS_PER_PAGE
             )
           "
-        >
-          <app-property-card (click)="onView(item)" [property]="item" />
-        </div>
+          (click)="onView(item)"
+          [property]="item"
+        />
       </div>
       <div class="flex justify-center lg:mx-10 w-full mb-10">
         <app-paginador
@@ -49,19 +49,17 @@ export class PropertyListComponent {
   cd = inject(ChangeDetectorRef);
   router = inject(Router);
 
-
-
   ITEMS_PER_PAGE: number = 9; // Cantidad de elementos por página
   currentPage: number = 1; // Página actual
   totalPages: any;
 
-  constructor(){}
+  constructor() {}
   ngOnChanges() {
     this.totalPages = Math.ceil(this.properties.length / this.ITEMS_PER_PAGE);
   }
 
-  filterActiveProperties(propiedades: []){
-    return propiedades.filter((propiedad: any) => propiedad.isActive)
+  filterActiveProperties(propiedades: []) {
+    return propiedades.filter((propiedad: any) => propiedad.isActive);
   }
 
   onPageChange(newPage: number) {
@@ -83,8 +81,8 @@ export class PropertyListComponent {
     }
   }
 
-  onView(data: any){
+  onView(data: any) {
     console.log(data);
-    this.router.navigate([`propiedades/detalle/${data.id}`])
+    this.router.navigate([`propiedades/detalle/${data.id}`]);
   }
 }
