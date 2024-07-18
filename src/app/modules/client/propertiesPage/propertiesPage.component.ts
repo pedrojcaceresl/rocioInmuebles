@@ -11,11 +11,23 @@ import { PropertySearchComponent } from './components/propertySearch/propertySea
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MobileFilterService } from './components/mobileFilter/mobileFilter.service';
+import { MobileFilterComponent } from "./components/mobileFilter/mobileFilter.component";
 @Component({
   selector: 'app-properties-page',
   standalone: true,
   template: `
-    <div class="flex flex-col xl:max-xl-[1920px] lg:max-w-7xl mx-auto">
+    <div
+      class="flex flex-col items-center xl:max-xl-[1920px] lg:max-w-7xl mx-auto"
+    >
+      <div class=" w-[306px] md:w-full flex justify-end mb-4 px-4">
+        <button
+          (click)="toggleSidebar()"
+          class="max-w-40 bg-amarillo-rocio left-52  text-white rounded-lg py-2 px-6 font-bold lg:hidden "
+        >
+          Filtros
+        </button>
+      </div>
       <div class="flex w-full" *ngIf="properties">
         <div class="hidden lg:block">
           <app-property-search
@@ -30,6 +42,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
         <app-property-list [properties]="filteredItems" />
       </div>
     </div>
+
+    <app-mobile-filter class="sm:hidden">
+      <app-property-filters
+        (onFiltered)="onFilteredItems($event)"
+        [properties]="properties"
+      />
+    </app-mobile-filter>
   `,
   styleUrls: ['./propertiesPage.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,12 +59,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
     HttpClientModule,
     SharedModule,
     PropertySearchComponent,
+    MobileFilterComponent,
   ],
 })
 export class PropertiesPageComponent {
   // injections
   cd = inject(ChangeDetectorRef);
   http = inject(HttpClient);
+  mobileFilterService = inject(MobileFilterService);
   firebaseService = inject(FirebaseService);
 
   // variables
@@ -85,6 +106,10 @@ export class PropertiesPageComponent {
     } else {
       this.filteredItems = this.properties;
     }
+  }
+
+  toggleSidebar() {
+    this.mobileFilterService.toggle();
   }
 
   ngOnInit() {
