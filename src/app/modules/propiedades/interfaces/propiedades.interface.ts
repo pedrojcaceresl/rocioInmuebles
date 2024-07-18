@@ -18,6 +18,7 @@ export default interface Propiedad {
   viewTitle: string | null | undefined;
   city: string | null | undefined;
   state: string | null | undefined;
+  linkBrochure: string | null | undefined;
 }
 
 interface Coords {
