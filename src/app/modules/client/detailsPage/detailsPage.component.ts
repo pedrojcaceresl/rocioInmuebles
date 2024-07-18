@@ -36,6 +36,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
             [baths]="propiedad.baths"
             [beds]="propiedad.beds"
             [dimension]="propiedad.dimension"
+            [linkBrochure]="propiedad.linkBrochure"
             [priceSale]="propiedad.priceSale"
             [isOffer]="propiedad.isOffer"
             [transactionType]="propiedad.transactionType"
@@ -52,6 +53,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
           [baths]="propiedad.baths"
           [beds]="propiedad.beds"
           [dimension]="propiedad.dimension"
+          [linkBrochure]="propiedad.linkBrochure"
           [priceSale]="propiedad.priceSale"
           [transactionType]="propiedad.transactionType"
         />
@@ -78,7 +80,7 @@ export class DetailsPageComponent {
 
   getPropertyById(id: string) {
     this.propertyService.getDataById(id, this.path).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.propiedad = res;
       this.cd.markForCheck();
     });

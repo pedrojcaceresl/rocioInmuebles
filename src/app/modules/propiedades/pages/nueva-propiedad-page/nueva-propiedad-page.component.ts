@@ -29,7 +29,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   imgUrl: string = '';
   departamentos: any[] = [];
   ciudades: string[] = [];
-  urlBrochure:any;
+  urlBrochure:string = '';
   isLoading = false;
   uploadSuccess = false;
 
@@ -101,7 +101,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('LA DATA',this.data)
+    // console.log('LA DATA',this.data)
     if (this.data) {
       const propiedad = this.data.propiedad;
       this.firstFormGroup.patchValue({
@@ -123,7 +123,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
         viewTitle: propiedad.viewTitle,
         city: propiedad.city,
         state: propiedad.state,
-        linkBrochure: propiedad.linkBrochure,
+        linkBrochure: propiedad.linkBrochure ?? '',
       });
 
       this.secondFormGroup.patchValue({
@@ -218,6 +218,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     viewTitle,
     city,
     state,
+    linkBrochure
   } = this.firstFormGroup.value;
   const { latitude, longitude } = this.secondFormGroup.value;
 
@@ -244,7 +245,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     viewTitle,
     city,
     state,
-    linkBrochure: this.urlBrochure,
+    linkBrochure: this.urlBrochure ?? '',
   };
 
   if (this.data && this.data.editMode) {
