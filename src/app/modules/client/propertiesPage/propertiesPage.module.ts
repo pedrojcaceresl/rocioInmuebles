@@ -7,6 +7,7 @@ import { PropertiesPageComponent } from './propertiesPage.component';
 import { PropertyCardComponent } from './components/propertyCard/propertyCard.component';
 import { PropertyListComponent } from './components/propertyList/propertyList.component';
 import { PropertySearchComponent } from './components/propertySearch/propertySearch.component';
+import { MobileFilterComponent } from './components/mobileFilter/mobileFilter.component';
 
 
 
@@ -21,7 +22,8 @@ import { PropertySearchComponent } from './components/propertySearch/propertySea
     PropertiesPageComponent,
     PropertyCardComponent,
     PropertyListComponent,
-    PropertySearchComponent
+    PropertySearchComponent,
+    MobileFilterComponent
   ],
   exports:[
   ]
