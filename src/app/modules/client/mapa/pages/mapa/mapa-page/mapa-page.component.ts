@@ -3,6 +3,7 @@ import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { FirebaseService } from '../../../../../../shared/services/firebase.service';
 import { Router } from '@angular/router';
 import { formatCurrency } from '../../../../../../core/helpers/index';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 @Component({
@@ -14,13 +15,13 @@ export class MapaPageComponent {
   @ViewChild('marker') mapMarker!: MapMarker;
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
 
+  width: number = 0;
+
   cd = inject(ChangeDetectorRef);
   markerPositions: any[] = [];
   propiedades: any;
-
   markerInfo: any;
   zoom = 7;
-
   formatCurrency = formatCurrency;
 
   TRANSACTION_TYPE = {
@@ -42,9 +43,19 @@ export class MapaPageComponent {
     lng: -54.66668507228658,
   };
 
+  breakpointWidths = {
+    [Breakpoints.HandsetPortrait]: 320,
+    [Breakpoints.HandsetLandscape]: 480,
+    [Breakpoints.TabletPortrait]: 768,
+    [Breakpoints.TabletLandscape]: 1024,
+    [Breakpoints.WebPortrait]: 800,
+    [Breakpoints.WebLandscape]: 900,
+  };
+
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
@@ -52,8 +63,18 @@ export class MapaPageComponent {
       this.propiedades = res;
       this.loadMarkers();
     });
-  }
 
+    this.breakpointObserver
+      .observe(Object.keys(this.breakpointWidths))
+      .subscribe((result) => {
+        for (let query of Object.keys(this.breakpointWidths)) {
+          if (result.breakpoints[query]) {
+            this.width = this.breakpointWidths[query];
+            break;
+          }
+        }
+      });
+  }
 
   isForSale(property: any) {
     return property.transactionType === this.TRANSACTION_TYPE.ALQUILER
