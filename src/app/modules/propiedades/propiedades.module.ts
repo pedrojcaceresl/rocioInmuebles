@@ -1,4 +1,4 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +16,7 @@ import { FiltrosComponent } from './pages/filtros/filtros.component';
 import { NuevoFiltroComponent } from './pages/nuevo-filtro/nuevo-filtro.component';
 import { NuevaCategoriaComponent } from './pages/nueva-categoria/nueva-categoria.component';
 import { FiltroCardComponent } from './pages/filtro-card/filtro-card.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { FiltroCardComponent } from './pages/filtro-card/filtro-card.component';
     GoogleMapsModule,
     PropiedadesClientModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    NgxEditorModule,
+    FormsModule,
   ],
 })
 export class PropiedadesModule {}

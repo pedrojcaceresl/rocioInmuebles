@@ -36,6 +36,7 @@
     "daisyui": "^2.51.3",
     "firebase": "^10.12.3",
     "flowbite": "^1.8.1",
+    "ngx-editor": "^16.0.1",
     "ngx-lightbox": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
