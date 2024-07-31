@@ -7,7 +7,7 @@
     </div>
 
     <div class="overflow-y-auto max-h-[80vh]">
-      <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" (keydown)="onKeydown($event)">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <!-- Información del inmueble -->
           <div>
@@ -90,12 +90,27 @@
             <div class="mb-4">
               <h2 class="text-black">Descripción</h2>
 
-              <textarea
-                placeholder="Descripción"
-                formControlName="description"
-                rows="5"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              ></textarea>
+              <div class="description-container">
+                <button
+                  type="button"
+                  (click)="toggleDescription()"
+                  class="text-white mb-1 bg-amarillo-rocio hover:bg-amarillo-rocio/70 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full sm:w-auto"
+                >
+                  {{
+                    isDescriptionVisible ? "Minimizar" : "Expandir"
+                  }}
+                  Descripción
+                </button>
+                <div *ngIf="isDescriptionVisible" class="NgxEditor__Wrapper">
+                  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                  <ngx-editor
+                    [editor]="editor"
+                    formControlName="description"
+                    [disabled]="false"
+                    [placeholder]="'Escribe aquí...'"
+                  ></ngx-editor>
+                </div>
+              </div>
             </div>
 
             <div class="mb-4">
@@ -209,15 +224,18 @@
               </select>
             </div>
 
-
             <div class="mb-4">
               <h2 class="text-black">Brochure</h2>
-              <input (change)="uploadFile($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" type="file">
+              <input
+                (change)="uploadFile($event)"
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
+                type="file"
+              />
             </div>
-        </div>
+          </div>
 
           <!-- Ubicación de la propiedad -->
-          <div >
+          <div>
             <label class="text-xl font-semibold text-gray-700"
               >Ubicación de la propiedad</label
             >

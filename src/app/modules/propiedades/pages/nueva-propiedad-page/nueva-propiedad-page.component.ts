@@ -9,6 +9,7 @@ import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage
 
 import Propiedad from '../../interfaces/propiedades.interface';
 import Filtro from '../../interfaces/filtros.interface';
+import { Editor } from 'ngx-editor';
 
 @Component({
   templateUrl: './nueva-propiedad-page.component.html',
@@ -89,6 +90,10 @@ export class NuevaPropiedadPageComponent implements OnInit {
   estados: Filtro[] = [];
   dormitorios: any;
 
+  editor!: Editor;
+  html = '';
+  isDescriptionVisible: boolean = false;
+
   constructor(
     private http: HttpClient,
     private storage: Storage,
@@ -101,6 +106,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.editor = new Editor();
     // console.log('LA DATA',this.data)
     if (this.data) {
       const propiedad = this.data.propiedad;
@@ -140,6 +146,10 @@ export class NuevaPropiedadPageComponent implements OnInit {
     this.http.get<any>('assets/geo-paraguay.json').subscribe((data) => {
       this.departamentos = data.departamentos;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
   onSelectDepartamento(nombreDepartamento: any): void {
@@ -202,6 +212,11 @@ export class NuevaPropiedadPageComponent implements OnInit {
   }
 
  onSubmit() {
+
+  const descriptionHtml = this.firstFormGroup.get('description')?.value;
+  // Ahora, la descripción es HTML y se puede almacenar
+  // console.log(descriptionHtml);
+
   const {
     baths,
     beds,
@@ -228,7 +243,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     beds,
     transactionType,
     dimension,
-    description,
+    description: descriptionHtml,
     isSold: !!isSold,
     imgUrl: this.imgUrl,
     imgUrls: this.imgUrls,
@@ -294,5 +309,8 @@ export class NuevaPropiedadPageComponent implements OnInit {
       .catch((error) => console.error());
   }
 
+  toggleDescription(): void {
+    this.isDescriptionVisible = !this.isDescriptionVisible;
+  }
   
 }

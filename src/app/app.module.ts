@@ -21,6 +21,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 // import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
     ReactiveFormsModule,
     HttpClientModule,
     SvgIconComponent,
+    NgxEditorModule,
     // AngularSvgIconModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
