@@ -129,7 +129,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
         viewTitle: propiedad.viewTitle,
         city: propiedad.city,
         state: propiedad.state,
-        linkBrochure: propiedad.linkBrochure ?? '',
+        linkBrochure: propiedad.linkBrochure,
       });
 
       this.secondFormGroup.patchValue({
@@ -260,7 +260,7 @@ export class NuevaPropiedadPageComponent implements OnInit {
     viewTitle,
     city,
     state,
-    linkBrochure: this.urlBrochure ?? '',
+    linkBrochure: this.urlBrochure,
   };
 
   if (this.data && this.data.editMode) {
@@ -292,16 +292,22 @@ export class NuevaPropiedadPageComponent implements OnInit {
   }
 
   updateFileUrl(url: string) {
+    // console.log('deberia llegar la url',url);
     this.firstFormGroup.patchValue({ linkBrochure: url});
+    // console.log('entro aqui', this.firstFormGroup.value);
   }
 
   uploadFile($event: any) {
+    // debugger
+    // console.log($event);
     const file = $event.target.files[0];
     const docRef = ref(this.storage, `brochures/${file.name}`);
-
+    // console.log(docRef);
     uploadBytes(docRef, file)
       .then(async (response) => {
+        // console.log('LA RESPUESTA',response);
         const url = await getDownloadURL(docRef);
+        // console.log(url);
         this.updateFileUrl(url)
         this.urlBrochure = url;
         console.log('CARGADO?',url);
@@ -312,5 +318,5 @@ export class NuevaPropiedadPageComponent implements OnInit {
   toggleDescription(): void {
     this.isDescriptionVisible = !this.isDescriptionVisible;
   }
-  
+
 }
